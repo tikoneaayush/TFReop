@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sindhu Global Foundation Trust</title>
+  <script type="module">
+    // Import the necessary Firebase SDK modules
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+    import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
+    
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDkLmo4Vf-1U8Vl_grn2waMigYCyMj1BaU",
+      authDomain: "formtestsgft.firebaseapp.com",
+      databaseURL: "https://formtestsgft-default-rtdb.firebaseio.com",
+      projectId: "formtestsgft",
+      storageBucket: "formtestsgft.firebasestorage.app",
+      messagingSenderId: "688396867961",
+      appId: "1:688396867961:web:8cc2136b755be21f4f77a8"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    
+    // Fetch event data from Firebase
+    function loadEventCards() {
+      const eventsRef = ref(database, 'events'); // Reference to events node
+      get(eventsRef).then((snapshot) => {
+        const eventsData = snapshot.val();
+        const container = document.getElementById('event-cards-container');
+        
+        for (const eventId in eventsData) {
+          const event = eventsData[eventId];
+          const card = document.createElement('div');
+          card.classList.add('card');
+          
+          const img = document.createElement('img');
+          img.src = event.imageUrl; // Image URL from Firebase storage
+          img.alt = event.title;
+
+          const eventName = document.createElement('h4');
+          eventName.innerText = event.title;
+
+          const button = document.createElement('button');
+          button.innerText = 'Explore Now';
+          button.onclick = () => showPopup(event);
+
+          card.appendChild(img);
+          card.appendChild(eventName);
+          card.appendChild(button);
+
+          container.appendChild(card);
+        }
+      });
+    }
+
+    // Show popup with event details
+    function showPopup(event) {
+      document.getElementById('popup-event-name').innerText = event.title;
+      document.getElementById('popup-event-date').innerText = event.date;
+      document.getElementById('popup-event-benefitted').innerText = event.peopleBenefitted;
+      document.getElementById('popup-event-summary').innerText = event.summary;
+
+      document.getElementById('event-popup').style.display = 'flex';
+    }
+
+    // Close the popup
+    function closePopup() {
+      document.getElementById('event-popup').style.display = 'none';
+    }
+
+    // Load event cards when the page loads
+    window.onload = function() {
+      loadEventCards();
+    };
+  </script>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .section-contribution {
+      padding: 50px 10%;
+      background-color: #fff;
+      text-align: center;
+    }
+
+    .section-contribution h2 {
+      color: #333;
+      font-size: 2.5em;
+      margin-bottom: 30px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .card h4 {
+      margin: 15px 0;
+      color: #333;
+      font-size: 1.2em;
+    }
+
+    .card button {
+      background-color: #ff7b29;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+
+    .card button:hover {
+      background-color: #e15b00;
+    }
+
+    /* Popup Styles */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .popup-content {
+      background: white;
+      padding: 20px;
+      width: 80%;
+      max-width: 500px;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .popup h2 {
+      margin-bottom: 20px;
+    }
+
+    .popup .close-btn {
+      background-color: #ff7b29;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      cursor: pointer;
+      float: right;
+      border-radius: 4px;
+    }
+
+    .popup .close-btn:hover {
+      background-color: #e15b00;
+    }
+  </style>
+</head>
+<body>
+  <!-- Section for dynamic event cards -->
+  <section class="section-contribution">
+    <h2>Every Contribution Is Valuable</h2>
+    <div class="cards" id="event-cards-container">
+      <!-- Dynamic event cards will be populated here -->
+    </div>
+  </section>
+
+  <!-- Popup for event details -->
+  <div class="popup" id="event-popup">
+    <div class="popup-content">
+      <button class="close-btn" onclick="closePopup()">Close</button>
+      <h2 id="popup-event-name">Event Name</h2>
+      <p><strong>Date:</strong> <span id="popup-event-date">Event Date</span></p>
+      <p><strong>People Benefitted:</strong> <span id="popup-event-benefitted">0</span></p>
+      <p><strong>Summary:</strong></p>
+      <p id="popup-event-summary">Event summary goes here...</p>
+    </div>
+  </div>
+</body>
+</html>
