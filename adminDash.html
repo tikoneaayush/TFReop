@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Dashboard - Manage Events</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+
+    body {
+      background-color: #fff4ea;
+    } 
+    .sidebar {
+      height: 100vh;
+      width: 40vh;
+      background-color: #fff;
+      border-right: 1px solid #dee2e6;
+      padding: 18px;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    }
+    .sidebar .btn-logout {
+      background-color: #9c27b0; /* Orange */
+      color: white;
+      width: 100%;
+      margin-top: 20px;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      font-weight: bold;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .sidebar .btn-logout:hover {
+      background-color: #e66a1f; /* Darker orange */
+    }
+    .events-table th {
+      background-color: #ff7b29; /* Orange */
+      color: white;
+    }
+    .highlight-orange {
+      color: #ff7b29; /* Orange */
+    }
+    .highlight-purple {
+      color: #9c27b0; /* Purple */
+    }
+    .icon-btn {
+      background: none;
+      border: none;
+      color: #007bff;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .icon-btn:hover {
+      transform: scale(1.1);
+    }
+    .icon-btn.delete {
+      color: #ff7b29; /* Orange */
+    }
+    .icon-btn.delete:hover {
+      color: #e66a1f;
+    }
+    .sidebar a {
+      text-decoration: none;
+      color: #333;
+      font-size: 1.1em;
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 5px;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+    .sidebar a:hover {
+      background-color: #ff7b29; /* Orange */
+      color: white;
+    }
+    .sidebar img {
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+    }
+    .sidebar h5 {
+      color: #ff7b29; /* Orange */
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .sidebar p {
+      color: #9c27b0; /* Purple */
+      font-size: 0.9em;
+    }
+    .sidebar .active {
+      background-color: #ff7b29; /* Orange */
+      color: white;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+<div class="d-flex">
+  <!-- Sidebar Placeholder -->
+  <div id="sidebar-placeholder"></div>
+
+  <div class="container-fluid p-4">
+    <h3>Admin Dashboard - Manage Events</h3>
+    <div class="card mt-4">
+      <div class="card-header">
+        <h5 class="mb-0">Events</h5>
+      </div>
+      <div class="card-body p-0">
+        <table class="table table-hover mb-0 events-table" id="eventsTable">
+          <thead>
+            <tr>
+              <th>Sr. No.</th>
+              <th>Event Name</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- View/Edit Modal -->
+<div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="eventModalLabel">Event Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="editForm">
+          <input type="hidden" id="editId">
+          <div class="mb-3"><label class="form-label">Title</label><input type="text" class="form-control" id="editTitle"></div>
+          <div class="mb-3"><label class="form-label">Date</label><input type="date" class="form-control" id="editDate"></div>
+          <div class="mb-3"><label class="form-label">Summary</label><textarea class="form-control" id="editSummary"></textarea></div>
+          <div class="mb-3"><label class="form-label">People Benefitted</label><input type="number" class="form-control" id="editPeople"></div>
+          <div class="mb-3"><label class="form-label">Amount Utilised (₹)</label><input type="number" class="form-control" id="editAmount"></div>
+          <div class="mb-3"><label class="form-label">Image URL</label><input type="url" class="form-control" id="editImageUrl"></div>
+          <img id="previewImage" src="" class="img-fluid rounded d-block mt-3" style="max-height:200px">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="saveChanges()">Save Changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+  import { getDatabase, ref, onValue, remove, update } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDkLmo4Vf-1U8Vl_grn2waMigYCyMj1BaU",
+    authDomain: "formtestsgft.firebaseapp.com",
+    databaseURL: "https://formtestsgft-default-rtdb.firebaseio.com",
+    projectId: "formtestsgft",
+    storageBucket: "formtestsgft.firebasestorage.app",
+    messagingSenderId: "688396867961",
+    appId: "1:688396867961:web:8cc2136b755be21f4f77a8"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  const tableBody = document.querySelector("#eventsTable tbody");
+
+  const fetchEvents = () => {
+    const eventsRef = ref(db, 'events');
+    onValue(eventsRef, (snapshot) => {
+      const data = snapshot.val();
+      tableBody.innerHTML = '';
+      let i = 1;
+      for (let id in data) {
+        const ev = data[id];
+        tableBody.innerHTML += `
+          <tr>
+            <td>${i++}</td>
+            <td>${ev.title}</td>
+            <td>
+              <button class="icon-btn" onclick='editEvent(${JSON.stringify(ev)}, "${id}")' data-bs-toggle="modal" data-bs-target="#eventModal"><i class="fa fa-pen"></i></button>
+              <button class="icon-btn delete" onclick='deleteEvent("${id}")'><i class="fa fa-trash"></i></button>
+            </td>
+          </tr>
+        `;
+      }
+    });
+  }
+
+  window.editEvent = (event, id) => {
+    document.getElementById('editId').value = id;
+    document.getElementById('editTitle').value = event.title;
+    document.getElementById('editDate').value = event.date;
+    document.getElementById('editSummary').value = event.summary;
+    document.getElementById('editPeople').value = event.peopleBenefitted;
+    document.getElementById('editAmount').value = event.amountUtilised;
+    document.getElementById('editImageUrl').value = event.imageUrl;
+    document.getElementById('previewImage').src = event.imageUrl;
+  }
+
+  window.saveChanges = () => {
+    const id = document.getElementById('editId').value;
+    const updatedData = {
+      title: document.getElementById('editTitle').value,
+      date: document.getElementById('editDate').value,
+      summary: document.getElementById('editSummary').value,
+      peopleBenefitted: document.getElementById('editPeople').value,
+      amountUtilised: document.getElementById('editAmount').value,
+      imageUrl: document.getElementById('editImageUrl').value
+    };
+
+    const eventRef = ref(db, 'events/' + id);
+    update(eventRef, updatedData).then(() => {
+      alert('Changes saved successfully!');
+      const modal = bootstrap.Modal.getInstance(document.getElementById('eventModal'));
+      modal.hide();
+    });
+  }
+
+  window.deleteEvent = (id) => {
+    if (confirm('Are you sure you want to delete this event?')) {
+      const delRef = ref(db, 'events/' + id);
+      remove(delRef).then(() => alert('Event deleted.'));
+    }
+  }
+
+  fetchEvents();
+
+  // Check the current page and set active class for sidebar link
+  window.onload = () => {
+    const currentPage = window.location.pathname.split('/').pop();
+    const manageEventsLink = document.getElementById('manageEventsLink');
+
+    if (currentPage === 'admin_dashboard.html') {
+      manageEventsLink.classList.add('active');
+    }
+  }
+
+  // Dynamically load sidebar content
+  fetch('sidebar.html')
+    .then(response => response.text())
+    .then(html => document.getElementById('sidebar-placeholder').innerHTML = html);
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
