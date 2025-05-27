@@ -272,32 +272,33 @@
 
     // Handle Login
     function login() {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
 
-    signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            get(ref(db, 'authUsers/' + user.uid))
-                .then((snapshot) => {
-                    if (snapshot.exists()) {
-                        const role = snapshot.val().role;
+  signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      get(ref(db, 'authUsers/' + user.uid))
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            const role = snapshot.val().role;
 
-                        // Set isUserLoggedIn to true in localStorage
-                        localStorage.setItem('isLoggedIn', 'true');
+            // Set a session cookie instead of localStorage
+            document.cookie = "isLoggedIn=true; path=/;";
 
-                        alert("Login successful! Redirecting to " + role + " dashboard.");
-                        redirectUser(role);
-                    }
-                })
-                .catch((error) => {
-                    alert("Error getting user role: " + error.message);
-                });
+            alert("Login successful! Redirecting to " + role + " dashboard.");
+            redirectUser(role);
+          }
         })
         .catch((error) => {
-            alert(error.message);
+          alert("Error getting user role: " + error.message);
         });
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
 }
+
 
 
     // Button Event Listeners
