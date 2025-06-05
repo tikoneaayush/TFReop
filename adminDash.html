@@ -6,155 +6,575 @@
   <title>Admin Dashboard - Manage Events</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    * {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
-      background-color: #fff4ea;
-    } 
+      background: #f8f9fa;
+      min-height: 100vh;
+    }
+
+    .main-container {
+      display: flex;
+      min-height: 100vh;
+    }
+
     .sidebar {
+      width: 280px;
+      background: #ffffff;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+      padding: 0;
+      position: fixed;
       height: 100vh;
-      width: 40vh;
-      background-color: #fff;
-      border-right: 1px solid #dee2e6;
-      padding: 18px;
-      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+      transition: transform 0.3s ease;
     }
-    .sidebar .btn-logout {
-      background-color: #9c27b0; /* Orange */
+
+    .sidebar-header {
+      padding: 40px 20px;
+      text-align: center;
+      background: linear-gradient(135deg, #ff7b29 0%, #9c27b0 100%);
       color: white;
-      width: 100%;
-      margin-top: 20px;
+    }
+
+    .sidebar img {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid rgba(255, 255, 255, 0.4);
+      margin-bottom: 15px;
+      transition: transform 0.3s ease;
+    }
+
+    .sidebar img:hover {
+      transform: scale(1.05);
+    }
+
+    .sidebar h5 {
+      color: white;
+      font-weight: 700;
+      font-size: 1.3rem;
+      margin-bottom: 5px;
+    }
+
+    .sidebar p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 0.9rem;
+      margin-bottom: 0;
+    }
+
+    .sidebar-nav {
+      padding: 20px 0;
+    }
+
+    .sidebar a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: #444;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 14px 25px;
+      margin: 4px 15px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar a:hover {
+      background: #ff7b29;
+      color: white;
+      transform: translateX(5px);
+    }
+
+    .sidebar a.active {
+      background: #ff7b29;
+      color: white;
+    }
+
+    .sidebar a i {
+      width: 20px;
+      margin-right: 12px;
+      text-align: center;
+      font-size: 1.1rem;
+    }
+
+    .btn-logout {
+      background: linear-gradient(135deg, #9c27b0 0%, #b039c4 100%);
+      color: white;
       border: none;
-      padding: 10px;
-      border-radius: 5px;
-      font-weight: bold;
-      text-transform: uppercase;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
       cursor: pointer;
+      margin: 20px 15px;
+      transition: all 0.3s ease;
+      width: calc(100% - 30px);
+      box-shadow: 0 2px 8px rgba(156, 39, 176, 0.2);
     }
-    .sidebar .btn-logout:hover {
-      background-color: #e66a1f; /* Darker orange */
+
+    .btn-logout:hover {
+      background: linear-gradient(135deg, #8b1a9f 0%, #a02bb3 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(156, 39, 176, 0.3);
     }
-    .events-table th {
-      background-color: #ff7b29; /* Orange */
+
+    .main-content {
+      flex: 1;
+      margin-left: 280px;
+      padding: 40px;
+      background: #f8f9fa;
+    }
+
+    .page-header {
+      background: white;
+      border-radius: 12px;
+      padding: 25px 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      border: none;
+      position: relative;
+    }
+
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #ff7b29 0%, #9c27b0 100%);
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+    }
+
+    .page-header h1 {
+      color: #2d2d2d;
+      font-weight: 800;
+      font-size: 2.2rem;
+      margin: 0;
+    }
+
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+
+    .stats-card {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      border-left: 5px solid;
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .stats-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .stats-card:nth-child(1) { border-left-color: #ff7b29; }
+    .stats-card:nth-child(2) { border-left-color: #9c27b0; }
+    .stats-card:nth-child(3) { border-left-color: #ff7b29; }
+    .stats-card:nth-child(4) { border-left-color: #9c27b0; }
+
+    .stats-icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .stats-card:nth-child(1) .stats-icon { color: #ff7b29; }
+    .stats-card:nth-child(2) .stats-icon { color: #9c27b0; }
+    .stats-card:nth-child(3) .stats-icon { color: #ff7b29; }
+    .stats-card:nth-child(4) .stats-icon { color: #9c27b0; }
+
+    .stats-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .stats-card:nth-child(1) .stats-number { color: #ff7b29; }
+    .stats-card:nth-child(2) .stats-number { color: #9c27b0; }
+    .stats-card:nth-child(3) .stats-number { color: #ff7b29; }
+    .stats-card:nth-child(4) .stats-number { color: #9c27b0; }
+
+    .stats-label {
+      color: #666;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .events-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+    }
+
+    .events-card-header {
+      background: #ff7b29;
       color: white;
+      padding: 20px 30px;
+      border-bottom: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    .highlight-orange {
-      color: #ff7b29; /* Orange */
+
+    .events-card-header h5 {
+      margin: 0;
+      font-weight: 700;
+      font-size: 1.2rem;
     }
-    .highlight-purple {
-      color: #9c27b0; /* Purple */
+
+    .events-table {
+      margin: 0;
     }
+
+    .events-table thead th {
+      background: #f8f9fa;
+      color: #333;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 15px 20px;
+      border: none;
+      border-bottom: 2px solid #e5e7eb;
+      text-transform: uppercase;
+    }
+
+    .events-table tbody td {
+      padding: 15px 20px;
+      border: none;
+      border-bottom: 1px solid #f0f0f0;
+      color: #444;
+      font-weight: 500;
+      vertical-align: middle;
+      font-size: 0.95rem;
+    }
+
+    .events-table tbody tr:nth-child(even) {
+      background: #fafafa;
+    }
+
+    .events-table tbody tr:hover {
+      background: #f1f5f9;
+    }
+
     .icon-btn {
       background: none;
       border: none;
-      color: #007bff;
+      padding: 8px 10px;
+      border-radius: 6px;
       cursor: pointer;
-      transition: transform 0.2s;
+      transition: all 0.2s ease;
+      margin: 0 3px;
+      font-size: 0.9rem;
     }
-    .icon-btn:hover {
-      transform: scale(1.1);
+
+    .icon-btn.edit {
+      color: #007bff;
+      background: #e3f2fd;
     }
+
+    .icon-btn.edit:hover {
+      background: #bfdbfe;
+    }
+
     .icon-btn.delete {
-      color: #ff7b29; /* Orange */
+      color: #dc3545;
+      background: #ffebee;
     }
+
     .icon-btn.delete:hover {
-      color: #e66a1f;
+      background: #fecdd3;
     }
-    .sidebar a {
-      text-decoration: none;
-      color: #333;
-      font-size: 1.1em;
-      margin-bottom: 15px;
-      padding: 10px;
-      border-radius: 5px;
-      width: 100%;
-      transition: background-color 0.3s ease;
+
+    .modal-content {
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
     }
-    .sidebar a:hover {
-      background-color: #ff7b29; /* Orange */
+
+    .modal-header {
+      background: #ff7b29;
       color: white;
+      border-bottom: none;
+      border-radius: 12px 12px 0 0;
+      padding: 20px 25px;
     }
-    .sidebar img {
-      border-radius: 50%;
-      width: 80px;
-      height: 80px;
-      object-fit: cover;
+
+    .modal-title {
+      font-weight: 700;
+      font-size: 1.2rem;
     }
-    .sidebar h5 {
-      color: #ff7b29; /* Orange */
-      font-weight: bold;
+
+    .btn-close {
+      filter: brightness(0) invert(1);
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+    }
+
+    .btn-close:hover {
+      opacity: 1;
+    }
+
+    .modal-body {
+      padding: 30px;
+    }
+
+    .form-label {
+      color: #444;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+    }
+
+    .form-control {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 12px 15px;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+
+    .form-control:focus {
+      border-color: #ff7b29;
+      box-shadow: 0 0 0 3px rgba(255, 123, 41, 0.1);
+    }
+
+    .modal-footer {
+      border-top: 1px solid #f0f0f0;
+      padding: 20px 25px;
+    }
+
+    .btn-primary {
+      background: #ff7b29;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background: #e6691f;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: #6c757d;
+      border: none;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      background: #5c636a;
+      transform: translateY(-2px);
+    }
+
+    #previewImage {
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      max-width: 100%;
+      width: 200px;
       margin-top: 10px;
     }
-    .sidebar p {
-      color: #9c27b0; /* Purple */
-      font-size: 0.9em;
+
+    .loading-message {
+      text-align: center;
+      padding: 40px;
+      color: #666;
+      font-style: italic;
+      font-size: 1rem;
     }
-    .sidebar .active {
-      background-color: #ff7b29; /* Orange */
-      color: white;
-      font-weight: bold;
+
+    @media (max-width: 992px) {
+      .sidebar {
+        transform: translateX(-100%);
+      }
+      
+      .sidebar.show {
+        transform: translateX(0);
+      }
+      
+      .main-content {
+        margin-left: 0;
+        padding: 30px;
+      }
+
+      .stats-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .page-header h1 {
+        font-size: 1.8rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .main-content {
+        padding: 20px;
+      }
+
+      .stats-container {
+        grid-template-columns: 1fr;
+      }
+
+      .page-header {
+        padding: 20px 25px;
+      }
+
+      .page-header h1 {
+        font-size: 1.5rem;
+      }
+
+      .events-table thead th,
+      .events-table tbody td {
+        font-size: 0.85rem;
+        padding: 12px 15px;
+      }
     }
   </style>
 </head>
 <body>
-<div class="d-flex">
+<div class="main-container">
   <!-- Sidebar Placeholder -->
   <div id="sidebar-placeholder"></div>
 
-  <div class="container-fluid p-4">
-    <h3>Admin Dashboard - Manage Events</h3>
-    <div class="card mt-4">
-      <div class="card-header">
-        <h5 class="mb-0">Events</h5>
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="page-header">
+      <h1>Manage Events</h1>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="stats-container">
+      <div class="stats-card">
+        <div class="stats-icon"><i class="fas fa-calendar-alt"></i></div>
+        <div class="stats-number" id="totalEvents">0</div>
+        <div class="stats-label">Total Events</div>
+      </div>
+      <div class="stats-card">
+        <div class="stats-icon"><i class="fas fa-users"></i></div>
+        <div class="stats-number" id="totalPeople">0</div>
+        <div class="stats-label">People Benefited</div>
+      </div>
+      <div class="stats-card">
+        <div class="stats-icon"><i class="fas fa-rupee-sign"></i></div>
+        <div class="stats-number" id="totalAmount">₹0</div>
+        <div class="stats-label">Amount Utilized</div>
+      </div>
+      <div class="stats-card">
+        <div class="stats-icon"><i class="fas fa-calendar-check"></i></div>
+        <div class="stats-number" id="thisMonth">0</div>
+        <div class="stats-label">This Month</div>
+      </div>
+    </div>
+
+    <!-- Events Table -->
+    <div class="events-card">
+      <div class="events-card-header">
+        <i class="fas fa-list"></i>
+        <h5>Manage Events</h5>
       </div>
       <div class="card-body p-0">
         <table class="table table-hover mb-0 events-table" id="eventsTable">
           <thead>
             <tr>
-              <th>Sr. No.</th>
-              <th>Event Name</th>
-              <th>Actions</th>
+              <th><i class="fas fa-hashtag me-1"></i> SR. NO.</th>
+              <th><i class="fas fa-calendar me-1"></i> EVENT NAME</th>
+              <th><i class="fas fa-calendar-day me-1"></i> DATE</th>
+              <th><i class="fas fa-users me-1"></i> BENEFICIARIES</th>
+              <th><i class="fas fa-rupee-sign me-1"></i> AMOUNT</th>
+              <th><i class="fas fa-cog me-1"></i> ACTIONS</th>
             </tr>
           </thead>
-          <tbody></tbody>
+          <tbody>
+            <tr>
+              <td colspan="6" class="loading-message">Loading events...</td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>
   </div>
 </div>
 
-<!-- View/Edit Modal -->
+<!-- Edit Event Modal -->
 <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="eventModalLabel">Event Details</h5>
+        <h5 class="modal-title" id="eventModalLabel">Edit Event</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form id="editForm">
           <input type="hidden" id="editId">
-          <div class="mb-3"><label class="form-label">Title</label><input type="text" class="form-control" id="editTitle"></div>
-          <div class="mb-3"><label class="form-label">Date</label><input type="date" class="form-control" id="editDate"></div>
-          <div class="mb-3"><label class="form-label">Summary</label><textarea class="form-control" id="editSummary"></textarea></div>
-          <div class="mb-3"><label class="form-label">People Benefitted</label><input type="number" class="form-control" id="editPeople"></div>
-          <div class="mb-3"><label class="form-label">Amount Utilised (₹)</label><input type="number" class="form-control" id="editAmount"></div>
-          <div class="mb-3"><label class="form-label">Image URL</label><input type="url" class="form-control" id="editImageUrl"></div>
-          <img id="previewImage" src="" class="img-fluid rounded d-block mt-3" style="max-height:200px">
+          <div class="mb-3">
+            <label class="form-label">Event Title *</label>
+            <input type="text" class="form-control" id="editTitle" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Date *</label>
+            <input type="date" class="form-control" id="editDate" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Event Summary *</label>
+            <textarea class="form-control" id="editSummary" rows="3" required></textarea>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">People Benefited</label>
+            <input type="number" class="form-control" id="editPeople" min="0">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Amount Utilized (₹)</label>
+            <input type="number" class="form-control" id="editAmount" min="0" step="0.01">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Event Image URL</label>
+            <input type="url" class="form-control" id="editImageUrl">
+          </div>
+          <div class="mb-3">
+            <img id="previewImage" src="" alt="Preview" style="max-width: 200px; display: none;">
+          </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
         <button type="button" class="btn btn-primary" onclick="saveChanges()">Save Changes</button>
       </div>
     </div>
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script type="module">
+  // Dynamically load sidebar content
+  fetch('sidebar.html')
+    .then(response => response.text())
+    .then(html => document.getElementById('sidebar-placeholder').innerHTML = html);
+
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
   import { getDatabase, ref, onValue, remove, update } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
-
+  
   const firebaseConfig = {
     apiKey: "AIzaSyDkLmo4Vf-1U8Vl_grn2waMigYCyMj1BaU",
     authDomain: "formtestsgft.firebaseapp.com",
@@ -169,83 +589,169 @@
   const db = getDatabase(app);
   const tableBody = document.querySelector("#eventsTable tbody");
 
+  const updateStats = (events) => {
+    let totalEvents = 0;
+    let totalPeople = 0;
+    let totalAmount = 0;
+    let thisMonth = 0;
+    
+    const currentMonth = new Date().getMonth();
+    const currentYear = new Date().getFullYear();
+    
+    for (let id in events) {
+      const event = events[id];
+      totalEvents++;
+      totalPeople += parseInt(event.peopleBenefitted) || 0;
+      totalAmount += parseFloat(event.amountUtilised) || 0;
+      
+      if (event.date) {
+        const eventDate = new Date(event.date);
+        if (eventDate.getMonth() === currentMonth && eventDate.getFullYear() === currentYear) {
+          thisMonth++;
+        }
+      }
+    }
+    
+    document.getElementById('totalEvents').textContent = totalEvents;
+    document.getElementById('totalPeople').textContent = totalPeople.toLocaleString();
+    document.getElementById('totalAmount').textContent = '₹' + totalAmount.toLocaleString();
+    document.getElementById('thisMonth').textContent = thisMonth;
+  };
+
   const fetchEvents = () => {
+    console.log('🔍 Attempting to fetch events...');
+    
+    const possiblePaths = ['events', 'Events', 'event', 'data/events', 'submissions'];
+    
+    possiblePaths.forEach(path => {
+      console.log(`🔍 Checking path: ${path}`);
+      const testRef = ref(db, path);
+      onValue(testRef, (snapshot) => {
+        const testData = snapshot.val();
+        if (testData) {
+          console.log(`✅ Found data at path '${path}':`, testData);
+        }
+      });
+    });
+    
     const eventsRef = ref(db, 'events');
+    
     onValue(eventsRef, (snapshot) => {
+      console.log('📡 Firebase response received for events path');
       const data = snapshot.val();
+      console.log('📊 Raw data from Firebase:', data);
+      console.log('📊 Data type:', typeof data);
+      console.log('📊 Data keys:', data ? Object.keys(data) : 'No keys');
+      
       tableBody.innerHTML = '';
+      
+      if (!data) {
+        console.log('❌ No data found in Firebase at events path');
+        tableBody.innerHTML = '<tr><td colspan="6" class="loading-message">No events found at /events path. Check console for other paths.</td></tr>';
+        updateStats({});
+        return;
+      }
+      
+      console.log('✅ Events found:', Object.keys(data).length);
+      updateStats(data);
+      
       let i = 1;
+      let htmlContent = '';
       for (let id in data) {
         const ev = data[id];
-        tableBody.innerHTML += `
+        console.log(`📋 Processing event ${i}:`, ev);
+        htmlContent += `
           <tr>
             <td>${i++}</td>
-            <td>${ev.title}</td>
+            <td>${ev.title || ev.eventName || ev.name || 'N/A'}</td>
+            <td>${ev.date || ev.eventDate || 'N/A'}</td>
+            <td>${ev.peopleBenefitted || ev.beneficiaries || ev.people || '0'}</td>
+            <td>₹${ev.amountUtilised || ev.amount || ev.cost || '0'}</td>
             <td>
-              <button class="icon-btn" onclick='editEvent(${JSON.stringify(ev)}, "${id}")' data-bs-toggle="modal" data-bs-target="#eventModal"><i class="fa fa-pen"></i></button>
-              <button class="icon-btn delete" onclick='deleteEvent("${id}")'><i class="fa fa-trash"></i></button>
+              <button class="icon-btn edit" onclick='editEvent(${JSON.stringify(ev)}, "${id}")' data-bs-toggle="modal" data-bs-target="#eventModal" title="Edit"><i class="fa fa-pen"></i></button>
+              <button class="icon-btn delete" onclick='deleteEvent("${id}")' title="Delete"><i class="fa fa-trash"></i></button>
             </td>
           </tr>
         `;
       }
+      tableBody.innerHTML = htmlContent;
+      console.log('🎉 Table updated successfully with HTML:', htmlContent);
+    }, (error) => {
+      console.error('🚨 Error fetching events:', error);
+      console.error('🚨 Error details:', error.code, error.message);
+      tableBody.innerHTML = '<tr><td colspan="6" class="loading-message">Error loading events. Check console for details.</td></tr>';
     });
-  }
+  };
 
   window.editEvent = (event, id) => {
     document.getElementById('editId').value = id;
-    document.getElementById('editTitle').value = event.title;
-    document.getElementById('editDate').value = event.date;
-    document.getElementById('editSummary').value = event.summary;
-    document.getElementById('editPeople').value = event.peopleBenefitted;
-    document.getElementById('editAmount').value = event.amountUtilised;
-    document.getElementById('editImageUrl').value = event.imageUrl;
-    document.getElementById('previewImage').src = event.imageUrl;
-  }
+    document.getElementById('editTitle').value = event.title || '';
+    document.getElementById('editDate').value = event.date || '';
+    document.getElementById('editSummary').value = event.summary || '';
+    document.getElementById('editPeople').value = event.peopleBenefitted || '';
+    document.getElementById('editAmount').value = event.amountUtilised || '';
+    document.getElementById('editImageUrl').value = event.imageUrl || '';
+    
+    const previewImg = document.getElementById('previewImage');
+    if (event.imageUrl) {
+      previewImg.src = event.imageUrl;
+      previewImg.style.display = 'block';
+    } else {
+      previewImg.style.display = 'none';
+    }
+  };
 
   window.saveChanges = () => {
     const id = document.getElementById('editId').value;
     const updatedData = {
-      title: document.getElementById('editTitle').value,
+      title: document.getElementById('editTitle').value.trim(),
       date: document.getElementById('editDate').value,
-      summary: document.getElementById('editSummary').value,
-      peopleBenefitted: document.getElementById('editPeople').value,
-      amountUtilised: document.getElementById('editAmount').value,
-      imageUrl: document.getElementById('editImageUrl').value
+      summary: document.getElementById('editSummary').value.trim(),
+      peopleBenefitted: document.getElementById('editPeople').value || 0,
+      amountUtilised: document.getElementById('editAmount').value || 0,
+      imageUrl: document.getElementById('editImageUrl').value.trim()
     };
+
+    if (!updatedData.title || !updatedData.date || !updatedData.summary) {
+      alert('Please fill in all required fields (Title, Date, Summary)');
+      return;
+    }
 
     const eventRef = ref(db, 'events/' + id);
     update(eventRef, updatedData).then(() => {
       alert('Changes saved successfully!');
       const modal = bootstrap.Modal.getInstance(document.getElementById('eventModal'));
       modal.hide();
+    }).catch((error) => {
+      alert('Error saving changes: ' + error.message);
     });
-  }
+  };
 
   window.deleteEvent = (id) => {
     if (confirm('Are you sure you want to delete this event?')) {
       const delRef = ref(db, 'events/' + id);
-      remove(delRef).then(() => alert('Event deleted.'));
+      remove(delRef).then(() => {
+        alert('Event deleted successfully!');
+      }).catch((error) => {
+        alert('Error deleting event: ' + error.message);
+      });
     }
-  }
+  };
+
+  console.log('🚀 Initializing app...');
+  console.log('🔧 Firebase config:', firebaseConfig);
+  console.log('💾 Database reference:', db);
+  
+  const connectedRef = ref(db, '.info/connected');
+  onValue(connectedRef, (snapshot) => {
+    if (snapshot.val() === true) {
+      console.log('🌐 Connected to Firebase');
+    } else {
+      console.log('🔴 Not connected to Firebase');
+    }
+  });
 
   fetchEvents();
-
-  // Check the current page and set active class for sidebar link
-  window.onload = () => {
-    const currentPage = window.location.pathname.split('/').pop();
-    const manageEventsLink = document.getElementById('manageEventsLink');
-
-    if (currentPage === 'admin_dashboard.html') {
-      manageEventsLink.classList.add('active');
-    }
-  }
-
-  // Dynamically load sidebar content
-  fetch('sidebar.html')
-    .then(response => response.text())
-    .then(html => document.getElementById('sidebar-placeholder').innerHTML = html);
 </script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
