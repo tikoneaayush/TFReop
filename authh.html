@@ -1,6 +1,3 @@
-<!-------authh.html------>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -240,33 +237,20 @@
         <button class="tab-button" id="signupTab">Sign Up</button>
       </div>
 
-      <!-- Login Form -->
+      <!-- Login Form (role selector removed) -->
       <div id="loginForm">
         <div class="form-group">
           <label for="email">Email Address</label>
           <input type="email" id="email" placeholder="Enter your email" required>
         </div>
-
         <div class="form-group">
           <label for="password">Password</label>
           <input type="password" id="password" placeholder="Enter your password" required>
         </div>
-
-        <div class="form-group role-selector">
-          <label for="role">Account Type</label>
-          <select id="role">
-            <option value="user">User</option>
-            <option value="admin">Administrator</option>
-          </select>
-        </div>
-
         <button class="primary-btn" id="loginBtn">Sign In</button>
-
         <div class="divider">
           <span>or</span>
         </div>
-
-        <!-- Google Sign-In Button -->
         <button class="google-btn" id="googleLogin">
           <svg class="google-icon" viewBox="0 0 24 24">
             <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -276,24 +260,21 @@
           </svg>
           Continue with Google
         </button>
-
         <div class="form-toggle">
           Don't have an account? <a href="#" id="goToSignup">Sign up here</a>
         </div>
       </div>
 
-      <!-- Sign Up Form -->
+      <!-- Sign Up Form (role selector remains) -->
       <div id="signupForm" style="display: none;">
         <div class="form-group">
           <label for="signupEmail">Email Address</label>
           <input type="email" id="signupEmail" placeholder="Enter your email" required>
         </div>
-
         <div class="form-group">
           <label for="signupPassword">Password</label>
           <input type="password" id="signupPassword" placeholder="Create a password" required>
         </div>
-
         <div class="form-group role-selector">
           <label for="signupRole">Account Type</label>
           <select id="signupRole">
@@ -301,14 +282,10 @@
             <option value="admin">Administrator</option>
           </select>
         </div>
-
         <button class="primary-btn" id="signupBtn">Create Account</button>
-
         <div class="divider">
           <span>or</span>
         </div>
-
-        <!-- Google Sign-Up Button -->
         <button class="google-btn" id="googleSignup">
           <svg class="google-icon" viewBox="0 0 24 24">
             <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -318,7 +295,6 @@
           </svg>
           Sign up with Google
         </button>
-
         <div class="form-toggle">
           Already have an account? <a href="#" id="goToLogin">Sign in here</a>
         </div>
@@ -349,18 +325,58 @@
     const db = getDatabase(app);
     const provider = new GoogleAuthProvider();
 
+    // Function to set cookies
+    function setCookie(name, value, hours) {
+      const expires = new Date(Date.now() + hours * 60 * 60 * 1000).toUTCString();
+      document.cookie = `${name}=${value}; expires=${expires}; path=/; SameSite=Lax`;
+    }
+
+    // Function to redirect user
+    function redirectUser(role) {
+      const url = role === "admin" ? "adminDash.html" : "index.html";
+      try {
+        if (window.top !== window.self) {
+          window.top.location.href = url;
+        } else {
+          window.location.href = url;
+        }
+      } catch (e) {
+        window.location.href = url;
+      }
+    }
+
     // Google Sign-In for login
     document.getElementById('googleLogin').addEventListener('click', () => {
       signInWithPopup(auth, provider)
         .then((result) => {
           const user = result.user;
-          const role = "user";  // Default role set to 'user' for Google sign-in
-          set(ref(db, 'authUsers/' + user.uid), {
-            email: user.email,
-            role: role
-          }).then(() => {
-            redirectUser(role);
-          });
+          const isNewUser = result.additionalUserInfo.isNewUser;
+          if (isNewUser) {
+            const role = "user";
+            set(ref(db, 'authUsers/' + user.uid), {
+              email: user.email,
+              role: role
+            }).then(() => {
+              setCookie('isLoggedIn', 'true', 24);
+              setCookie('userRole', role, 24);
+              redirectUser(role);
+            });
+          } else {
+            get(ref(db, 'authUsers/' + user.uid))
+              .then((snapshot) => {
+                if (snapshot.exists()) {
+                  const role = snapshot.val().role;
+                  setCookie('isLoggedIn', 'true', 24);
+                  setCookie('userRole', role, 24);
+                  redirectUser(role);
+                } else {
+                  alert("User data not found.");
+                }
+              })
+              .catch((error) => {
+                alert("Error fetching user role: " + error.message);
+              });
+          }
         })
         .catch((error) => {
           alert(error.message);
@@ -372,40 +388,25 @@
       signInWithPopup(auth, provider)
         .then((result) => {
           const user = result.user;
-          const role = document.getElementById("signupRole").value;
-          set(ref(db, 'authUsers/' + user.uid), {
-            email: user.email,
-            role: role
-          }).then(() => {
-            redirectUser(role);
-          });
+          const isNewUser = result.additionalUserInfo.isNewUser;
+          if (isNewUser) {
+            const role = document.getElementById("signupRole").value;
+            set(ref(db, 'authUsers/' + user.uid), {
+              email: user.email,
+              role: role
+            }).then(() => {
+              setCookie('isLoggedIn', 'true', 24);
+              setCookie('userRole', role, 24);
+              redirectUser(role);
+            });
+          } else {
+            alert("An account with this Google account already exists. Please sign in.");
+          }
         })
         .catch((error) => {
           alert(error.message);
         });
     });
-
-    // Get role
-    function getRole() {
-      return document.getElementById("role").value;
-    }
-
-    function redirectUser(role) {
-      const url = role === "admin" ? "adminDash.html" : "index.html";
-
-      try {
-        if (window.top !== window.self) {
-          // Inside an iframe
-          window.top.location.href = url;
-        } else {
-          // Not in iframe
-          window.location.href = url;
-        }
-      } catch (e) {
-        // Fallback if cross-origin blocks access
-        window.location.href = url;
-      }
-    }
 
     // Handle Sign Up
     function signup() {
@@ -420,6 +421,8 @@
             email: user.email,
             role: role
           }).then(() => {
+            setCookie('isLoggedIn', 'true', 24);
+            setCookie('userRole', role, 24);
             redirectUser(role);
           });
         })
@@ -440,18 +443,16 @@
             .then((snapshot) => {
               if (snapshot.exists()) {
                 const role = snapshot.val().role;
-
-                // Set a session cookie instead of localStorage
-                 const expires = new Date(Date.now() + 24 * 60 * 60 * 1000).toUTCString();
-                 document.cookie = `isLoggedIn=true; expires=${expires}; path=/; SameSite=Lax`;
-                 document.cookie = `userRole=${role}; expires=${expires}; path=/; SameSite=Lax`;
-                 
+                setCookie('isLoggedIn', 'true', 24);
+                setCookie('userRole', role, 24);
                 alert("Login successful! Redirecting to " + role + " dashboard.");
                 redirectUser(role);
+              } else {
+                alert("User data not found.");
               }
             })
             .catch((error) => {
-              alert("Error getting user role: " + error.message);
+              alert("Error fetching user role: " + error.message);
             });
         })
         .catch((error) => {
