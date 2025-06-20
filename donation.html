@@ -1,1 +1,489 @@
-payment page here
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Donate - Sindhu Global Foundation Trust</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+      line-height: 1.6;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+    .header {
+      background: linear-gradient(135deg, #ff7b29 0%, #9c27b0 100%);
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      border-radius: 16px 16px 0 0;
+    }
+    .header img {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 10px;
+    }
+    .header h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0;
+    }
+    .content {
+      padding: 30px;
+      display: flex;
+      gap: 30px;
+    }
+    .donate-info {
+      flex: 1;
+    }
+    .donate-info h2 {
+      color: #ff7b29;
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .donate-info p {
+      color: #555;
+      margin-bottom: 15px;
+    }
+    .donation-type {
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-label {
+      color: #444;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .form-control, .form-select {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+    .form-control:focus, .form-select:focus {
+      border-color: #ff7b29;
+      box-shadow: 0 0 0 3px rgba(255, 123, 41, 0.1);
+      outline: none;
+    }
+    .form-select {
+      appearance: none;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23333' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E") no-repeat right 12px center;
+    }
+    .donation-details {
+      flex: 1;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+    }
+    .donation-details h3 {
+      color: #333;
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .btn-pay, .btn-submit {
+      width: 100%;
+      padding: 15px;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .btn-pay {
+      background: #007bff;
+    }
+    .btn-pay:hover {
+      background: #0056b3;
+      transform: translateY(-2px);
+    }
+    .btn-submit {
+      background: #28a745;
+    }
+    .btn-submit:hover {
+      background: #218838;
+      transform: translateY(-2px);
+    }
+    .payment-options {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+    .payment-options img {
+      height: 20px;
+    }
+    .terms {
+      color: #6c757d;
+      font-size: 0.85rem;
+      margin-top: 15px;
+      text-align: center;
+    }
+    .modal-content {
+      border-radius: 12px;
+      text-align: center;
+      padding: 30px;
+    }
+    .modal-header {
+      border-bottom: none;
+      padding: 0;
+    }
+    .modal-title {
+      font-size: 1.5rem;
+      color: #28a745;
+      font-weight: 700;
+    }
+    .modal-body p {
+      font-size: 1rem;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 768px) {
+      .content {
+        flex-direction: column处罚
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="images/dummylogosgft.png" alt="Logo">
+      <h1>Sindhu Global Foundation Trust</h1>
+    </div>
+    <div class="content">
+      <div class="donate-info">
+        <h2>Make a Difference</h2>
+        <p>Support our mission to empower underprivileged communities with education and healthcare. Every contribution counts.</p>
+        <div class="donation-type">
+          <div class="form-group">
+            <label for="donationType" class="form-label">Select Type of Donation *</label>
+            <select class="form-select" id="donationType" onchange="updateSubOptions()">
+              <option value="">-Select-</option>
+              <option value="money">Money</option>
+              <option value="inKind">In-Kind</option>
+            </select>
+          </div>
+          <div class="form-group" id="subOptionContainer" style="display: none;">
+            <label for="subOption" class="form-label">Select Sub-Option *</label>
+            <select class="form-select" id="subOption" onchange="updateDetails()">
+              <option value="">-Select-</option>
+            </select>
+          </div>
+        </div>
+        <div class="contact-info">
+          <p><strong>Contact Us:</strong></p>
+          <p><i class="fas fa-envelope"></i> <a href="mailto:contact@sindhuglobalfoundationtrust.org">contact@sindhuglobalfoundationtrust.org</a></p>
+          <p><i class="fas fa-phone"></i> <a href="tel:+912261234567">+91 22 6123 4567</a></p>
+        </div>
+        <div class="terms">
+          Terms & Conditions: You agree to share information entered on this page with Sindhu Global Foundation Trust (owner of this page) and Razorpay, adhering to applicable laws.
+        </div>
+      </div>
+      <div class="donation-details" id="donationDetails">
+        <h3>Donation Details</h3>
+        <div id="standardFields">
+          <div class="form-group">
+            <label for="fullName" class="form-label">Full Name *</label>
+            <input type="text" class="form-control" id="fullName" required>
+          </div>
+          <div class="form-group">
+            <label for="email" class="form-label">Email *</label>
+            <input type="email" class="form-control" id="email" required>
+          </div>
+          <div class="form-group">
+            <label for="address" class="form-label">Address *</label>
+            <input type="text" class="form-control" id="address" required>
+          </div>
+          <div class="form-group">
+            <label for="panNo" class="form-label">PAN No. *</label>
+            <input type="text" class="form-control" id="panNo" required>
+          </div>
+        </div>
+        <div id="dynamicFields"></div>
+        <div id="donationTypeDisplay" class="form-group" style="display: none;">
+          <label class="form-label">Donation Type:</label>
+          <p id="selectedType" style="margin: 0;"></p>
+        </div>
+        <button type="button" class="btn-pay" id="payButton" style="display: none;" onclick="handleOnlinePayment()">Pay Amount<span id="displayAmount">0.00</span></button>
+        <button type="button" class="btn-submit" id="submitButton" style="display: none;" onclick="handleSubmission()">Submit</button>
+        <div class="payment-options" style="display: none;" id="paymentOptions">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/UPI-Logo.svg/1200px-UPI-Logo.svg.png" alt="UPI">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/200px-Visa_Inc._logo.svg.png" alt="Visa">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/MasterCard_2019_logo.svg/1200px-MasterCard_2019_logo.svg.png" alt="MasterCard">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/RuPay_Logo.svg/1200px-RuPay_Logo.svg.png" alt="RuPay">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Thank You Modal -->
+  <div class="modal fade" id="thankYouModal" tabindex="-1" aria-labelledby="thankYouModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="thankYouModalLabel">Thank You!</h5>
+        </div>
+        <div class="modal-body">
+          <p>Thank you for your generous donation. Your support makes a difference!</p>
+          <p>Login credentials for accessing Donor Dashboard have been sent via email.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Firebase Modular SDK -->
+  <script type="module">
+    // Import Firebase modules
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+    import { getDatabase, ref, push, set } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js';
+
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDkLmo4Vf-1U8Vl_grn2waMigYCyMj1BaU",
+      authDomain: "formtestsgft.firebaseapp.com",
+      databaseURL: "https://formtestsgft-default-rtdb.firebaseio.com",
+      projectId: "formtestsgft",
+      storageBucket: "formtestsgft.appspot.com",
+      messagingSenderId: "688396867961",
+      appId: "1:688396867961:web:8cc2136b755be21f4f77a8"
+    };
+
+    // Check if Firebase is loaded
+    if (typeof initializeApp === 'undefined') {
+      console.error('Firebase SDK not loaded. Please check the network or CDN.');
+      alert('Failed to load Firebase. Please check your internet connection and try again.');
+      throw new Error('Firebase SDK not loaded');
+    }
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+
+    let selectedType = '';
+    let selectedSubOption = '';
+    let isOnlineProcessed = false;
+
+    function updateSubOptions() {
+      const donationType = document.getElementById('donationType').value;
+      const subOptionSelect = document.getElementById('subOption');
+      const subOptionContainer = document.getElementById('subOptionContainer');
+      const donationTypeDisplay = document.getElementById('donationTypeDisplay');
+      const selectedTypeElement = document.getElementById('selectedType');
+
+      subOptionSelect.innerHTML = '<option value="">-Select-</option>';
+      donationTypeDisplay.style.display = 'none';
+      document.getElementById('dynamicFields').innerHTML = '';
+      document.getElementById('payButton').style.display = 'none';
+      document.getElementById('submitButton').style.display = 'none';
+      document.getElementById('paymentOptions').style.display = 'none';
+      isOnlineProcessed = false;
+
+      if (donationType) {
+        subOptionContainer.style.display = 'block';
+        selectedType = donationType;
+        selectedTypeElement.textContent = donationType.charAt(0).toUpperCase() + donationType.slice(1).replace(/([A-Z])/g, ' $1');
+        donationTypeDisplay.style-display = 'block';
+        const options = donationType === 'money' 
+          ? ['cash', 'cheque', 'online'] 
+          : ['stationery', 'grains', 'sanitaryItems'];
+        options.forEach(option => {
+          const optionText = option.charAt(0).toUpperCase() + option.slice(1).replace(/([A-Z])/g, ' $1');
+          subOptionSelect.innerHTML += `<option value="${option}">${optionText}</option>`;
+        });
+      } else {
+        subOptionContainer.style.display = 'none';
+        selectedTypeElement.textContent = '-';
+      }
+    }
+
+    function updateDetails() {
+      const subOption = document.getElementById('subOption').value;
+      const dynamicFields = document.getElementById('dynamicFields');
+      const payButton = document.getElementById('payButton');
+      const submitButton = document.getElementById('submitButton');
+      const paymentOptions = document.getElementById('paymentOptions');
+
+      dynamicFields.innerHTML = '';
+      payButton.style.display = 'none';
+      submitButton.style.display = 'none';
+      paymentOptions.style.display = 'none';
+      isOnlineProcessed = false;
+
+      if (subOption) {
+        selectedSubOption = subOption;
+        if (selectedType === 'money') {
+          dynamicFields.innerHTML = `
+            <div class="form-group">
+              <label for="donationAmount" class="form-label">Donation Amount (₹) *</label>
+              <input type="number" class="form-control" id="donationAmount" min="100" required>
+            </div>
+          `;
+          if (subOption === 'online') {
+            payButton.style.display = 'block';
+            paymentOptions.style.display = 'flex';
+            updatePayButtonText();
+            document.getElementById('donationAmount').addEventListener('input', updatePayButtonText);
+          } else {
+            dynamicFields.innerHTML += `
+              <div class="form-group">
+                <label for="submissionType" class="form-label">Submission Type *</label>
+                <select class="form-select" id="submissionType" required>
+                  <option value="">-Select-</option>
+                  <option value="ngo">Submit to NGO</option>
+                  <option value="collect">Needs to be Collected</option>
+                </select>
+              </div>
+            `;
+            submitButton.style.display = 'block';
+          }
+        } else if (selectedType === 'inKind') {
+          dynamicFields.innerHTML = `
+            <div class="form-group">
+              <label for="itemDetails" class="form-label">Item Details *</label>
+              <input type="text" class="form-control" id="itemDetails" placeholder="Describe the items" required>
+            </div>
+            <div class="form-group">
+              <label for="submissionType" class="form-label">Submission Type *</label>
+              <select class="form-select" id="submissionType" required>
+                <option value="">-Select-</option>
+                <option value="ngo">Submit to NGO</option>
+                <option value="collect">Needs to be Collected</option>
+              </select>
+            </div>
+          `;
+          submitButton.style.display = 'block';
+        }
+      }
+    }
+
+    function updatePayButtonText() {
+      const amount = document.getElementById('donationAmount').value || 0;
+      const payButton = document.getElementById('payButton');
+      payButton.textContent = `Pay ₹${amount}.00`;
+    }
+
+    function handleOnlinePayment() {
+      const amount = document.getElementById('donationAmount')?.value.trim();
+      if (!amount || amount < 100) {
+        alert('Please enter a valid donation amount of at least ₹100.');
+        return;
+      }
+      alert('Payment via gateway here');
+      isOnlineProcessed = true;
+      document.getElementById('payButton').style.display = 'none';
+      document.getElementById('submitButton').style.display = 'block';
+    }
+
+    function handleSubmission() {
+      const fullName = document.getElementById('fullName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const address = document.getElementById('address').value.trim();
+      const panNo = document.getElementById('panNo').value.trim();
+      let amountOrItem = '';
+      let submissionType = '';
+
+      if (!fullName || !email || !address || !panNo) {
+        alert('Please fill in all standard fields.');
+        return;
+      }
+
+      if (selectedType === 'money') {
+        amountOrItem = document.getElementById('donationAmount')?.value.trim();
+        if (!amountOrItem || amountOrItem < 100) {
+          alert('Please enter a valid donation amount of at least ₹100.');
+          return;
+        }
+        if (selectedSubOption !== 'online' || isOnlineProcessed) {
+          submissionType = document.getElementById('submissionType')?.value;
+          if (!submissionType && selectedSubOption !== 'online') {
+            alert('Please select a submission type.');
+            return;
+          }
+        }
+      } else if (selectedType === 'inKind') {
+        amountOrItem = document.getElementById('itemDetails')?.value.trim();
+        submissionType = document.getElementById('submissionType')?.value;
+        if (!amountOrItem || !submissionType) {
+          alert('Please fill in all required fields for in-kind donation.');
+          return;
+        }
+      }
+
+      const donationData = {
+        fullName: fullName,
+        email: email,
+        address: address,
+        panNo: panNo,
+        donationType: selectedType,
+        subOption: selectedSubOption,
+        amountOrItem: amountOrItem,
+        submissionType: submissionType || 'N/A',
+        timestamp: new Date().toISOString(),
+        paymentStatus: selectedSubOption === 'online' && isOnlineProcessed ? 'Processed' : 'Pending'
+      };
+
+      const donationRef = ref(database, 'donations');
+      const newDonationRef = push(donationRef);
+      set(newDonationRef, donationData)
+        .then(() => {
+          if (selectedType === 'money') {
+            alert(
+              `Thank you ${fullName}! Your ${selectedSubOption} donation of ₹${amountOrItem} shall be ${
+                submissionType === 'ngo' ? 'submitted by you to NGO' : 'collected'
+              }. on communicated date and time`
+            );
+          } else if (selectedType === 'inKind') {
+            alert(
+              `Thank you ${fullName}! Your in-kind donation of ${amountOrItem} will be ${
+                submissionType === 'ngo' ? 'submitted to NGO' : 'collected'
+              }.`
+            );
+          }
+
+          const modal = new bootstrap.Modal(document.getElementById('thankYouModal'));
+          modal.show();
+
+          document.querySelectorAll('.form-control, .form-select').forEach(input => (input.value = ''));
+          document.getElementById('displayAmount').textContent = '0.00';
+          document.getElementById('subOption').value = '';
+          updateSubOptions();
+        })
+        .catch(error => {
+          console.error('Error saving to Firebase:', error);
+          alert('An error occurred while saving your donation. Please try again.');
+        });
+    }
+
+    window.addEventListener('message', (event) => {
+      if (event.data === 'closePopup') {
+        window.parent.closeDonatePopup();
+      }
+    });
+  </script>
+</body>
+</html>

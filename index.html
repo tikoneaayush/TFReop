@@ -736,7 +736,7 @@
       <h1><span class="highlight-purple">Sindhu</span> <span class="highlight-orange">Global</span><br>
         Foundation <span class="highlight-orange">Trust</span></h1>
       <p>Together for Change, United for Impact.</p>
-      <button class="btn-donate" onclick="handleDonateNow()">Donate Now</button>
+      <button class="btn-donate" onclick="window.location.href='donation.html'">Donate Now</button>
     </div>
     <div class="hero-right">
       <img src="images/happychildren.jpg" alt="Happy children">
@@ -1051,32 +1051,18 @@
     }
 
     function showPopup(event) {
-      const cookieValue = getCookie('isLoggedIn');
-      const isLoggedIn = cookieValue === 'true';
+      document.getElementById('popup-event-name').innerText = event.title;
+      document.getElementById('popup-event-date').innerText = event.date;
+      document.getElementById('popup-event-benefitted').innerText = event.peopleBenefitted;
+      document.getElementById('popup-event-amount').innerText = event.amountUtilised;
+      document.getElementById('popup-event-summary').innerText = event.summary;
 
-      if (isLoggedIn) {
-        document.getElementById('popup-event-name').innerText = event.title;
-        document.getElementById('popup-event-date').innerText = event.date;
-        document.getElementById('popup-event-benefitted').innerText = event.peopleBenefitted;
-        document.getElementById('popup-event-amount').innerText = event.amountUtilised;
-        document.getElementById('popup-event-summary').innerText = event.summary;
-
-        const modal = new bootstrap.Modal(document.getElementById('event-popup'));
-        modal.show();
-      } else {
-        alert("Please login to access the event details.");
-      }
+      const modal = new bootstrap.Modal(document.getElementById('event-popup'));
+      modal.show();
     }
 
     window.handleDonateNow = function() {
-      const cookieValue = getCookie('isLoggedIn');
-      const isLoggedIn = cookieValue === 'true';
-
-      if (isLoggedIn) {
-        window.location.href = 'donation.html';
-      } else {
-        alert("Please login to donate.");
-      }
+      window.location.href = 'donation.html';
     };
 
     function toggleContributions(isSignedIn) {

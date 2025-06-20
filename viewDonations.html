@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>View Donations - Sindhu Global Foundation Trust</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+      line-height: 1.6;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      padding: 30px;
+    }
+    .header {
+      background: linear-gradient(135deg, #ff7b29 0%, #9c27b0 100%);
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      border-radius: 16px 16px 0 0;
+      margin: -30px -30px 30px -30px;
+    }
+    .header img {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 10px;
+    }
+    .header h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0;
+    }
+    .table-responsive {
+      margin-top: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background: #ff7b29;
+      color: #fff;
+      font-weight: 600;
+    }
+    tr:nth-child(even) {
+      background: #f8f9fa;
+    }
+    tr:hover {
+      background: #e9ecef;
+    }
+    .loading, .error, .no-data {
+      text-align: center;
+      font-size: 1.1rem;
+      margin: 20px 0;
+    }
+    @media (max-width: 768px) {
+      .container {
+        margin: 20px;
+        padding: 20px;
+      }
+      th, td {
+        font-size: 0.9rem;
+        padding: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="images/dummylogosgft.png" alt="Logo">
+      <h1>Sindhu Global Foundation Trust - Donation Records</h1>
+    </div>
+    <div class="loading" id="loading">Loading donations...</div>
+    <div class="error" id="error" style="display: none; color: red;"></div>
+    <div class="no-data" id="noData" style="display: none;">No donations found.</div>
+    <div class="table-responsive" id="donationTable" style="display: none;">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>PAN No.</th>
+            <th>Donation Type</th>
+            <th>Sub Option</th>
+            <th>Amount/Item</th>
+            <th>Submission Type</th>
+            <th>Timestamp</th>
+          </tr>
+        </thead>
+        <tbody id="donationTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js"></script>
+  <script>
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDkLmo4Vf-1U8Vl_grn2waMigYCyMj1BaU",
+      authDomain: "formtestsgft.firebaseapp.com",
+      databaseURL: "https://formtestsgft-default-rtdb.firebaseio.com",
+      projectId: "formtestsgft",
+      storageBucket: "formtestsgft.appspot.com",
+      messagingSenderId: "688396867961",
+      appId: "1:688396867961:web:8cc2136b755be21f4f77a8"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+
+    // Fetch donations
+    const donationTableBody = document.getElementById('donationTableBody');
+    const loadingDiv = document.getElementById('loading');
+    const errorDiv = document.getElementById('error');
+    const noDataDiv = document.getElementById('noData');
+    const donationTable = document.getElementById('donationTable');
+
+    database.ref('donations').on('value', (snapshot) => {
+      loadingDiv.style.display = 'none';
+      donationTableBody.innerHTML = '';
+
+      if (snapshot.exists()) {
+        const donations = snapshot.val();
+        Object.values(donations).forEach(donation => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${donation.fullName}</td>
+            <td>${donation.email}</td>
+            <td>${donation.address}</td>
+            <td>${donation.panNo}</td>
+            <td>${donation.donationType.charAt(0).toUpperCase() + donation.donationType.slice(1).replace(/([A-Z])/g, ' $1')}</td>
+            <td>${donation.subOption.charAt(0).toUpperCase() + donation.subOption.slice(1).replace(/([A-Z])/g, ' $1')}</td>
+            <td>${donation.amountOrItem}${donation.donationType === 'money' ? ' ₹' : ''}</td>
+            <td>${donation.submissionType.charAt(0).toUpperCase() + donation.submissionType.slice(1).replace(/([A-Z])/g, ' $1')}</td>
+            <td>${new Date(donation.timestamp).toLocaleString()}</td>
+          `;
+          donationTableBody.appendChild(row);
+        });
+        donationTable.style.display = 'block';
+      } else {
+        noDataDiv.style.display = 'block';
+      }
+    }, (error) => {
+      loadingDiv.style.display = 'none';
+      errorDiv.textContent = 'Error loading donations: ' + error.message;
+      errorDiv.style.display = 'block';
+    });
+  </script>
+</body>
+</html>
