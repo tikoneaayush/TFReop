@@ -159,9 +159,18 @@
       color: #333;
       margin-bottom: 20px;
     }
+    #otherItemContainer {
+      display: none;
+      margin-top: 10px;
+    }
     @media (max-width: 768px) {
       .content {
-        flex-direction: column处罚
+        flex-direction: column;
+        padding: 20px;
+      }
+      .donation-details {
+        padding: 15px;
+      }
     }
   </style>
 </head>
@@ -186,9 +195,13 @@
           </div>
           <div class="form-group" id="subOptionContainer" style="display: none;">
             <label for="subOption" class="form-label">Select Sub-Option *</label>
-            <select class="form-select" id="subOption" onchange="updateDetails()">
+            <select class="form-select" id="subOption" onchange="toggleOtherItem()">
               <option value="">-Select-</option>
             </select>
+          </div>
+          <div class="form-group" id="otherItemContainer">
+            <label for="otherItem" class="form-label">Other Item (Optional)</label>
+            <input type="text" class="form-control" id="otherItem" placeholder="Enter custom item if 'Other' is selected">
           </div>
         </div>
         <div class="contact-info">
@@ -255,14 +268,17 @@
     </div>
   </div>
 
+  <!-- Firebase SDK (Compatibility Mode) -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Firebase Modular SDK -->
-  <script type="module">
-    // Import Firebase modules
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
-    import { getDatabase, ref, push, set } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js';
+  <script>
+    // Declare variables at the top to avoid TDZ
+    let selectedType = '';
+    let selectedSubOption = '';
+    let isOnlineProcessed = false;
 
-    // Firebase configuration
+    // Firebase Configuration
     const firebaseConfig = {
       apiKey: "AIzaSyDkLmo4Vf-1U8Vl_grn2waMigYCyMj1BaU",
       authDomain: "formtestsgft.firebaseapp.com",
@@ -273,20 +289,9 @@
       appId: "1:688396867961:web:8cc2136b755be21f4f77a8"
     };
 
-    // Check if Firebase is loaded
-    if (typeof initializeApp === 'undefined') {
-      console.error('Firebase SDK not loaded. Please check the network or CDN.');
-      alert('Failed to load Firebase. Please check your internet connection and try again.');
-      throw new Error('Firebase SDK not loaded');
-    }
-
     // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const database = getDatabase(app);
-
-    let selectedType = '';
-    let selectedSubOption = '';
-    let isOnlineProcessed = false;
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
 
     function updateSubOptions() {
       const donationType = document.getElementById('donationType').value;
@@ -302,23 +307,46 @@
       document.getElementById('submitButton').style.display = 'none';
       document.getElementById('paymentOptions').style.display = 'none';
       isOnlineProcessed = false;
+      document.getElementById('otherItemContainer').style.display = 'none';
 
       if (donationType) {
         subOptionContainer.style.display = 'block';
         selectedType = donationType;
         selectedTypeElement.textContent = donationType.charAt(0).toUpperCase() + donationType.slice(1).replace(/([A-Z])/g, ' $1');
-        donationTypeDisplay.style-display = 'block';
-        const options = donationType === 'money' 
-          ? ['cash', 'cheque', 'online'] 
-          : ['stationery', 'grains', 'sanitaryItems'];
-        options.forEach(option => {
-          const optionText = option.charAt(0).toUpperCase() + option.slice(1).replace(/([A-Z])/g, ' $1');
-          subOptionSelect.innerHTML += `<option value="${option}">${optionText}</option>`;
-        });
+        donationTypeDisplay.style.display = 'block';
+        if (donationType === 'money') {
+          const options = ['cash', 'cheque', 'online'];
+          options.forEach(option => {
+            const optionText = option.charAt(0).toUpperCase() + option.slice(1).replace(/([A-Z])/g, ' $1');
+            subOptionSelect.innerHTML += `<option value="${option}">${optionText}</option>`;
+          });
+        } else if (donationType === 'inKind') {
+          db.ref('inkindItems').once('value', (snapshot) => {
+            subOptionSelect.innerHTML = '<option value="">-Select-</option>';
+            snapshot.forEach(childSnapshot => {
+              const item = childSnapshot.val();
+              const optionText = item.charAt(0).toUpperCase() + item.slice(1).replace(/([A-Z])/g, ' $1');
+              subOptionSelect.innerHTML += `<option value="${item}">${optionText}</option>`;
+            });
+            subOptionSelect.innerHTML += '<option value="other">Other</option>';
+          }).catch(error => console.error('Error fetching in-kind items:', error));
+        }
       } else {
         subOptionContainer.style.display = 'none';
         selectedTypeElement.textContent = '-';
       }
+    }
+
+    function toggleOtherItem() {
+      const subOption = document.getElementById('subOption').value;
+      const otherItemContainer = document.getElementById('otherItemContainer');
+      if (subOption === 'other') {
+        otherItemContainer.style.display = 'block';
+      } else {
+        otherItemContainer.style.display = 'none';
+        document.getElementById('otherItem').value = '';
+      }
+      updateDetails();
     }
 
     function updateDetails() {
@@ -352,11 +380,15 @@
             dynamicFields.innerHTML += `
               <div class="form-group">
                 <label for="submissionType" class="form-label">Submission Type *</label>
-                <select class="form-select" id="submissionType" required>
+                <select class="form-select" id="submissionType" onchange="toggleSubmissionDate()" required>
                   <option value="">-Select-</option>
                   <option value="ngo">Submit to NGO</option>
                   <option value="collect">Needs to be Collected</option>
                 </select>
+              </div>
+              <div class="form-group" id="submissionDateContainer" style="display: none;">
+                <label for="submissionDate" class="form-label">Submission/Collection Date *</label>
+                <input type="date" class="form-control" id="submissionDate" required>
               </div>
             `;
             submitButton.style.display = 'block';
@@ -369,15 +401,30 @@
             </div>
             <div class="form-group">
               <label for="submissionType" class="form-label">Submission Type *</label>
-              <select class="form-select" id="submissionType" required>
+              <select class="form-select" id="submissionType" onchange="toggleSubmissionDate()" required>
                 <option value="">-Select-</option>
                 <option value="ngo">Submit to NGO</option>
                 <option value="collect">Needs to be Collected</option>
               </select>
             </div>
+            <div class="form-group" id="submissionDateContainer" style="display: none;">
+              <label for="submissionDate" class="form-label">Submission/Collection Date *</label>
+              <input type="date" class="form-control" id="submissionDate" required>
+            </div>
           `;
           submitButton.style.display = 'block';
         }
+      }
+    }
+
+    function toggleSubmissionDate() {
+      const submissionType = document.getElementById('submissionType')?.value;
+      const submissionDateContainer = document.getElementById('submissionDateContainer');
+      if (submissionType === 'ngo' || submissionType === 'collect') {
+        submissionDateContainer.style.display = 'block';
+      } else {
+        submissionDateContainer.style.display = 'none';
+        document.getElementById('submissionDate').value = '';
       }
     }
 
@@ -406,6 +453,8 @@
       const panNo = document.getElementById('panNo').value.trim();
       let amountOrItem = '';
       let submissionType = '';
+      let submissionDate = '';
+      let otherItem = document.getElementById('otherItem')?.value.trim();
 
       if (!fullName || !email || !address || !panNo) {
         alert('Please fill in all standard fields.');
@@ -424,6 +473,14 @@
             alert('Please select a submission type.');
             return;
           }
+          if (submissionType && (submissionType === 'ngo' || submissionType === 'collect')) {
+            submissionDate = document.getElementById('submissionDate')?.value;
+            if (!submissionDate) {
+              alert('Please select a submission/collection date.');
+              return;
+            }
+          }
+          alert(`Thank you ${fullName}! Your ${selectedSubOption} donation of ₹${amountOrItem} shall be ${submissionType === 'ngo' ? 'submitted by you to NGO' : 'collected'} on ${submissionDate || 'a communicated date and time'}.`);
         }
       } else if (selectedType === 'inKind') {
         amountOrItem = document.getElementById('itemDetails')?.value.trim();
@@ -432,51 +489,69 @@
           alert('Please fill in all required fields for in-kind donation.');
           return;
         }
+        if (submissionType === 'ngo' || submissionType === 'collect') {
+          submissionDate = document.getElementById('submissionDate')?.value;
+          if (!submissionDate) {
+            alert('Please select a submission/collection date.');
+            return;
+          }
+        }
+        if (selectedSubOption === 'other' && !otherItem) {
+          alert('Please enter a custom item for "Other" selection if desired.');
+        }
+        // Use itemDetails as the primary field, append otherItem if provided
+        amountOrItem = otherItem ? `${amountOrItem} (${otherItem})` : amountOrItem;
+        alert(`Thank you ${fullName}! Your in-kind donation of ${amountOrItem} will be ${submissionType === 'ngo' ? 'submitted to NGO' : 'collected'} on ${submissionDate}.`);
       }
 
-      const donationData = {
-        fullName: fullName,
-        email: email,
-        address: address,
-        panNo: panNo,
-        donationType: selectedType,
-        subOption: selectedSubOption,
-        amountOrItem: amountOrItem,
-        submissionType: submissionType || 'N/A',
-        timestamp: new Date().toISOString(),
-        paymentStatus: selectedSubOption === 'online' && isOnlineProcessed ? 'Processed' : 'Pending'
-      };
-
-      const donationRef = ref(database, 'donations');
-      const newDonationRef = push(donationRef);
-      set(newDonationRef, donationData)
-        .then(() => {
-          if (selectedType === 'money') {
-            alert(
-              `Thank you ${fullName}! Your ${selectedSubOption} donation of ₹${amountOrItem} shall be ${
-                submissionType === 'ngo' ? 'submitted by you to NGO' : 'collected'
-              }. on communicated date and time`
-            );
-          } else if (selectedType === 'inKind') {
-            alert(
-              `Thank you ${fullName}! Your in-kind donation of ${amountOrItem} will be ${
-                submissionType === 'ngo' ? 'submitted to NGO' : 'collected'
-              }.`
-            );
+      // Save to Firebase Realtime Database
+      try {
+        const donationRef = db.ref('donations').push();
+        donationRef.set({
+          fullName,
+          email,
+          address,
+          panNo,
+          donationType: selectedType,
+          subOption: selectedSubOption,
+          amountOrItem,
+          submissionType: submissionType || 'online',
+          submissionDate: submissionDate ? new Date(submissionDate).getTime() : null,
+          timestamp: firebase.database.ServerValue.TIMESTAMP
+        }).then(() => {
+          if (selectedType === 'inKind' && selectedSubOption === 'other' && otherItem) {
+            db.ref('otherItems').push({
+              item: otherItem,
+              donationId: donationRef.key,
+              pendingApproval: true,
+              timestamp: firebase.database.ServerValue.TIMESTAMP
+            });
           }
-
           const modal = new bootstrap.Modal(document.getElementById('thankYouModal'));
           modal.show();
 
-          document.querySelectorAll('.form-control, .form-select').forEach(input => (input.value = ''));
+          // Show "Donation recorded" alert when modal is closed
+          document.getElementById('thankYouModal').addEventListener('hidden.bs.modal', function handler() {
+            alert('Donation recorded');
+            // Remove the event listener to prevent multiple triggers
+            this.removeEventListener('hidden.bs.modal', handler);
+          });
+
+          // Reset form
+          document.querySelectorAll('.form-control, .form-select').forEach(input => input.value = '');
           document.getElementById('displayAmount').textContent = '0.00';
           document.getElementById('subOption').value = '';
+          document.getElementById('otherItemContainer').style.display = 'none';
+          document.getElementById('submissionDateContainer').style.display = 'none';
           updateSubOptions();
-        })
-        .catch(error => {
-          console.error('Error saving to Firebase:', error);
-          alert('An error occurred while saving your donation. Please try again.');
+        }).catch(error => {
+          console.error('Error saving donation:', error);
+          alert('An error occurred while submitting your donation. Please try again.');
         });
+      } catch (error) {
+        console.error('Error saving donation:', error);
+        alert('An error occurred while submitting your donation. Please try again.');
+      }
     }
 
     window.addEventListener('message', (event) => {

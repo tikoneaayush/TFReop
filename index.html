@@ -15,7 +15,7 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
     }
 
     body {
@@ -74,8 +74,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 15px 5%;
-      background: #fff;
+      padding: 15px 2%;
+      background-color: #fff;
       border-bottom: 1px solid #eee;
       position: sticky;
       top: 0;
@@ -99,22 +99,43 @@
       transform: scale(1.1);
     }
 
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      font-size: 1.1rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .logo-text .line1, .logo-text .line2 {
+      display: flex;
+      gap: 4px;
+    }
+
+    .highlight-purple {
+      color: #9c27b0;
+    }
+
+    .highlight-orange {
+      color: #ff7b29;
+    }
+
     nav {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 15px;
       margin-left: auto;
-      margin-right: 20px;
+      margin-right: 15px;
     }
 
     nav a {
       text-decoration: none;
       color: #333;
       font-weight: 600;
-      font-size: 1rem;
-      transition: color 0.3s ease;
+      font-size: 0.95rem;
       padding: 8px 12px;
       border-radius: 6px;
+      transition: color 0.3s ease;
     }
 
     nav a:hover {
@@ -327,10 +348,18 @@
     }
 
     .card h4 {
-      margin: 20px 15px;
+      margin: 20px 15px 8px 15px;
       font-size: 1.5rem;
       font-weight: 700;
       color: #333;
+    }
+
+    .card .event-summary {
+      margin: 0 15px 10px 15px;
+      font-size: 0.9rem;
+      color: #666;
+      font-weight: 500;
+      line-height: 1.4;
     }
 
     .card button {
@@ -657,23 +686,30 @@
       .contact-map iframe {
         height: 200px;
       }
+
+      .logo-text {
+        font-size: 1rem;
+      }
     }
 
     @media (max-width: 768px) {
       header {
         flex-wrap: wrap;
-        gap: 15px;
+        gap: 10px;
         justify-content: center;
+        padding: 10px 5%;
       }
 
       nav {
         margin-left: 0;
         margin-right: 0;
         justify-content: center;
+        gap: 10px;
       }
 
       nav a {
         font-size: 0.9rem;
+        padding: 6px 10px;
       }
 
       .hero-left h1 {
@@ -705,6 +741,31 @@
       .card {
         min-width: 260px;
       }
+
+      .logo-text {
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .logo {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .logo-text {
+        font-size: 0.85rem;
+      }
+
+      #userInfo {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .btn-signin, .btn-logout {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+      }
     }
   </style>
 </head>
@@ -714,7 +775,16 @@
   <header>
     <div class="logo">
       <img src="images/dummylogosgft.png" alt="Logo">
-      <strong>Sindhu Global Foundation Trust</strong>
+      <div class="logo-text">
+        <div class="line1">
+          <span class="highlight-purple">Sindhu</span>
+          <span class="highlight-orange">Global</span>
+        </div>
+        <div class="line2">
+          <span>Foundation</span>
+          <span class="highlight-orange">Trust</span>
+        </div>
+      </div>
     </div>
     <nav>
       <a href="index.html" class="active">Home</a>
@@ -797,7 +867,7 @@
         <div class="modal-body">
           <p><strong>Date:</strong> <span id="popup-event-date"></span></p>
           <p><strong>People Benefitted:</strong> <span id="popup-event-benefitted"></span></p>
-          <p><strong>Amount Utilised:</strong> <span id="popup-event-amount"></span></p>
+          <p><strong>Donation:</strong> <span id="popup-event-donation"></span></p>
           <p><strong>Summary:</strong></p>
           <p id="popup-event-summary"></p>
         </div>
@@ -912,12 +982,43 @@
 
     const app = initializeApp(firebaseConfig);
     const database = getDatabase(app);
+    let inkindItemsCache = {};
+
+    // Fetch in-kind items and cache them
+    function fetchInkindItems() {
+      const inkindRef = ref(database, 'inkindItems');
+      get(inkindRef).then((snapshot) => {
+        const items = snapshot.val() || [];
+        inkindItemsCache = {};
+        if (Array.isArray(items)) {
+          items.forEach((item, index) => {
+            let itemName = item.name || item;
+            if (typeof itemName === 'string') {
+              inkindItemsCache[index] = itemName;
+            }
+          });
+        } else {
+          for (let id in items) {
+            let itemName = items[id].name || items[id];
+            if (typeof itemName === 'string') {
+              inkindItemsCache[id] = itemName;
+            }
+          }
+        }
+        console.log('In-kind items cached:', inkindItemsCache);
+        loadEventCards();
+      }).catch((error) => {
+        console.error('Error fetching in-kind items:', error);
+        loadEventCards(); // Load events even if in-kind items fail
+      });
+    }
 
     function loadEventCards() {
       const eventsRef = ref(database, 'events');
       get(eventsRef).then((snapshot) => {
         if (!snapshot.exists()) {
           console.log("No events data available");
+          document.getElementById('event-cards-container').innerHTML = '<p>No events available.</p>';
           return;
         }
         const eventsData = snapshot.val();
@@ -926,6 +1027,7 @@
           console.error("Event cards container not found");
           return;
         }
+        container.innerHTML = '';
 
         for (const eventId in eventsData) {
           const event = eventsData[eventId];
@@ -933,14 +1035,18 @@
           card.classList.add('card');
 
           const img = document.createElement('img');
-          img.src = event.imageUrl;
-          img.alt = event.title;
+          img.src = event.imageUrl || '';
+          img.alt = event.title || 'Event Image';
           img.onerror = function() {
             this.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="280" height="200"><rect width="280" height="200" fill="%23f0f0f0"/><text x="140" y="100" text-anchor="middle" fill="%23999">Image not found</text></svg>';
           };
 
           const eventName = document.createElement('h4');
-          eventName.innerText = event.title;
+          eventName.innerText = event.title || 'Untitled Event';
+
+          const eventSummary = document.createElement('p');
+          eventSummary.classList.add('event-summary');
+          eventSummary.innerText = event.summary || 'No summary available';
 
           const button = document.createElement('button');
           button.innerText = 'Explore Now';
@@ -948,6 +1054,7 @@
 
           card.appendChild(img);
           card.appendChild(eventName);
+          card.appendChild(eventSummary);
           card.appendChild(button);
 
           container.appendChild(card);
@@ -956,6 +1063,7 @@
         initializeScrollFunctionality();
       }).catch((error) => {
         console.error("Error loading events:", error);
+        document.getElementById('event-cards-container').innerHTML = '<p>Error loading events.</p>';
       });
     }
 
@@ -1036,7 +1144,7 @@
         expires = "; expires=" + date.toUTCString();
       }
       document.cookie = name + "=" + (value || "") + expires + "; path=/";
-      console.log('Cookie set:', name + '=' + value, 'Result:', getCookie(name));
+      console.log('Cookie set:', name + '=' + value);
     }
 
     function getCookie(name) {
@@ -1051,11 +1159,24 @@
     }
 
     function showPopup(event) {
-      document.getElementById('popup-event-name').innerText = event.title;
-      document.getElementById('popup-event-date').innerText = event.date;
-      document.getElementById('popup-event-benefitted').innerText = event.peopleBenefitted;
-      document.getElementById('popup-event-amount').innerText = event.amountUtilised;
-      document.getElementById('popup-event-summary').innerText = event.summary;
+      document.getElementById('popup-event-name').innerText = event.title || 'Untitled Event';
+      document.getElementById('popup-event-date').innerText = event.date || 'N/A';
+      document.getElementById('popup-event-benefitted').innerText = event.peopleBenefitted || 0;
+      document.getElementById('popup-event-summary').innerText = event.summary || 'No summary available';
+
+      const donationElement = document.getElementById('popup-event-donation');
+      if (event.donations) {
+        if (event.donations.type === 'money') {
+          donationElement.innerText = `₹${event.donations.amount || 0} (${event.donations.subType || 'N/A'})`;
+        } else if (event.donations.type === 'inkind') {
+          const itemName = inkindItemsCache[event.donations.itemId] || 'Unknown Item';
+          donationElement.innerText = `${event.donations.quantity || 0} x ${itemName}`;
+        } else {
+          donationElement.innerText = 'N/A';
+        }
+      } else {
+        donationElement.innerText = 'N/A';
+      }
 
       const modal = new bootstrap.Modal(document.getElementById('event-popup'));
       modal.show();
@@ -1182,7 +1303,7 @@
     });
 
     window.onload = function() {
-      loadEventCards();
+      fetchInkindItems();
       initImpactAnimation();
       const cookieValue = getCookie('isLoggedIn');
       const isLoggedIn = cookieValue === 'true';
