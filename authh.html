@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login / Sign Up</title>
+  <title>Sign In</title>
   <style>
     * {
       margin: 0;
@@ -53,33 +53,6 @@
       padding: 40px;
     }
 
-    .tabs {
-      display: flex;
-      background: #f8f9fa;
-      border-radius: 8px;
-      padding: 4px;
-      margin-bottom: 30px;
-    }
-
-    .tab-button {
-      flex: 1;
-      background: transparent;
-      border: none;
-      padding: 12px 20px;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      border-radius: 6px;
-      transition: all 0.3s ease;
-      color: #64748b;
-    }
-
-    .tab-button.active {
-      background: white;
-      color: #7c3aed;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
     .form-group {
       margin-bottom: 20px;
     }
@@ -92,7 +65,7 @@
       margin-bottom: 8px;
     }
 
-    input, select {
+    input {
       width: 100%;
       padding: 12px 16px;
       border: 2px solid #e5e7eb;
@@ -102,7 +75,7 @@
       background: #fafafa;
     }
 
-    input:focus, select:focus {
+    input:focus {
       outline: none;
       border-color: #ff6b35;
       background: white;
@@ -183,35 +156,6 @@
       flex-shrink: 0;
     }
 
-    .form-toggle {
-      text-align: center;
-      font-size: 14px;
-      color: #6b7280;
-    }
-
-    .form-toggle a {
-      color: #ff6b35;
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    .form-toggle a:hover {
-      text-decoration: underline;
-    }
-
-    .role-selector {
-      position: relative;
-    }
-
-    .role-selector select {
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
-      background-position: right 12px center;
-      background-repeat: no-repeat;
-      background-size: 16px;
-      padding-right: 40px;
-    }
-
     @media (max-width: 480px) {
       .form-content {
         padding: 30px 25px;
@@ -227,17 +171,11 @@
   <div class="auth-container">
     <div class="auth-header">
       <h1>Welcome</h1>
-      <p>Access your account or create a new one</p>
+      <p>Sign in to access your account</p>
     </div>
 
     <div class="form-content">
-      <!-- Tab Buttons for Login / Sign Up -->
-      <div class="tabs">
-        <button class="tab-button active" id="loginTab">Sign In</button>
-        <button class="tab-button" id="signupTab">Sign Up</button>
-      </div>
-
-      <!-- Login Form (role selector removed) -->
+      <!-- Login Form -->
       <div id="loginForm">
         <div class="form-group">
           <label for="email">Email Address</label>
@@ -260,44 +198,6 @@
           </svg>
           Continue with Google
         </button>
-        <div class="form-toggle">
-          Don't have an account? <a href="#" id="goToSignup">Sign up here</a>
-        </div>
-      </div>
-
-      <!-- Sign Up Form (role selector remains) -->
-      <div id="signupForm" style="display: none;">
-        <div class="form-group">
-          <label for="signupEmail">Email Address</label>
-          <input type="email" id="signupEmail" placeholder="Enter your email" required>
-        </div>
-        <div class="form-group">
-          <label for="signupPassword">Password</label>
-          <input type="password" id="signupPassword" placeholder="Create a password" required>
-        </div>
-        <div class="form-group role-selector">
-          <label for="signupRole">Account Type</label>
-          <select id="signupRole">
-            <option value="user">User</option>
-            <option value="admin">Administrator</option>
-          </select>
-        </div>
-        <button class="primary-btn" id="signupBtn">Create Account</button>
-        <div class="divider">
-          <span>or</span>
-        </div>
-        <button class="google-btn" id="googleSignup">
-          <svg class="google-icon" viewBox="0 0 24 24">
-            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-          </svg>
-          Sign up with Google
-        </button>
-        <div class="form-toggle">
-          Already have an account? <a href="#" id="goToLogin">Sign in here</a>
-        </div>
       </div>
     </div>
   </div>
@@ -305,8 +205,8 @@
   <!-- Firebase Scripts -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
-    import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
-    import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+    import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+    import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
 
     // Firebase configuration
     const firebaseConfig = {
@@ -332,8 +232,8 @@
     }
 
     // Function to redirect user
-    function redirectUser(role) {
-      const url = role === "admin" ? "adminDash.html" : "index.html";
+    function redirectUser() {
+      const url = "userDash.html"; // Default to user dashboard
       try {
         if (window.top !== window.self) {
           window.top.location.href = url;
@@ -345,156 +245,107 @@
       }
     }
 
-    // Google Sign-In for login
-    document.getElementById('googleLogin').addEventListener('click', () => {
-      signInWithPopup(auth, provider)
-        .then((result) => {
-          const user = result.user;
-          const isNewUser = result.additionalUserInfo.isNewUser;
-          if (isNewUser) {
-            const role = "user";
-            set(ref(db, 'authUsers/' + user.uid), {
-              email: user.email,
-              role: role
-            }).then(() => {
-              setCookie('isLoggedIn', 'true', 24);
-              setCookie('userRole', role, 24);
-              redirectUser(role);
-            });
+    // Function to hash password using SHA-256
+    async function hashPassword(password) {
+      const msgBuffer = new TextEncoder().encode(password);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    // Function to generate and store user credentials in Realtime Database
+    async function generateAndStoreCredentials(email, fullName, panNo) {
+      const sanitizedEmail = email.replace(/\./g, '_');
+      const firstName = fullName.split(' ')[0].toUpperCase();
+      const panPrefix = panNo.substring(0, 4).toUpperCase();
+      const generatedPassword = `${firstName}@${panPrefix}`;
+      const hashedPassword = await hashPassword(generatedPassword);
+
+      // Store in userCreds node in Realtime Database
+      try {
+        await set(ref(db, `userCreds/${sanitizedEmail}`), {
+          email: email,
+          hashedPassword: hashedPassword,
+          createdAt: new Date().toISOString()
+        });
+        return generatedPassword;
+      } catch (error) {
+        console.error('Error storing credentials:', error);
+        throw new Error('Failed to store credentials');
+      }
+    }
+
+    // Function to check if credentials exist, if not generate from donations
+    async function ensureCredentialsExist(email) {
+      const sanitizedEmail = email.replace(/\./g, '_');
+      const credRef = ref(db, `userCreds/${sanitizedEmail}`);
+      const credSnap = await get(credRef);
+
+      if (credSnap.exists()) {
+        return credSnap.val();
+      } else {
+        // Fetch user data from donations
+        const donationsRef = ref(db, `donations/${sanitizedEmail}`);
+        const snapshot = await get(donationsRef);
+        if (snapshot.exists()) {
+          const donationData = Object.values(snapshot.val())[0]; // Get first donation
+          const { fullName, panNo } = donationData;
+          if (fullName && panNo) {
+            await generateAndStoreCredentials(email, fullName, panNo);
+            return { email, hashedPassword: await hashPassword(`${fullName.split(' ')[0].toUpperCase()}@${panNo.substring(0, 4).toUpperCase()}`) };
           } else {
-            get(ref(db, 'authUsers/' + user.uid))
-              .then((snapshot) => {
-                if (snapshot.exists()) {
-                  const role = snapshot.val().role;
-                  setCookie('isLoggedIn', 'true', 24);
-                  setCookie('userRole', role, 24);
-                  redirectUser(role);
-                } else {
-                  alert("User data not found.");
-                }
-              })
-              .catch((error) => {
-                alert("Error fetching user role: " + error.message);
-              });
+            throw new Error('Invalid donation data: fullName or panNo missing');
           }
-        })
-        .catch((error) => {
-          alert(error.message);
-        });
-    });
-
-    // Google Sign-Up
-    document.getElementById('googleSignup').addEventListener('click', () => {
-      signInWithPopup(auth, provider)
-        .then((result) => {
-          const user = result.user;
-          const isNewUser = result.additionalUserInfo.isNewUser;
-          if (isNewUser) {
-            const role = document.getElementById("signupRole").value;
-            set(ref(db, 'authUsers/' + user.uid), {
-              email: user.email,
-              role: role
-            }).then(() => {
-              setCookie('isLoggedIn', 'true', 24);
-              setCookie('userRole', role, 24);
-              redirectUser(role);
-            });
-          } else {
-            alert("An account with this Google account already exists. Please sign in.");
-          }
-        })
-        .catch((error) => {
-          alert(error.message);
-        });
-    });
-
-    // Handle Sign Up
-    function signup() {
-      const email = document.getElementById("signupEmail").value;
-      const password = document.getElementById("signupPassword").value;
-      const role = document.getElementById("signupRole").value;
-
-      createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          set(ref(db, 'authUsers/' + user.uid), {
-            email: user.email,
-            role: role
-          }).then(() => {
-            setCookie('isLoggedIn', 'true', 24);
-            setCookie('userRole', role, 24);
-            redirectUser(role);
-          });
-        })
-        .catch((error) => {
-          alert(error.message);
-        });
+        } else {
+          throw new Error('No donation record found for this email');
+        }
+      }
     }
 
     // Handle Login
-    function login() {
-      const email = document.getElementById("email").value;
+    async function login() {
+      const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value;
 
-      signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          get(ref(db, 'authUsers/' + user.uid))
-            .then((snapshot) => {
-              if (snapshot.exists()) {
-                const role = snapshot.val().role;
-                setCookie('isLoggedIn', 'true', 24);
-                setCookie('userRole', role, 24);
-                alert("Login successful! Redirecting to " + role + " dashboard.");
-                redirectUser(role);
-              } else {
-                alert("User data not found.");
-              }
-            })
-            .catch((error) => {
-              alert("Error fetching user role: " + error.message);
-            });
-        })
-        .catch((error) => {
-          alert(error.message);
-        });
+      if (!email || !password) {
+        alert("Please fill in all fields.");
+        return;
+      }
+
+      try {
+        const creds = await ensureCredentialsExist(email);
+        const hashedInputPassword = await hashPassword(password);
+
+        if (creds.hashedPassword === hashedInputPassword) {
+          setCookie('isLoggedIn', 'true', 24);
+          setCookie('userEmail', email, 24);
+          alert("Login successful! Redirecting to dashboard.");
+          redirectUser();
+        } else {
+          alert("Invalid email or password.");
+        }
+      } catch (error) {
+        alert(error.message);
+      }
     }
 
-    // Button Event Listeners
-    document.getElementById("signupBtn").addEventListener("click", signup);
+    // Google Sign-In
+    document.getElementById('googleLogin').addEventListener('click', async () => {
+      try {
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+        const creds = await ensureCredentialsExist(user.email);
+        setCookie('isLoggedIn', 'true', 24);
+        setCookie('userEmail', user.email, 24);
+        alert("Login successful! Redirecting to dashboard.");
+        redirectUser();
+      } catch (error) {
+        alert(error.message);
+      }
+    });
+
+    // Button Event Listener
     document.getElementById("loginBtn").addEventListener("click", login);
-
-    // Tab switching functionality
-    document.getElementById("loginTab").addEventListener("click", () => {
-      document.getElementById("loginForm").style.display = "block";
-      document.getElementById("signupForm").style.display = "none";
-      document.getElementById("loginTab").classList.add("active");
-      document.getElementById("signupTab").classList.remove("active");
-    });
-
-    document.getElementById("signupTab").addEventListener("click", () => {
-      document.getElementById("signupForm").style.display = "block";
-      document.getElementById("loginForm").style.display = "none";
-      document.getElementById("signupTab").classList.add("active");
-      document.getElementById("loginTab").classList.remove("active");
-    });
-
-    // Form Toggle Links
-    document.getElementById("goToSignup").addEventListener("click", (e) => {
-      e.preventDefault();
-      document.getElementById("loginForm").style.display = "none";
-      document.getElementById("signupForm").style.display = "block";
-      document.getElementById("loginTab").classList.remove("active");
-      document.getElementById("signupTab").classList.add("active");
-    });
-
-    document.getElementById("goToLogin").addEventListener("click", (e) => {
-      e.preventDefault();
-      document.getElementById("signupForm").style.display = "none";
-      document.getElementById("loginForm").style.display = "block";
-      document.getElementById("signupTab").classList.remove("active");
-      document.getElementById("loginTab").classList.add("active");
-    });
   </script>
 </body>
 </html>

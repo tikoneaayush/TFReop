@@ -795,9 +795,6 @@
     <div id="userInfo">
       <button class="btn-signin" onclick="loadAuthIframe()">Sign In</button>
       <button class="btn-logout" id="logoutBtn" style="display: none;">Log Out</button>
-      <div id="contributionsText" style="display:none; color:#333; font-weight:bold;">
-        My Contributions: Rs. 0
-      </div>
     </div>
   </header>
 
@@ -1186,34 +1183,16 @@
       window.location.href = 'donation.html';
     };
 
-    function toggleContributions(isSignedIn) {
-      const element = document.getElementById('contributionsText');
-      if (isSignedIn) {
-        element.classList.remove('hidden');
-      } else {
-        element.classList.add('hidden');
-      }
-    }
-
     function updateUIForLoginState(isLoggedIn) {
       const signInBtn = document.querySelector('.btn-signin');
       const logoutBtn = document.getElementById('logoutBtn');
-      const contributionsText = document.getElementById('contributionsText');
 
       if (isLoggedIn) {
         if (signInBtn) signInBtn.style.display = 'none';
         if (logoutBtn) logoutBtn.style.display = 'inline-block';
-        if (contributionsText) {
-          contributionsText.classList.remove('hidden');
-          contributionsText.style.display = 'block';
-        }
       } else {
         if (signInBtn) signInBtn.style.display = 'inline-block';
         if (logoutBtn) logoutBtn.style.display = 'none';
-        if (contributionsText) {
-          contributionsText.classList.add('hidden');
-          contributionsText.style.display = 'none';
-        }
       }
     }
 
@@ -1264,7 +1243,7 @@
 
     function handleLogout() {
       deleteCookie('isLoggedIn');
-      deleteCookie('userRole');
+      deleteCookie('userEmail');
       updateUIForLoginState(false);
       location.reload();
     }
@@ -1303,10 +1282,13 @@
     });
 
     window.onload = function() {
+      const isLoggedIn = getCookie('isLoggedIn') === 'true';
+      if (isLoggedIn) {
+        window.location.href = 'userDash.html';
+        return;
+      }
       fetchInkindItems();
       initImpactAnimation();
-      const cookieValue = getCookie('isLoggedIn');
-      const isLoggedIn = cookieValue === 'true';
       updateUIForLoginState(isLoggedIn);
       const logoutBtn = document.getElementById('logoutBtn');
       if (logoutBtn) {
@@ -1346,19 +1328,12 @@
           window.addEventListener('message', function(event) {
             if (event.data === 'loginSuccess') {
               setCookie('isLoggedIn', 'true', 7);
-              const contributionsText = document.getElementById('contributionsText');
-              if (contributionsText) {
-                contributionsText.classList.remove('hidden');
-                contributionsText.style.display = 'inline-block';
-                contributionsText.style.visibility = 'visible';
-                contributionsText.style.opacity = '1';
-              }
               blurOverlay.classList.remove('active');
               container.classList.remove('active');
               setTimeout(() => {
                 container.innerHTML = '';
+                window.location.href = 'userDash.html';
               }, 300);
-              updateUIForLoginState(true);
             }
           });
         } else {
