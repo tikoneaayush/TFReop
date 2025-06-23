@@ -506,7 +506,9 @@
 
       // Save to Firebase Realtime Database
       try {
-        const donationRef = db.ref('donations').push();
+        // Sanitize email to create a valid Firebase key by replacing '.' with '_'
+        const sanitizedEmail = email.replace(/\./g, '_');
+        const donationRef = db.ref(`donations/${sanitizedEmail}`).push();
         donationRef.set({
           fullName,
           email,

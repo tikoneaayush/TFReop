@@ -490,27 +490,33 @@
   }, (error) => console.error('Error fetching donations:', error));
 
   const updateDashboard = () => {
-    const currentDate = new Date('2025-06-22T23:47:00+05:30'); // 11:47 PM IST, June 22, 2025
+    const currentDate = new Date('2025-06-23T16:18:00+05:30'); // 04:18 PM IST, June 23, 2025
     let totalMoney = 0;
     let totalInKindDonations = 0;
 
     // Calculate amount raised and in-kind donations from 'donations' node, only if status is 'Received'
-    for (let id in donationsData) {
-      const donation = donationsData[id];
-      if (donation.donationType === 'money' && donation.status === 'Received') {
-        totalMoney += parseFloat(donation.amountOrItem) || 0;
-      } else if (donation.donationType === 'inKind' && donation.status === 'Received') {
-        totalInKindDonations++; // Increment in-kind counter only if status is 'Received'
+    for (let email in donationsData) {
+      if (donationsData.hasOwnProperty(email)) {
+        const userDonations = donationsData[email];
+        for (let donationId in userDonations) {
+          if (userDonations.hasOwnProperty(donationId)) {
+            const donation = userDonations[donationId];
+            if (donation.donationType === 'money' && donation.status === 'Received') {
+              totalMoney += parseFloat(donation.amountOrItem) || 0;
+            } else if (donation.donationType === 'inKind' && donation.status === 'Received') {
+              totalInKindDonations++;
+            }
+          }
+        }
       }
     }
 
     document.getElementById('totalMoney').textContent = '₹' + totalMoney.toLocaleString();
     document.getElementById('totalInKindDonors').textContent = totalInKindDonations;
-    // Do not update totalEvents here; it will be handled in showDetails
   };
 
   const updateEventsCount = () => {
-    filterEvents(); // Update events count based on current filter
+    filterEvents();
   };
 
   // Add event listeners after DOM is loaded
@@ -583,10 +589,22 @@
         `;
         tbody.appendChild(row);
       });
-      // Update totalEvents based on the number of rows displayed
       document.getElementById('totalEvents').textContent = tbody.getElementsByTagName('tr').length;
     } else if (type === 'money') {
-      let moneyDonations = Object.entries(donationsData).filter(([id, donation]) => donation.donationType === 'money' && donation.status === 'Received').map(([id, donation]) => ({ id, ...donation }));
+      let moneyDonations = [];
+      for (let email in donationsData) {
+        if (donationsData.hasOwnProperty(email)) {
+          const userDonations = donationsData[email];
+          for (let donationId in userDonations) {
+            if (userDonations.hasOwnProperty(donationId)) {
+              const donation = userDonations[donationId];
+              if (donation.donationType === 'money' && donation.status === 'Received') {
+                moneyDonations.push({ id: donationId, email, ...donation });
+              }
+            }
+          }
+        }
+      }
       if (moneyDonations.length === 0) {
         tbody.innerHTML = '<tr><td colspan="6">No money donations received.</td></tr>';
         return;
@@ -605,7 +623,20 @@
         tbody.appendChild(row);
       });
     } else if (type === 'inkind') {
-      let inkindDonations = Object.entries(donationsData).filter(([id, donation]) => donation.donationType === 'inKind' && donation.status === 'Received').map(([id, donation]) => ({ id, ...donation }));
+      let inkindDonations = [];
+      for (let email in donationsData) {
+        if (donationsData.hasOwnProperty(email)) {
+          const userDonations = donationsData[email];
+          for (let donationId in userDonations) {
+            if (userDonations.hasOwnProperty(donationId)) {
+              const donation = userDonations[donationId];
+              if (donation.donationType === 'inKind' && donation.status === 'Received') {
+                inkindDonations.push({ id: donationId, email, ...donation });
+              }
+            }
+          }
+        }
+      }
       if (inkindDonations.length === 0) {
         tbody.innerHTML = '<tr><td colspan="6">No in-kind donations received.</td></tr>';
         return;
@@ -633,7 +664,7 @@
     const tbody = document.querySelector("#detailsTable tbody");
     if (document.getElementById('detailsSection').style.display === 'block' && (sortPeriod !== 'all' || filterType !== 'all')) {
       tbody.innerHTML = '';
-      const currentDate = new Date('2025-06-22T23:47:00+05:30');
+      const currentDate = new Date('2025-06-23T16:18:00+05:30');
       let eventsArray = Object.entries(eventsData).map(([id, event]) => ({ id, ...event }));
 
       eventsArray = eventsArray.filter(event => {
@@ -681,7 +712,6 @@
         tbody.appendChild(row);
       });
 
-      // Update total events based on the number of rows displayed
       document.getElementById('totalEvents').textContent = tbody.getElementsByTagName('tr').length;
     }
   };

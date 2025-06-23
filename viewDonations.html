@@ -189,7 +189,7 @@
     .donations-table-wrapper {
       max-height: 70vh;
       overflow-y: auto;
-      overflow-x: auto; /* Horizontal scroll */
+      overflow-x: auto;
     }
 
     .donations-table {
@@ -416,9 +416,19 @@
 
       const data = snapshot.val();
       let donationsArray = [];
-      for (let key in data) {
-        if (data.hasOwnProperty(key)) {
-          donationsArray.push({ id: key, ...data[key] });
+      for (let email in data) {
+        if (data.hasOwnProperty(email)) {
+          const userDonations = data[email];
+          for (let donationId in userDonations) {
+            if (userDonations.hasOwnProperty(donationId)) {
+              donationsArray.push({
+                email: email,
+                id: donationId,
+                path: `donations/${email}/${donationId}`,
+                ...userDonations[donationId]
+              });
+            }
+          }
         }
       }
       console.log('Parsed donations array:', donationsArray);
@@ -464,11 +474,11 @@
             <td>${date}</td>
             <td>
               <div class="status-group">
-                <select onchange="updateStatus('${donation.id}', this.value, this)">
+                <select onchange="updateStatus('${donation.path}', this.value, this)">
                   <option value="Pending" ${status === 'Pending' ? 'selected' : ''}>Pending</option>
                   <option value="Received" ${status === 'Received' ? 'selected' : ''}>Received</option>
                 </select>
-                <input type="date" class="date-picker" id="date-${donation.id}" onchange="saveReceivedDate('${donation.id}', this.value)">
+                <input type="date" class="date-picker" id="date-${donation.id}" onchange="saveReceivedDate('${donation.path}', this.value)">
               </div>
               ${receivedDate ? `<br><small>Received: ${receivedDate}</small>` : ''}
               ${donation.submissionDate && (donation.submissionType === 'ngo' || donation.submissionType === 'collect') ? `<br><small>Scheduled: ${submissionDate}</small>` : ''}
@@ -498,8 +508,9 @@
   };
 
   // Update status and handle received date
-  window.updateStatus = function(key, status, selectElement) {
-    const datePicker = document.getElementById(`date-${key}`);
+  window.updateStatus = function(path, status, selectElement) {
+    const donationId = path.split('/').pop();
+    const datePicker = document.getElementById(`date-${donationId}`);
     if (datePicker) {
       if (status === 'Received') {
         datePicker.style.display = 'block';
@@ -508,7 +519,7 @@
         }
       } else {
         datePicker.style.display = 'none';
-        db.ref('donations/' + key).update({ status: status, receivedDate: null })
+        db.ref(path).update({ status: status, receivedDate: null })
           .catch(error => {
             console.error('Status update error at', new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }), ':', error);
             alert('Error updating status. Please try again.');
@@ -519,41 +530,43 @@
   };
 
   // Save received date when selected
-  window.saveReceivedDate = function(key, dateValue) {
+  window.saveReceivedDate = function(path, dateValue) {
     if (dateValue) {
       const date = new Date(dateValue);
       if (isNaN(date.getTime())) {
         alert('Invalid date selected. Please choose a valid date.');
-        document.getElementById(`date-${key}`).value = ''; // Clear invalid input
+        document.getElementById(`date-${path.split('/').pop()}`).value = ''; // Clear invalid input
         return;
       }
       const updates = {
         status: 'Received',
         receivedDate: date.getTime()
       };
-      db.ref('donations/' + key).update(updates)
+      db.ref(path).update(updates)
         .then(() => {
-          console.log('Received date updated successfully for key:', key);
+          console.log('Received date updated successfully for path:', path);
         })
         .catch(error => {
           console.error('Date update error at', new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }), ':', error);
           alert('Error updating received date. Please try again.');
-          const selectElement = document.querySelector(`#donationsTable select[onchange="updateStatus('${key}', this.value, this)"]`);
+          const donationId = path.split('/').pop();
+          const selectElement = document.querySelector(`#donationsTable select[onchange="updateStatus('${path}', this.value, this)"]`);
           selectElement.value = 'Pending'; // Revert to Pending on error
-          document.getElementById(`date-${key}`).style.display = 'none';
+          document.getElementById(`date-${donationId}`).style.display = 'none';
         });
     } else {
       alert('Please select a date.');
-      const selectElement = document.querySelector(`#donationsTable select[onchange="updateStatus('${key}', this.value, this)"]`);
+      const donationId = path.split('/').pop();
+      const selectElement = document.querySelector(`#donationsTable select[onchange="updateStatus('${path}', this.value, this)"]`);
       selectElement.value = 'Pending'; // Revert to Pending if no date
-      document.getElementById(`date-${key}`).style.display = 'none';
+      document.getElementById(`date-${donationId}`).style.display = 'none';
     }
   };
 
   // Load donations on page load
   window.onload = fetchDonations;
 
-  // Placeholder for logout function (to be implemented in logout.js)
+  // Placeholder for logout function
   window.handleLogout = function() {
     alert('Logout functionality to be implemented.');
   };
