@@ -224,12 +224,56 @@
       color: #888;
       margin-top: 5px;
     }
-    .period-dropdown {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      padding: 5px;
-      font-size: 0.9rem;
+    .date-filter-container {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 30px;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      align-items: center;
+    }
+    .date-filter-container label {
+      font-weight: 500;
+      color: #333;
+      margin-right: 10px;
+      align-self: center;
+    }
+    .date-filter-container input {
+      padding: 10px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      color: #333;
+      background: #fafafa;
+      transition: border-color 0.3s ease;
+    }
+    .date-filter-container input:focus {
+      border-color: #ff7b29;
+      outline: none;
+    }
+    .export-btn {
+      background: linear-gradient(135deg, #ff7b29 0%, #9c27b0 100%);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    .export-btn:hover:not(:disabled) {
+      background: linear-gradient(135deg, #e56b20 0%, #8b1a9f 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    .export-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      box-shadow: none;
     }
     .details-section {
       background: white;
@@ -298,6 +342,10 @@
         flex-direction: column;
         gap: 10px;
       }
+      .date-filter-container {
+        flex-direction: column;
+        gap: 15px;
+      }
     }
     @media (max-width: 576px) {
       .main-content {
@@ -319,6 +367,17 @@
       .details-table tbody td {
         font-size: 0.85rem;
         padding: 12px 15px;
+      }
+      .date-filter-container {
+        padding: 15px;
+      }
+      .date-filter-container input {
+        font-size: 0.9rem;
+        padding: 8px;
+      }
+      .export-btn {
+        font-size: 0.9rem;
+        padding: 8px 15px;
       }
     }
   </style>
@@ -359,14 +418,20 @@
         </div>
         <div class="stats-number" id="totalEvents">0</div>
         <div class="stats-label">Total Events</div>
-        <select class="period-dropdown" id="periodSelect" onchange="updateEventsCount()">
-          <option value="all">All</option>
-          <option value="weekly">Weekly</option>
-          <option value="monthly">Monthly</option>
-          <option value="quarterly">Quarterly</option>
-          <option value="yearly">Yearly</option>
-        </select>
       </div>
+    </div>
+
+    <!-- Date Range Filter and Export Button -->
+    <div class="date-filter-container">
+      <div>
+        <label for="dateFrom">From:</label>
+        <input type="date" id="dateFrom" />
+      </div>
+      <div>
+        <label for="dateTo">To:</label>
+        <input type="date" id="dateTo" />
+      </div>
+      <button class="export-btn" id="exportBtn" disabled>Export as CSV</button>
     </div>
 
     <!-- Details Section -->
@@ -450,7 +515,7 @@
 
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
   import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
-  
+
   const firebaseConfig = {
     apiKey: "AIzaSyDkLmo4Vf-1U8Vl_grn2waMigYCyMj1BaU",
     authDomain: "formtestsgft.firebaseapp.com",
@@ -467,6 +532,8 @@
   let eventsData = {};
   let donationsData = {};
   let inkindItems = {};
+  let dateFrom = null;
+  let dateTo = null;
 
   // Fetch in-kind items
   const inkindRef = ref(db, 'inkindItems');
@@ -480,6 +547,9 @@
   onValue(eventsRef, (snapshot) => {
     eventsData = snapshot.val() || {};
     updateDashboard();
+    if (document.getElementById('detailsSection').style.display === 'block') {
+      showDetails('events');
+    }
   }, (error) => console.error('Error fetching events:', error));
 
   // Fetch donations
@@ -487,14 +557,19 @@
   onValue(donationsRef, (snapshot) => {
     donationsData = snapshot.val() || {};
     updateDashboard();
+    if (document.getElementById('detailsSection').style.display === 'block') {
+      const type = document.getElementById('detailsTable').dataset.type;
+      if (type === 'money' || type === 'inkind') {
+        showDetails(type);
+      }
+    }
   }, (error) => console.error('Error fetching donations:', error));
 
   const updateDashboard = () => {
-    const currentDate = new Date('2025-06-23T16:18:00+05:30'); // 04:18 PM IST, June 23, 2025
+    const currentDate = new Date('2025-06-24T06:55:00+05:30');
     let totalMoney = 0;
     let totalInKindDonations = 0;
 
-    // Calculate amount raised and in-kind donations from 'donations' node, only if status is 'Received'
     for (let email in donationsData) {
       if (donationsData.hasOwnProperty(email)) {
         const userDonations = donationsData[email];
@@ -513,10 +588,20 @@
 
     document.getElementById('totalMoney').textContent = '₹' + totalMoney.toLocaleString();
     document.getElementById('totalInKindDonors').textContent = totalInKindDonations;
+    updateEventsCount();
   };
 
   const updateEventsCount = () => {
-    filterEvents();
+    let eventsArray = Object.entries(eventsData).map(([id, event]) => ({ id, ...event }));
+    if (dateFrom && dateTo) {
+      eventsArray = eventsArray.filter(event => {
+        if (!event.date) return false;
+        const eventDate = new Date(event.date);
+        return eventDate >= dateFrom && eventDate <= dateTo;
+      });
+    }
+    document.getElementById('totalEvents').textContent = eventsArray.length;
+    updateExportButtonState();
   };
 
   // Add event listeners after DOM is loaded
@@ -524,18 +609,163 @@
     const moneyCard = document.querySelector('.money-card');
     const inkindCard = document.querySelector('.inkind-card');
     const statsCard = document.querySelector('.stats-card');
+    const exportBtn = document.getElementById('exportBtn');
 
     moneyCard.addEventListener('click', () => showDetails('money'));
     inkindCard.addEventListener('click', () => showDetails('inkind'));
     statsCard.addEventListener('click', () => showDetails('events'));
+
+    // Date filter event listeners
+    const dateFromInput = document.getElementById('dateFrom');
+    const dateToInput = document.getElementById('dateTo');
+
+    dateFromInput.addEventListener('change', () => {
+      dateFrom = dateFromInput.value ? new Date(dateFromInput.value) : null;
+      if (dateFrom && dateTo) {
+        updateAllTables();
+      } else if (!dateFrom && !dateTo) {
+        resetAllTables();
+      }
+    });
+
+    dateToInput.addEventListener('change', () => {
+      dateTo = dateToInput.value ? new Date(dateToInput.value) : null;
+      if (dateFrom && dateTo) {
+        updateAllTables();
+      } else if (!dateFrom && !dateTo) {
+        resetAllTables();
+      }
+    });
+
+    exportBtn.addEventListener('click', exportToCSV);
   });
+
+  function updateExportButtonState() {
+    const detailsSection = document.getElementById('detailsSection');
+    const moneyModal = document.getElementById('moneyModal');
+    const inKindModal = document.getElementById('inKindModal');
+    const exportBtn = document.getElementById('exportBtn');
+    const isDetailsVisible = detailsSection.style.display === 'block' && document.querySelector('#detailsTable tbody').children.length > 0;
+    const isMoneyModalVisible = moneyModal.classList.contains('show') && document.querySelector('#moneyTableBody').children.length > 0;
+    const isInKindModalVisible = inKindModal.classList.contains('show') && document.querySelector('#inKindTableBody').children.length > 0;
+    exportBtn.disabled = !(isDetailsVisible || isMoneyModalVisible || isInKindModalVisible);
+  }
+
+  function exportToCSV() {
+    const detailsSection = document.getElementById('detailsSection');
+    let data = [];
+    let headers = [];
+    let filename = `dashboard_data_${new Date().toISOString().replace(/[:.]/g, '-')}.csv`;
+
+    if (detailsSection.style.display === 'block') {
+      const type = document.getElementById('detailsTable').dataset.type;
+      const tbody = document.querySelector('#detailsTable tbody');
+      if (type === 'events') {
+        headers = ['Sr. No.', 'Event Name', 'Date', 'No. of Beneficiaries', 'Donation'];
+        data = Array.from(tbody.children).map(row => {
+          const cells = row.querySelectorAll('td');
+          return [
+            cells[0].textContent,
+            `"${cells[1].textContent}"`,
+            cells[2].textContent,
+            cells[3].textContent,
+            `"${cells[4].textContent}"`
+          ];
+        });
+      } else if (type === 'money') {
+        headers = ['Sr. No.', 'Full Name', 'Email', 'Sub Option', 'Amount', 'Received Date'];
+        data = Array.from(tbody.children).map(row => {
+          const cells = row.querySelectorAll('td');
+          return [
+            cells[0].textContent,
+            `"${cells[1].textContent}"`,
+            `"${cells[2].textContent}"`,
+            `"${cells[3].textContent}"`,
+            cells[4].textContent,
+            cells[5].textContent
+          ];
+        });
+      } else if (type === 'inkind') {
+        headers = ['Sr. No.', 'Full Name', 'Email', 'Sub Option', 'Item', 'Received Date'];
+        data = Array.from(tbody.children).map(row => {
+          const cells = row.querySelectorAll('td');
+          return [
+            cells[0].textContent,
+            `"${cells[1].textContent}"`,
+            `"${cells[2].textContent}"`,
+            `"${cells[3].textContent}"`,
+            `"${cells[4].textContent}"`,
+            cells[5].textContent
+          ];
+        });
+      }
+    } else if (document.getElementById('moneyModal').classList.contains('show')) {
+      headers = ['Event', 'Amount', 'Date'];
+      data = Array.from(document.querySelector('#moneyTableBody').children).map(row => {
+        const cells = row.querySelectorAll('td');
+        return [
+          `"${cells[0].textContent}"`,
+          cells[1].textContent,
+          cells[2].textContent
+        ];
+      });
+    } else if (document.getElementById('inKindModal').classList.contains('show')) {
+      headers = ['Event', 'Item', 'Quantity', 'Date'];
+      data = Array.from(document.querySelector('#inKindTableBody').children).map(row => {
+        const cells = row.querySelectorAll('td');
+        return [
+          `"${cells[0].textContent}"`,
+          `"${cells[1].textContent}"`,
+          cells[2].textContent,
+          cells[3].textContent
+        ];
+      });
+    }
+
+    if (data.length > 0) {
+      const csvContent = [headers.join(','), ...data.map(row => row.join(','))].join('\n');
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = filename;
+      link.click();
+      URL.revokeObjectURL(link.href);
+    }
+  }
+
+  function updateAllTables() {
+    if (document.getElementById('detailsSection').style.display === 'block') {
+      const type = document.getElementById('detailsTable').dataset.type || 'events';
+      showDetails(type);
+    }
+    updateEventsCount();
+    updateModalTables();
+  }
+
+  function resetAllTables() {
+    if (document.getElementById('detailsSection').style.display === 'block') {
+      const type = document.getElementById('detailsTable').dataset.type || 'events';
+      showDetails(type);
+    }
+    updateEventsCount();
+    updateModalTables();
+  }
+
+  function updateModalTables() {
+    if (document.getElementById('moneyModal').classList.contains('show')) {
+      showMoneyDetails();
+    }
+    if (document.getElementById('inKindModal').classList.contains('show')) {
+      showInKindDetails();
+    }
+  }
 
   function showDetails(type) {
     const detailsSection = document.getElementById('detailsSection');
     const table = document.getElementById('detailsTable');
     detailsSection.style.display = 'block';
+    table.dataset.type = type;
 
-    // Dynamically set table headers based on type
     let theadHTML = '<thead><tr>';
     if (type === 'money') {
       theadHTML += `
@@ -560,7 +790,7 @@
         <th><i class="fas fa-hashtag me-1"></i> SR. NO.</th>
         <th><i class="fas fa-calendar-day me-1"></i> Event Name</th>
         <th><i class="fas fa-calendar me-1"></i> Date</th>
-        <th><i class="fas fa-users me-1"></i> No. of Beneficiary</th>
+        <th><i class="fas fa-users me-1"></i> No. of Beneficiaries</th>
         <th><i class="fas fa-donate me-1"></i> Donation</th>
       `;
     }
@@ -572,9 +802,16 @@
 
     if (type === 'events') {
       let eventsArray = Object.entries(eventsData).map(([id, event]) => ({ id, ...event }));
+      if (dateFrom && dateTo) {
+        eventsArray = eventsArray.filter(event => {
+          if (!event.date) return false;
+          const eventDate = new Date(event.date);
+          return eventDate >= dateFrom && eventDate <= dateTo;
+        });
+      }
       if (eventsArray.length === 0) {
         tbody.innerHTML = '<tr><td colspan="5">No events found.</td></tr>';
-        document.getElementById('totalEvents').textContent = 0;
+        updateExportButtonState();
         return;
       }
       let i = 1;
@@ -589,7 +826,6 @@
         `;
         tbody.appendChild(row);
       });
-      document.getElementById('totalEvents').textContent = tbody.getElementsByTagName('tr').length;
     } else if (type === 'money') {
       let moneyDonations = [];
       for (let email in donationsData) {
@@ -599,7 +835,14 @@
             if (userDonations.hasOwnProperty(donationId)) {
               const donation = userDonations[donationId];
               if (donation.donationType === 'money' && donation.status === 'Received') {
-                moneyDonations.push({ id: donationId, email, ...donation });
+                if (dateFrom && dateTo && donation.receivedDate) {
+                  const receivedDate = new Date(donation.receivedDate);
+                  if (receivedDate >= dateFrom && receivedDate <= dateTo) {
+                    moneyDonations.push({ id: donationId, email, ...donation });
+                  }
+                } else if (!dateFrom && !dateTo) {
+                  moneyDonations.push({ id: donationId, email, ...donation });
+                }
               }
             }
           }
@@ -607,6 +850,7 @@
       }
       if (moneyDonations.length === 0) {
         tbody.innerHTML = '<tr><td colspan="6">No money donations received.</td></tr>';
+        updateExportButtonState();
         return;
       }
       let i = 1;
@@ -631,7 +875,14 @@
             if (userDonations.hasOwnProperty(donationId)) {
               const donation = userDonations[donationId];
               if (donation.donationType === 'inKind' && donation.status === 'Received') {
-                inkindDonations.push({ id: donationId, email, ...donation });
+                if (dateFrom && dateTo && donation.receivedDate) {
+                  const receivedDate = new Date(donation.receivedDate);
+                  if (receivedDate >= dateFrom && receivedDate <= dateTo) {
+                    inkindDonations.push({ id: donationId, email, ...donation });
+                  }
+                } else if (!dateFrom && !dateTo) {
+                  inkindDonations.push({ id: donationId, email, ...donation });
+                }
               }
             }
           }
@@ -639,6 +890,7 @@
       }
       if (inkindDonations.length === 0) {
         tbody.innerHTML = '<tr><td colspan="6">No in-kind donations received.</td></tr>';
+        updateExportButtonState();
         return;
       }
       let i = 1;
@@ -655,102 +907,66 @@
         tbody.appendChild(row);
       });
     }
+    updateExportButtonState();
   }
-
-  const filterEvents = () => {
-    const sortPeriod = document.getElementById('sortSelect')?.value || 'all';
-    const filterType = document.getElementById('filterSelect')?.value || 'all';
-    const period = document.getElementById('periodSelect').value;
-    const tbody = document.querySelector("#detailsTable tbody");
-    if (document.getElementById('detailsSection').style.display === 'block' && (sortPeriod !== 'all' || filterType !== 'all')) {
-      tbody.innerHTML = '';
-      const currentDate = new Date('2025-06-23T16:18:00+05:30');
-      let eventsArray = Object.entries(eventsData).map(([id, event]) => ({ id, ...event }));
-
-      eventsArray = eventsArray.filter(event => {
-        if (!event.date) return false;
-        const eventDate = new Date(event.date);
-        const diffDays = Math.floor((currentDate - eventDate) / (1000 * 60 * 60 * 24));
-        if (period !== 'all') {
-          if (period === 'weekly' && diffDays > 7) return false;
-          if (period === 'monthly' && diffDays > 30) return false;
-          if (period === 'quarterly' && diffDays > 90) return false;
-          if (period === 'yearly' && diffDays > 365) return false;
-        }
-        if (filterType !== 'all') {
-          if (filterType === 'money' && (!event.donations || event.donations.type !== 'money')) return false;
-          if (filterType === 'inkind' && (!event.donations || event.donations.type !== 'inkind')) return false;
-        }
-        return true;
-      });
-
-      if (eventsArray.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="5">No events found.</td></tr>';
-        document.getElementById('totalEvents').textContent = 0;
-        return;
-      }
-
-      let i = 1;
-      eventsArray.forEach(event => {
-        let donationDisplay = 'N/A';
-        if (event.donations) {
-          if (event.donations.type === 'money') {
-            donationDisplay = `₹${event.donations.amount || 0} (${event.donations.subType || 'N/A'})`;
-          } else if (event.donations.type === 'inkind') {
-            const itemName = inkindItems[event.donations.itemId] || 'Unknown Item';
-            donationDisplay = `${event.donations.quantity || 0} x ${itemName}`;
-          }
-        }
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td>${i++}</td>
-          <td>${event.title || 'N/A'}</td>
-          <td>${event.date ? new Date(event.date).toLocaleDateString() : 'N/A'}</td>
-          <td>${event.peopleBenefitted || 0}</td>
-          <td>${donationDisplay}</td>
-        `;
-        tbody.appendChild(row);
-      });
-
-      document.getElementById('totalEvents').textContent = tbody.getElementsByTagName('tr').length;
-    }
-  };
 
   function showMoneyDetails() {
     const tbody = document.getElementById('moneyTableBody');
     tbody.innerHTML = '';
-    for (let id in eventsData) {
-      const event = eventsData[id];
-      if (event.donations && event.donations.type === 'money' && event.date) {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td>${event.title || 'Untitled'}</td>
-          <td>₹${(parseFloat(event.donations.amount) || 0).toLocaleString()}</td>
-          <td>${new Date(event.date).toLocaleDateString()}</td>
-        `;
-        tbody.appendChild(row);
-      }
+    let moneyEvents = Object.entries(eventsData).map(([id, event]) => ({ id, ...event }))
+      .filter(event => event.donations && event.donations.type === 'money' && event.date);
+    if (dateFrom && dateTo) {
+      moneyEvents = moneyEvents.filter(event => {
+        const eventDate = new Date(event.date);
+        return eventDate >= dateFrom && eventDate <= dateTo;
+      });
     }
+    if (moneyEvents.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="3">No money donations found.</td></tr>';
+      updateExportButtonState();
+      return;
+    }
+    moneyEvents.forEach(event => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${event.title || 'Untitled'}</td>
+        <td>₹${(parseFloat(event.donations.amount) || 0).toLocaleString()}</td>
+        <td>${new Date(event.date).toLocaleDateString()}</td>
+      `;
+      tbody.appendChild(row);
+    });
     new bootstrap.Modal(document.getElementById('moneyModal')).show();
+    updateExportButtonState();
   }
 
   function showInKindDetails() {
     const tbody = document.getElementById('inKindTableBody');
     tbody.innerHTML = '';
-    for (let id in eventsData) {
-      const event = eventsData[id];
-      if (event.donations && event.donations.type === 'inkind' && event.donations.itemId && event.date) {
-        const itemName = inkindItems[event.donations.itemId] || 'Unknown Item';
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td>${event.title || 'Untitled'}</td>
-          <td>${itemName}</td>
-          <td>${event.donations.quantity || 0}</td>
-          <td>${new Date(event.date).toLocaleDateString()}</td>
-        `;
-        tbody.appendChild(row);
-      }
+    let inkindEvents = Object.entries(eventsData).map(([id, event]) => ({ id, ...event }))
+      .filter(event => event.donations && event.donations.type === 'inkind' && event.donations.itemId && event.date);
+    if (dateFrom && dateTo) {
+      inkindEvents = inkindEvents.filter(event => {
+        const eventDate = new Date(event.date);
+        return eventDate >= dateFrom && eventDate <= dateTo;
+      });
     }
+    if (inkindEvents.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="4">No in-kind donations found.</td></tr>';
+      updateExportButtonState();
+      return;
+    }
+    inkindEvents.forEach(event => {
+      const itemName = inkindItems[event.donations.itemId] || 'Unknown Item';
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${event.title || 'Untitled'}</td>
+        <td>${itemName}</td>
+        <td>${event.donations.quantity || 0}</td>
+        <td>${new Date(event.date).toLocaleDateString()}</td>
+      `;
+      tbody.appendChild(row);
+    });
     new bootstrap.Modal(document.getElementById('inKindModal')).show();
+    updateExportButtonState();
   }
 </script>

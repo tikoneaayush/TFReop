@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Donate - Sindhu Global Foundation Trust</title>
+  <title>Donate - Sindhu Global Development Foundation</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -84,6 +84,19 @@
       box-shadow: 0 0 0 3px rgba(255, 123, 41, 0.1);
       outline: none;
     }
+    .form-control.is-invalid {
+      border-color: #dc3545;
+    }
+    .invalid-feedback {
+      color: #dc3545;
+      font-size: 0.85rem;
+      margin-top: 5px;
+      display: none;
+    }
+    .form-control.is-invalid ~ .invalid-feedback,
+    .form-select.is-invalid ~ .invalid-feedback {
+      display: block;
+    }
     .form-select {
       appearance: none;
       background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23333' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E") no-repeat right 12px center;
@@ -140,6 +153,31 @@
       margin-top: 15px;
       text-align: center;
     }
+    .queries-section {
+      text-align: center;
+      padding: 15px;
+      background: #f8f9fa;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .queries-section h4 {
+      color: #ff7b29;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+    .queries-section p {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 8px;
+    }
+    .queries-section a {
+      color: #ff7b29;
+      text-decoration: none;
+    }
+    .queries-section a:hover {
+      text-decoration: underline;
+    }
     .modal-content {
       border-radius: 12px;
       text-align: center;
@@ -171,46 +209,57 @@
       .donation-details {
         padding: 15px;
       }
+      .queries-section {
+        padding: 10px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
-      <img src="images/dummylogosgft.png" alt="Logo">
-      <h1>Sindhu Global Foundation Trust</h1>
+      <img src="images/sgdf-logo.png" alt="Logo">
+      <h1>Sindhu Global Development Foundation</h1>
     </div>
     <div class="content">
       <div class="donate-info">
         <h2>Make a Difference</h2>
-        <p>Support our mission to empower underprivileged communities with education and healthcare. Every contribution counts.</p>
+        <p>Support our mission to empower underprivileged!</p>
+        <div class="queries-section">
+          <h4>In Case of Queries</h4>
+          <!-- <p>Sindhu Global Development Foundation</p> -->
+          <!-- <p>Block C-5/Room No 10, Dev Samaj Road, Netaji, Ulhasnagar 421004, Maharashtra, India</p> -->
+          <p>Phone: <a href="tel:+917021668519">+91 7021668519 (Haresh Rupani)</a></p>
+          <p>Phone: <a href="tel:+919371262700">+91 9371262700 (CA Hari Dudani)</a></p>
+          <p>Email: <a href="mailto:sindhuglobal.df@gmail.com">sindhuglobal.df@gmail.com</a></p>
+          <!-- <p>CIN: U80301MH2015NPL262428 | PAN: AAVCS5664E</p> -->
+          <!-- <p>80G Reg.: AAVCS5664EF20201 | CSR Reg.: CSR00005292</p> -->
+        </div>
         <div class="donation-type">
           <div class="form-group">
             <label for="donationType" class="form-label">Select Type of Donation *</label>
-            <select class="form-select" id="donationType" onchange="updateSubOptions()">
+            <select class="form-select" id="donationType" onchange="updateSubOptions()" required>
               <option value="">-Select-</option>
               <option value="money">Money</option>
               <option value="inKind">In-Kind</option>
             </select>
+            <div class="invalid-feedback">Please select a donation type.</div>
           </div>
           <div class="form-group" id="subOptionContainer" style="display: none;">
             <label for="subOption" class="form-label">Select Sub-Option *</label>
-            <select class="form-select" id="subOption" onchange="toggleOtherItem()">
+            <select class="form-select" id="subOption" onchange="toggleOtherItem()" required>
               <option value="">-Select-</option>
             </select>
+            <div class="invalid-feedback">Please select a sub-option.</div>
           </div>
           <div class="form-group" id="otherItemContainer">
             <label for="otherItem" class="form-label">Other Item (Optional)</label>
             <input type="text" class="form-control" id="otherItem" placeholder="Enter custom item if 'Other' is selected">
+            <div class="invalid-feedback">Custom item must be at least 3 characters long.</div>
           </div>
         </div>
-        <div class="contact-info">
-          <p><strong>Contact Us:</strong></p>
-          <p><i class="fas fa-envelope"></i> <a href="mailto:contact@sindhuglobalfoundationtrust.org">contact@sindhuglobalfoundationtrust.org</a></p>
-          <p><i class="fas fa-phone"></i> <a href="tel:+912261234567">+91 22 6123 4567</a></p>
-        </div>
         <div class="terms">
-          Terms & Conditions: You agree to share information entered on this page with Sindhu Global Foundation Trust (owner of this page) and Razorpay, adhering to applicable laws.
+          Terms & Conditions: You agree to share information entered on this page with Sindhu Global Development Foundation (owner of this page) and Razorpay, adhering to applicable laws.
         </div>
       </div>
       <div class="donation-details" id="donationDetails">
@@ -219,18 +268,22 @@
           <div class="form-group">
             <label for="fullName" class="form-label">Full Name *</label>
             <input type="text" class="form-control" id="fullName" required>
+            <div class="invalid-feedback">Full name must be at least 2 characters long and contain only letters and spaces.</div>
           </div>
           <div class="form-group">
             <label for="email" class="form-label">Email *</label>
             <input type="email" class="form-control" id="email" required>
+            <div class="invalid-feedback">Please enter a valid email address.</div>
           </div>
           <div class="form-group">
             <label for="address" class="form-label">Address *</label>
             <input type="text" class="form-control" id="address" required>
+            <div class="invalid-feedback">Address must be at least 5 characters long.</div>
           </div>
           <div class="form-group">
             <label for="panNo" class="form-label">PAN No. *</label>
             <input type="text" class="form-control" id="panNo" required>
+            <div class="invalid-feedback">Please enter a valid PAN number (e.g., ABCDE1234F).</div>
           </div>
         </div>
         <div id="dynamicFields"></div>
@@ -238,7 +291,7 @@
           <label class="form-label">Donation Type:</label>
           <p id="selectedType" style="margin: 0;"></p>
         </div>
-        <button type="button" class="btn-pay" id="payButton" style="display: none;" onclick="handleOnlinePayment()">Pay Amount<span id="displayAmount">0.00</span></button>
+        <button type="button" class="btn-pay" id="payButton" style="display: none;" onclick="handleOnlinePayment()">Pay Amount <span id="displayAmount">0.00</span></button>
         <button type="button" class="btn-submit" id="submitButton" style="display: none;" onclick="handleSubmission()">Submit</button>
         <div class="payment-options" style="display: none;" id="paymentOptions">
           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/UPI-Logo.svg/1200px-UPI-Logo.svg.png" alt="UPI">
@@ -286,12 +339,83 @@
       projectId: "formtestsgft",
       storageBucket: "formtestsgft.appspot.com",
       messagingSenderId: "688396867961",
-      appId: "1:688396867961:web:8cc2136b755be21f4f77a8"
+      appId: "1:688396867961:web:099be0b0c1a3f81e4f77a8"
     };
 
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
+
+    function validateField(field, validationFn, errorMessage) {
+      const isValid = validationFn(field.value.trim());
+      field.classList.toggle('is-invalid', !isValid);
+      const feedback = field.nextElementSibling;
+      if (feedback && feedback.classList.contains('invalid-feedback')) {
+        feedback.textContent = isValid ? '' : errorMessage;
+      }
+      return isValid;
+    }
+
+    function validateForm() {
+      let isValid = true;
+      const fullName = document.getElementById('fullName');
+      const email = document.getElementById('email');
+      const address = document.getElementById('address');
+      const panNo = document.getElementById('panNo');
+      const donationType = document.getElementById('donationType');
+      const subOption = document.getElementById('subOption');
+      const otherItem = document.getElementById('otherItem');
+      const donationAmount = document.getElementById('donationAmount');
+      const itemDetails = document.getElementById('itemDetails');
+      const submissionType = document.getElementById('submissionType');
+      const submissionDate = document.getElementById('submissionDate');
+
+      // Standard fields
+      isValid &= validateField(fullName, value => /^[a-zA-Z\s]{2,}$/.test(value), 'Full name must be at least 2 characters long and contain only letters and spaces.');
+      isValid &= validateField(email, value => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value), 'Please enter a valid email address.');
+      isValid &= validateField(address, value => value.length >= 5, 'Address must be at least 5 characters long.');
+      isValid &= validateField(panNo, value => /^[A-Z]{5}[0-9]{4}[A-Z]$/.test(value), 'Please enter a valid PAN number (e.g., ABCDE1234F).');
+
+      // Donation type
+      isValid &= validateField(donationType, value => value !== '', 'Please select a donation type.');
+
+      // Sub-option
+      if (subOptionContainer.style.display !== 'none') {
+        isValid &= validateField(subOption, value => value !== '', 'Please select a sub-option.');
+      }
+
+      // Other item (optional, but validated if provided)
+      if (otherItem && otherItemContainer.style.display !== 'none' && otherItem.value.trim()) {
+        isValid &= validateField(otherItem, value => value.length >= 3, 'Custom item must be at least 3 characters long.');
+      }
+
+      // Dynamic fields
+      if (selectedType === 'money' && donationAmount) {
+        isValid &= validateField(donationAmount, value => value >= 100 && !isNaN(value), 'Donation amount must be at least ₹100.');
+        if (selectedSubOption !== 'online') {
+          if (submissionType) {
+            isValid &= validateField(submissionType, value => value !== '', 'Please select a submission type.');
+          }
+          if (submissionDate && submissionDateContainer.style.display !== 'none') {
+            const today = new Date().setHours(0, 0, 0, 0);
+            const selectedDate = new Date(submissionDate.value).setHours(0, 0, 0, 0);
+            isValid &= validateField(submissionDate, value => value && selectedDate >= today, 'Please select a future date.');
+          }
+        }
+      } else if (selectedType === 'inKind' && itemDetails) {
+        isValid &= validateField(itemDetails, value => value.length >= 5, 'Item details must be at least 5 characters long.');
+        if (submissionType) {
+          isValid &= validateField(submissionType, value => value !== '', 'Please select a submission type.');
+        }
+        if (submissionDate && submissionDateContainer.style.display !== 'none') {
+          const today = new Date().setHours(0, 0, 0, 0);
+          const selectedDate = new Date(submissionDate.value).setHours(0, 0, 0, 0);
+          isValid &= validateField(submissionDate, value => value && selectedDate >= today, 'Please select a future date.');
+        }
+      }
+
+      return isValid;
+    }
 
     function updateSubOptions() {
       const donationType = document.getElementById('donationType').value;
@@ -369,6 +493,7 @@
             <div class="form-group">
               <label for="donationAmount" class="form-label">Donation Amount (₹) *</label>
               <input type="number" class="form-control" id="donationAmount" min="100" required>
+              <div class="invalid-feedback">Donation amount must be at least ₹100.</div>
             </div>
           `;
           if (subOption === 'online') {
@@ -385,10 +510,12 @@
                   <option value="ngo">Submit to NGO</option>
                   <option value="collect">Needs to be Collected</option>
                 </select>
+                <div class="invalid-feedback">Please select a submission type.</div>
               </div>
               <div class="form-group" id="submissionDateContainer" style="display: none;">
                 <label for="submissionDate" class="form-label">Submission/Collection Date *</label>
                 <input type="date" class="form-control" id="submissionDate" required>
+                <div class="invalid-feedback">Please select a future date.</div>
               </div>
             `;
             submitButton.style.display = 'block';
@@ -398,6 +525,7 @@
             <div class="form-group">
               <label for="itemDetails" class="form-label">Item Details *</label>
               <input type="text" class="form-control" id="itemDetails" placeholder="Describe the items" required>
+              <div class="invalid-feedback">Item details must be at least 5 characters long.</div>
             </div>
             <div class="form-group">
               <label for="submissionType" class="form-label">Submission Type *</label>
@@ -406,10 +534,12 @@
                 <option value="ngo">Submit to NGO</option>
                 <option value="collect">Needs to be Collected</option>
               </select>
+              <div class="invalid-feedback">Please select a submission type.</div>
             </div>
             <div class="form-group" id="submissionDateContainer" style="display: none;">
               <label for="submissionDate" class="form-label">Submission/Collection Date *</label>
               <input type="date" class="form-control" id="submissionDate" required>
+              <div class="invalid-feedback">Please select a future date.</div>
             </div>
           `;
           submitButton.style.display = 'block';
@@ -435,18 +565,27 @@
     }
 
     function handleOnlinePayment() {
+      if (!validateForm()) {
+        alert('Please correct the errors in the form.');
+        return;
+      }
       const amount = document.getElementById('donationAmount')?.value.trim();
       if (!amount || amount < 100) {
         alert('Please enter a valid donation amount of at least ₹100.');
         return;
       }
-      alert('Payment via gateway here');
+      alert('Payment processing via gateway');
       isOnlineProcessed = true;
       document.getElementById('payButton').style.display = 'none';
       document.getElementById('submitButton').style.display = 'block';
     }
 
     function handleSubmission() {
+      if (!validateForm()) {
+        alert('Please correct the errors in the form.');
+        return;
+      }
+
       const fullName = document.getElementById('fullName').value.trim();
       const email = document.getElementById('email').value.trim();
       const address = document.getElementById('address').value.trim();
@@ -456,13 +595,8 @@
       let submissionDate = '';
       let otherItem = document.getElementById('otherItem')?.value.trim();
 
-      if (!fullName || !email || !address || !panNo) {
-        alert('Please fill in all standard fields.');
-        return;
-      }
-
       if (selectedType === 'money') {
-        amountOrItem = document.getElementById('donationAmount')?.value.trim();
+        amountOrItem = document.getElementById('donationAmount').value.trim();
         if (!amountOrItem || amountOrItem < 100) {
           alert('Please enter a valid donation amount of at least ₹100.');
           return;
@@ -496,17 +630,16 @@
             return;
           }
         }
-        if (selectedSubOption === 'other' && !otherItem) {
-          alert('Please enter a custom item for "Other" selection if desired.');
+        if (selectedSubOption === 'other' && otherItem && otherItem.length < 3) {
+          alert('Custom item must be at least 3 characters long if provided.');
+          return;
         }
-        // Use itemDetails as the primary field, append otherItem if provided
         amountOrItem = otherItem ? `${amountOrItem} (${otherItem})` : amountOrItem;
         alert(`Thank you ${fullName}! Your in-kind donation of ${amountOrItem} will be ${submissionType === 'ngo' ? 'submitted to NGO' : 'collected'} on ${submissionDate}.`);
       }
 
       // Save to Firebase Realtime Database
       try {
-        // Sanitize email to create a valid Firebase key by replacing '.' with '_'
         const sanitizedEmail = email.replace(/\./g, '_');
         const donationRef = db.ref(`donations/${sanitizedEmail}`).push();
         donationRef.set({
@@ -532,15 +665,15 @@
           const modal = new bootstrap.Modal(document.getElementById('thankYouModal'));
           modal.show();
 
-          // Show "Donation recorded" alert when modal is closed
           document.getElementById('thankYouModal').addEventListener('hidden.bs.modal', function handler() {
             alert('Donation recorded');
-            // Remove the event listener to prevent multiple triggers
             this.removeEventListener('hidden.bs.modal', handler);
           });
 
-          // Reset form
-          document.querySelectorAll('.form-control, .form-select').forEach(input => input.value = '');
+          document.querySelectorAll('.form-control, .form-select').forEach(input => {
+            input.value = '';
+            input.classList.remove('is-invalid');
+          });
           document.getElementById('displayAmount').textContent = '0.00';
           document.getElementById('subOption').value = '';
           document.getElementById('otherItemContainer').style.display = 'none';
@@ -553,6 +686,47 @@
       } catch (error) {
         console.error('Error saving donation:', error);
         alert('An error occurred while submitting your donation. Please try again.');
+      }
+    }
+
+    window.onload = function() {
+      // Add real-time validation listeners
+      const fields = ['fullName', 'email', 'address', 'panNo', 'donationType', 'subOption'];
+      fields.forEach(id => {
+        const field = document.getElementById(id);
+        if (field) {
+          field.addEventListener('input', () => validateField(field, getValidationFn(id), getErrorMessage(id)));
+        }
+      });
+
+      document.addEventListener('change', (e) => {
+        if (e.target.id === 'submissionType') {
+          validateField(e.target, value => value !== '', 'Please select a submission type.');
+        }
+      });
+    };
+
+    function getValidationFn(id) {
+      switch (id) {
+        case 'fullName': return value => /^[a-zA-Z\s]{2,}$/.test(value);
+        case 'email': return value => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+        case 'address': return value => value.length >= 5;
+        case 'panNo': return value => /^[A-Z]{5}[0-9]{4}[A-Z]$/.test(value);
+        case 'donationType': return value => value !== '';
+        case 'subOption': return value => value !== '';
+        default: return () => true;
+      }
+    }
+
+    function getErrorMessage(id) {
+      switch (id) {
+        case 'fullName': return 'Full name must be at least 2 characters long and contain only letters and spaces.';
+        case 'email': return 'Please enter a valid email address.';
+        case 'address': return 'Address must be at least 5 characters long.';
+        case 'panNo': return 'Please enter a valid PAN number (e.g., ABCDE1234F).';
+        case 'donationType': return 'Please select a donation type.';
+        case 'subOption': return 'Please select a sub-option.';
+        default: return '';
       }
     }
 
