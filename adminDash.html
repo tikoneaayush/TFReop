@@ -115,6 +115,7 @@
       margin-left: 280px;
       padding: 40px;
       background: #f8f9fa;
+      transition: margin-left 0.3s ease;
     }
     .page-header {
       background: white;
@@ -324,7 +325,22 @@
     .details-table tbody tr:hover {
       background: #f1f5f9;
     }
+    .hamburger {
+      display: none;
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 1001;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: #2d2d2d;
+      cursor: pointer;
+    }
     @media (max-width: 992px) {
+      .hamburger {
+        display: block;
+      }
       .sidebar {
         transform: translateX(-100%);
       }
@@ -345,6 +361,9 @@
       .date-filter-container {
         flex-direction: column;
         gap: 15px;
+      }
+      .main-content.shifted {
+        margin-left: 280px;
       }
     }
     @media (max-width: 576px) {
@@ -385,6 +404,9 @@
 </head>
 <body>
 <div class="main-container">
+  <!-- Hamburger Button -->
+  <button class="hamburger">☰</button>
+
   <!-- Sidebar Placeholder -->
   <div id="sidebar-placeholder"></div>
 
@@ -512,6 +534,26 @@
       });
     })
     .catch(error => console.error('Error loading sidebar:', error));
+
+  // Hamburger menu toggle
+  document.addEventListener("DOMContentLoaded", () => {
+    const hamburger = document.querySelector(".hamburger");
+    const sidebar = document.querySelector(".sidebar");
+    const mainContent = document.querySelector(".main-content");
+
+    hamburger.addEventListener("click", () => {
+      sidebar.classList.toggle("show");
+      mainContent.classList.toggle("shifted");
+    });
+
+    // Close sidebar if clicked outside on mobile
+    document.addEventListener("click", (e) => {
+      if (window.innerWidth <= 992 && !sidebar.contains(e.target) && !hamburger.contains(e.target)) {
+        sidebar.classList.remove("show");
+        mainContent.classList.remove("shifted");
+      }
+    });
+  });
 
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
   import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";

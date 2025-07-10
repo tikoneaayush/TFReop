@@ -11,202 +11,168 @@
       box-sizing: border-box;
     }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      background: linear-gradient(135deg, #ff6b35 0%, #8b5cf6 100%);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
+    :root {
+      --primary-color: #9c27b0; /* Purple from index.html */
+      --accent-color: #ff7b29; /* Orange from index.html */
+      --background-white: #ffffff; /* White background */
+      --text-dark: #333; /* Text color */
+      --text-muted: #666; /* Muted text */
+      --border-light: #e5e7eb; /* Border color */
     }
 
-    .auth-container {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-      width: 100%;
-      max-width: 400px;
-      position: relative;
+    body {
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: var(--background-white); /* White background to match iframe */
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 0; /* No body padding to maximize space */
+      color: var(--text-dark);
     }
 
     .auth-header {
-      background: linear-gradient(135deg, #7c3aed 0%, #ff6b35 100%);
-      color: white;
-      padding: 30px 40px 20px;
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+      color: var(--background-white);
+      padding: 12px 15px;
       text-align: center;
+      border-top-left-radius: 10px; /* Match iframe's border-radius */
+      border-top-right-radius: 10px;
     }
 
     .auth-header h1 {
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 600;
-      margin-bottom: 5px;
+      margin-bottom: 4px;
     }
 
     .auth-header p {
-      font-size: 14px;
+      font-size: 13px;
       opacity: 0.9;
+      margin: 0;
     }
 
     .form-content {
-      padding: 40px;
+      flex-grow: 1;
+      background: var(--background-white); /* White background */
+      padding: 15px; /* Compact padding */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .form-group {
-      margin-bottom: 20px;
+      margin-bottom: 12px; /* Compact spacing */
     }
 
     label {
       display: block;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 500;
-      color: #374151;
-      margin-bottom: 8px;
+      color: var(--text-dark);
+      margin-bottom: 5px;
     }
 
     input {
       width: 100%;
-      padding: 12px 16px;
-      border: 2px solid #e5e7eb;
-      border-radius: 8px;
-      font-size: 14px;
-      transition: border-color 0.3s ease;
-      background: #fafafa;
+      padding: 8px 12px; /* Compact input padding */
+      border: 1px solid var(--border-light); /* Thinner border */
+      border-radius: 6px;
+      font-size: 13px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      background: #f8f9fa; /* Light gray background from index.html */
     }
 
     input:focus {
       outline: none;
-      border-color: #ff6b35;
-      background: white;
+      border-color: var(--accent-color);
+      box-shadow: 0 0 5px rgba(255, 123, 41, 0.3); /* Subtle glow */
+      background: var(--background-white);
     }
 
     .primary-btn {
       width: 100%;
-      padding: 14px;
-      background: linear-gradient(135deg, #ff6b35 0%, #7c3aed 100%);
-      color: white;
+      padding: 10px; /* Compact button */
+      background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 100%);
+      color: var(--background-white);
       border: none;
-      border-radius: 8px;
-      font-size: 16px;
+      border-radius: 6px;
+      font-size: 14px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
 
     .primary-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
-    }
-
-    .divider {
-      text-align: center;
-      margin: 20px 0;
-      position: relative;
-      color: #9ca3af;
-      font-size: 14px;
-    }
-
-    .divider::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: #e5e7eb;
-      z-index: 1;
-    }
-
-    .divider span {
-      background: white;
-      padding: 0 15px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .google-btn {
-      width: 100%;
-      padding: 12px;
-      background: white;
-      color: #374151;
-      border: 2px solid #e5e7eb;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      transition: all 0.3s ease;
-      margin-bottom: 20px;
-    }
-
-    .google-btn:hover {
-      border-color: #d1d5db;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       transform: translateY(-1px);
-    }
-
-    .google-icon {
-      width: 18px;
-      height: 18px;
-      flex-shrink: 0;
+      box-shadow: 0 4px 15px rgba(255, 123, 41, 0.4);
     }
 
     @media (max-width: 480px) {
-      .form-content {
-        padding: 30px 25px;
-      }
-      
       .auth-header {
-        padding: 25px 30px 15px;
+        padding: 10px 12px;
+      }
+
+      .auth-header h1 {
+        font-size: 18px;
+      }
+
+      .auth-header p {
+        font-size: 12px;
+      }
+
+      .form-content {
+        padding: 12px;
+      }
+
+      .form-group {
+        margin-bottom: 10px;
+      }
+
+      label {
+        font-size: 12px;
+        margin-bottom: 4px;
+      }
+
+      input {
+        padding: 7px 10px;
+        font-size: 12px;
+        border-radius: 5px;
+      }
+
+      .primary-btn {
+        padding: 8px;
+        font-size: 13px;
+        margin-bottom: 8px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="auth-container">
-    <div class="auth-header">
-      <h1>Welcome</h1>
-      <p>Sign in to access your account</p>
-    </div>
+  <div class="auth-header">
+    <h1>Welcome</h1>
+    <p>Sign in to access your account</p>
+  </div>
 
-    <div class="form-content">
-      <!-- Login Form -->
-      <div id="loginForm">
-        <div class="form-group">
-          <label for="email">Email Address</label>
-          <input type="email" id="email" placeholder="Enter your email" required>
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" id="password" placeholder="Enter your password" required>
-        </div>
-        <button class="primary-btn" id="loginBtn">Sign In</button>
-        <div class="divider">
-          <span>or</span>
-        </div>
-        <button class="google-btn" id="googleLogin">
-          <svg class="google-icon" viewBox="0 0 24 24">
-            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-          </svg>
-          Continue with Google
-        </button>
+  <div class="form-content">
+    <!-- Login Form -->
+    <div id="loginForm">
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="Enter your email" required>
       </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter your password" required>
+      </div>
+      <button class="primary-btn" id="loginBtn">Sign In</button>
     </div>
   </div>
 
   <!-- Firebase Scripts -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
-    import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
-    import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+    import { getDatabase, ref, get, set, update } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
 
     // Firebase configuration
     const firebaseConfig = {
@@ -221,9 +187,7 @@
 
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
     const db = getDatabase(app);
-    const provider = new GoogleAuthProvider();
 
     // Function to set cookies
     function setCookie(name, value, hours) {
@@ -231,12 +195,19 @@
       document.cookie = `${name}=${value}; expires=${expires}; path=/; SameSite=Lax`;
     }
 
+    // Function to send message to parent window
+    function sendLoginSuccess() {
+      if (window.top !== window.self) {
+        window.top.postMessage('loginSuccess', '*');
+      }
+    }
+
     // Function to redirect user
     function redirectUser() {
-      const url = "userDash.html"; // Default to user dashboard
+      const url = "userDash.html";
       try {
         if (window.top !== window.self) {
-          window.top.location.href = url;
+          sendLoginSuccess();
         } else {
           window.location.href = url;
         }
@@ -253,21 +224,32 @@
       return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
     }
 
+    // Function to decode base64 password
+    function decodeBase64Password(base64Password) {
+      try {
+        return atob(base64Password);
+      } catch (e) {
+        console.error('Failed to decode base64 password:', e);
+        return null;
+      }
+    }
+
     // Function to generate and store user credentials in Realtime Database
-    async function generateAndStoreCredentials(email, fullName, panNo) {
+    async function generateAndStoreCredentials(email, firstName, lastName, panNo) {
       const sanitizedEmail = email.replace(/\./g, '_');
-      const firstName = fullName.split(' ')[0].toUpperCase();
       const panPrefix = panNo.substring(0, 4).toUpperCase();
-      const generatedPassword = `${firstName}@${panPrefix}`;
+      const generatedPassword = `${firstName.toUpperCase()}@${panPrefix}`;
       const hashedPassword = await hashPassword(generatedPassword);
 
-      // Store in userCreds node in Realtime Database
       try {
         await set(ref(db, `userCreds/${sanitizedEmail}`), {
           email: email,
           hashedPassword: hashedPassword,
+          firstName: firstName,
+          lastName: lastName,
           createdAt: new Date().toISOString()
         });
+        console.log(`Generated password: ${generatedPassword}, Hashed: ${hashedPassword}`);
         return generatedPassword;
       } catch (error) {
         console.error('Error storing credentials:', error);
@@ -282,19 +264,47 @@
       const credSnap = await get(credRef);
 
       if (credSnap.exists()) {
-        return credSnap.val();
+        const creds = credSnap.val();
+        console.log(`Existing creds for ${email}:`, creds);
+        if (!creds.hashedPassword) {
+          console.warn(`No hashedPassword found for ${email}, checking legacy password...`);
+          if (creds.password) {
+            const decodedPassword = decodeBase64Password(creds.password);
+            if (decodedPassword) {
+              const hashedPassword = await hashPassword(decodedPassword);
+              await update(credRef, { hashedPassword: hashedPassword });
+              console.log(`Migrated legacy password ${decodedPassword} to hashed: ${hashedPassword}`);
+              const newCredSnap = await get(credRef);
+              return newCredSnap.val();
+            }
+          }
+          console.warn(`No valid password found, regenerating credentials...`);
+          const donationsRef = ref(db, `donations/${sanitizedEmail}`);
+          const snapshot = await get(donationsRef);
+          if (snapshot.exists()) {
+            const donationData = Object.values(snapshot.val())[0];
+            const { firstName, lastName, panNo } = donationData;
+            if (firstName && panNo) {
+              await generateAndStoreCredentials(email, firstName, lastName, panNo);
+              const newCredSnap = await get(credRef);
+              return newCredSnap.val();
+            }
+          }
+        }
+        return creds;
       } else {
-        // Fetch user data from donations
         const donationsRef = ref(db, `donations/${sanitizedEmail}`);
         const snapshot = await get(donationsRef);
         if (snapshot.exists()) {
-          const donationData = Object.values(snapshot.val())[0]; // Get first donation
-          const { fullName, panNo } = donationData;
-          if (fullName && panNo) {
-            await generateAndStoreCredentials(email, fullName, panNo);
-            return { email, hashedPassword: await hashPassword(`${fullName.split(' ')[0].toUpperCase()}@${panNo.substring(0, 4).toUpperCase()}`) };
+          const donationData = Object.values(snapshot.val())[0];
+          const { firstName, lastName, panNo } = donationData;
+          if (firstName && panNo) {
+            const generatedPassword = await generateAndStoreCredentials(email, firstName, lastName, panNo);
+            const hashedPassword = await hashPassword(generatedPassword);
+            console.log(`Generated for ${email}: Password=${generatedPassword}, Hashed=${hashedPassword}`);
+            return { email, hashedPassword, firstName, lastName };
           } else {
-            throw new Error('Invalid donation data: fullName or panNo missing');
+            throw new Error('Invalid donation data: firstName or panNo missing');
           }
         } else {
           throw new Error('No donation record found for this email');
@@ -315,34 +325,20 @@
       try {
         const creds = await ensureCredentialsExist(email);
         const hashedInputPassword = await hashPassword(password);
+        console.log(`Input password: ${password}, Hashed input: ${hashedInputPassword}, Stored hash: ${creds.hashedPassword || 'undefined'}`);
 
-        if (creds.hashedPassword === hashedInputPassword) {
+        if (creds.hashedPassword && creds.hashedPassword === hashedInputPassword) {
           setCookie('isLoggedIn', 'true', 24);
           setCookie('userEmail', email, 24);
           alert("Login successful! Redirecting to dashboard.");
           redirectUser();
         } else {
-          alert("Invalid email or password.");
+          alert("Invalid email or password. Check console for debug logs.");
         }
       } catch (error) {
         alert(error.message);
       }
     }
-
-    // Google Sign-In
-    document.getElementById('googleLogin').addEventListener('click', async () => {
-      try {
-        const result = await signInWithPopup(auth, provider);
-        const user = result.user;
-        const creds = await ensureCredentialsExist(user.email);
-        setCookie('isLoggedIn', 'true', 24);
-        setCookie('userEmail', user.email, 24);
-        alert("Login successful! Redirecting to dashboard.");
-        redirectUser();
-      } catch (error) {
-        alert(error.message);
-      }
-    });
 
     // Button Event Listener
     document.getElementById("loginBtn").addEventListener("click", login);

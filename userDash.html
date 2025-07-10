@@ -36,102 +36,6 @@
       line-height: 1.6;
     }
 
-    .hidden {
-      display: none !important;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 2%;
-      background-color: var(--background-white);
-      border-bottom: 1px solid var(--border-light);
-      position: sticky;
-      top: 0;
-      z-index: 997;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .logo img {
-      width: 48px;
-      height: 48px;
-      transition: transform 0.3s ease;
-    }
-
-    .logo img:hover {
-      transform: scale(1.1);
-    }
-
-    .logo-text {
-      display: flex;
-      flex-direction: column;
-      font-size: 1.1rem;
-      font-weight: 700;
-      line-height: 1.2;
-    }
-
-    .logo-text .line1, .logo-text .line2 {
-      display: flex;
-      gap: 4px;
-    }
-
-    .highlight-purple {
-      color: var(--primary-color);
-    }
-
-    .highlight-orange {
-      color: var(--accent-color);
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      margin-left: auto;
-      margin-right: 15px;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: var(--text-dark);
-      font-weight: 600;
-      font-size: 0.95rem;
-      padding: 8px 12px;
-      border-radius: 6px;
-      transition: color 0.3s ease;
-    }
-
-    nav a:hover {
-      color: var(--accent-color);
-    }
-
-    nav a.active {
-      color: var(--accent-color);
-    }
-
-    .btn-logout {
-      padding: 10px 20px;
-      background-color: var(--accent-color);
-      color: var(--background-white);
-      border: none;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .btn-logout:hover {
-      background-color: #e66a20;
-      transform: translateY(-2px);
-    }
-
     .dashboard-section {
       padding: 60px 5%;
       background: linear-gradient(135deg, var(--background-light) 0%, var(--background-white) 100%);
@@ -365,238 +269,6 @@
       padding: 20px;
     }
 
-    footer {
-      background: #222;
-      color: white;
-      padding: 40px 5%;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-
-    footer h4 {
-      font-size: 1.25rem;
-      margin-bottom: 15px;
-    }
-
-    footer p, footer a {
-      font-size: 0.9rem;
-      opacity: 0.9;
-      margin-bottom: 8px;
-      color: #ccc;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    footer a:hover {
-      color: var(--accent-color);
-    }
-
-    .footer-bottom {
-      text-align: center;
-      width: 100%;
-      margin-top: 30px;
-      font-size: 0.9rem;
-    }
-
-    /* Get in Touch Modal Styles */
-    .contact-modal .modal-dialog {
-      max-width: 900px;
-    }
-
-    .contact-modal .modal-content {
-      border-radius: 12px;
-      box-shadow: var(--shadow-md);
-    }
-
-    .contact-modal .modal-header {
-      background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 100%);
-      color: var(--background-white);
-      border-bottom: none;
-      border-radius: 12px 12px 0 0;
-      padding: 20px 25px;
-    }
-
-    .contact-modal .modal-title {
-      font-weight: 700;
-      font-size: 1.2rem;
-    }
-
-    .contact-modal .btn-close {
-      filter: brightness(0) invert(1);
-      opacity: 0.8;
-      transition: opacity 0.3s ease;
-    }
-
-    .contact-modal .btn-close:hover {
-      opacity: 1;
-    }
-
-    .contact-modal .modal-body {
-      padding: 30px;
-      display: flex;
-      gap: 20px;
-    }
-
-    .contact-form {
-      flex: 1;
-    }
-
-    .contact-info {
-      flex: 1;
-      padding: 20px;
-      background: var(--background-light);
-      border-radius: 8px;
-    }
-
-    .contact-info h5 {
-      color: var(--primary-color);
-      font-weight: 700;
-      margin-bottom: 15px;
-    }
-
-    .contact-info p {
-      font-size: 0.9rem;
-      color: var(--text-dark);
-      margin-bottom: 8px;
-    }
-
-    .contact-info a {
-      color: var(--accent-color);
-      text-decoration: none;
-    }
-
-    .contact-info a:hover {
-      text-decoration: underline;
-    }
-
-    .contact-map {
-      flex: 1;
-    }
-
-    .contact-map iframe {
-      width: 100%;
-      height: 300px;
-      border-radius: 8px;
-      border: 1px solid var(--border-light);
-    }
-
-    .form-label {
-      color: #444;
-      font-weight: 600;
-      font-size: 0.95rem;
-      margin-bottom: 8px;
-    }
-
-    .form-control {
-      border: 1px solid var(--border-light);
-      border-radius: 8px;
-      padding: 12px 15px;
-      font-size: 0.95rem;
-      transition: all 0.2s ease;
-    }
-
-    .form-control:focus {
-      border-color: var(--accent-color);
-      box-shadow: 0 0 0 3px rgba(255, 123, 41, 0.1);
-    }
-
-    .modal-footer {
-      border-top: 1px solid #f0f0f0;
-      padding: 20px 25px;
-    }
-
-    .btn-primary {
-      background: var(--accent-color);
-      border: none;
-      padding: 12px 25px;
-      border-radius: 8px;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-
-    .btn-primary:hover {
-      background: #e6691f;
-      transform: translateY(-2px);
-    }
-
-    .btn-secondary {
-      background: #6c757d;
-      border: none;
-      color: var(--background-white);
-      padding: 12px 25px;
-      border-radius: 8px;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-
-    .btn-secondary:hover {
-      background: #5c636a;
-      transform: translateY(-2px);
-    }
-
-    /* About Us Modal Styles */
-    .about-modal .modal-dialog {
-      max-width: 700px;
-    }
-
-    .about-modal .modal-content {
-      border-radius: 12px;
-      box-shadow: var(--shadow-md);
-    }
-
-    .about-modal .modal-header {
-      background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 100%);
-      color: var(--background-white);
-      border-bottom: none;
-      border-radius: 12px 12px 0 0;
-      padding: 20px 25px;
-    }
-
-    .about-modal .modal-title {
-      font-weight: 700;
-      font-size: 1.5rem;
-    }
-
-    .about-modal .btn-close {
-      filter: brightness(0) invert(1);
-      opacity: 0.8;
-      transition: opacity 0.3s ease;
-    }
-
-    .about-modal .btn-close:hover {
-      opacity: 1;
-    }
-
-    .about-modal .modal-body {
-      padding: 30px;
-      color: #444;
-      line-height: 1.7;
-    }
-
-    .about-modal .modal-body h5 {
-      color: var(--accent-color);
-      font-weight: 700;
-      margin-top: 20px;
-      margin-bottom: 10px;
-    }
-
-    .about-modal .modal-body p {
-      margin-bottom: 15px;
-      font-size: 1rem;
-    }
-
-    .about-modal .modal-body ul {
-      padding-left: 20px;
-      margin-bottom: 15px;
-    }
-
-    .about-modal .modal-body ul li {
-      margin-bottom: 8px;
-      font-size: 0.95rem;
-    }
-
     @media (max-width: 992px) {
       .dashboard-section {
         padding: 50px 5%;
@@ -609,40 +281,9 @@
       .contribution-cards {
         grid-template-columns: 1fr;
       }
-
-      .contact-modal .modal-body {
-        flex-direction: column;
-      }
-
-      .contact-map iframe {
-        height: 200px;
-      }
-
-      .logo-text {
-        font-size: 1rem;
-      }
     }
 
     @media (max-width: 768px) {
-      header {
-        flex-wrap: wrap;
-        gap: 10px;
-        justify-content: center;
-        padding: 10px 5%;
-      }
-
-      nav {
-        margin-left: 0;
-        margin-right: 0;
-        justify-content: center;
-        gap: 10px;
-      }
-
-      nav a {
-        font-size: 0.9rem;
-        padding: 6px 10px;
-      }
-
       .dashboard-section h1 {
         font-size: 2rem;
         text-align: center;
@@ -650,10 +291,6 @@
 
       .tab-content {
         padding: 15px;
-      }
-
-      .logo-text {
-        font-size: 0.9rem;
       }
 
       .donation-table th,
@@ -664,25 +301,6 @@
     }
 
     @media (max-width: 576px) {
-      .logo {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .logo-text {
-        font-size: 0.85rem;
-      }
-
-      #userInfo {
-        flex-direction: column;
-        gap: 8px;
-      }
-
-      .btn-logout {
-        padding: 8px 16px;
-        font-size: 0.9rem;
-      }
-
       .event-gallery {
         grid-template-columns: 1fr;
       }
@@ -694,30 +312,8 @@
   </style>
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <img src="images/sgdf-logo.png" alt="Logo">
-      <div class="logo-text">
-        <div class="line1">
-          <span class="highlight-purple">Sindhu</span>
-          <span class="highlight-orange">Global</span>
-        </div>
-        <div class="line2">
-          <span>Development</span>
-          <span class="highlight-orange">Foundation</span>
-        </div>
-      </div>
-    </div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="donation.html">Donate</a>
-      <a href="#" data-bs-toggle="modal" data-bs-target="#aboutModal">About Us</a>
-      <a href="#" data-bs-toggle="modal" data-bs-target="#contactModal">Get in Touch</a>
-    </nav>
-    <div id="userInfo">
-      <button class="btn-logout" id="logoutBtn">Log Out</button>
-    </div>
-  </header>
+  <!-- Include Navbar -->
+  <div id="navbar"></div>
 
   <section class="dashboard-section">
     <h1 id="welcomeHeading">Welcome to Your Dashboard</h1>
@@ -761,128 +357,13 @@
     </div>
   </section>
 
-  <!-- Get in Touch Modal -->
-  <div class="modal fade contact-modal" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="contactModalLabel">Get in Touch</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="contact-form">
-            <form id="contactForm">
-              <div class="mb-3">
-                <label for="contactName" class="form-label">Name *</label>
-                <input type="text" class="form-control" id="contactName" required>
-              </div>
-              <div class="mb-3">
-                <label for="contactEmail" class="form-label">Email *</label>
-                <input type="email" class="form-control" id="contactEmail" required>
-              </div>
-              <div class="mb-3">
-                <label for="contactMessage" class="form-label">Message *</label>
-                <textarea class="form-control" id="contactMessage" rows="3" required></textarea>
-              </div>
-              <div class="d-flex gap-2">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
-            </form>
-          </div>
-          <div class="contact-info">
-            <h5>Contact Us</h5>
-            <p>Sindhu Global Development Foundation</p>
-            <p>Block C-5/Room No 10, Dev Samaj Road, Netaji, Ulhasnagar 421004, Maharashtra, India</p>
-            <p>Phone: <a href="tel:+917021668519">+91 7021668519 (Haresh Rupani)</a></p>
-            <p>Phone: <a href="tel:+919371262700">+91 9371262700 (CA Hari Dudani)</a></p>
-            <p>Email: <a href="mailto:sindhuglobal.df@gmail.com">sindhuglobal.df@gmail.com</a></p>
-          </div>
-          <div class="contact-map">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3767.867!2d73.160075!3d19.216125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c9e5c5b5c5b5%3A0x5c5b5c5b5c5b5c5b!2sDev%20Samaj%20Road%2C%20Netaji%2C%20Ulhasnagar%2C%20Maharashtra%20421004%2C%20India!5e0!3m2!1sen!2sin!4v1696427518033!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- About Us Modal -->
-  <div class="modal fade about-modal" id="aboutModal" tabindex="-1" aria-labelledby="aboutModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="aboutModalLabel">About Sindhu Global Development Foundation</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>Welcome to <strong>Sindhu Global Development Foundation</strong>, a beacon of hope and change dedicated to uplifting communities across the globe. Registered under Section 8 of the Companies Act 2013 (CIN: U80301MH2015NPL262428), we are a non-profit organization established in 2015 in Ulhasnagar, Maharashtra, committed to creating a lasting impact through compassion, innovation, and collaboration.</p>
-          
-          <h5>Our Mission</h5>
-          <p>At Sindhu Global Development Foundation, our mission is to empower underprivileged communities by providing access to education, healthcare, and sustainable opportunities. We believe in fostering self-reliance and building a brighter future for generations to come.</p>
-          
-          <h5>Our Vision</h5>
-          <p>We envision a world where every individual has the opportunity to thrive, regardless of their circumstances. Through our initiatives, we aim to bridge gaps, break barriers, and unite people for a common cause—positive change.</p>
-          
-          <h5>What We Do</h5>
-          <ul>
-            <li><strong>Education for All:</strong> We support children from marginalized communities by providing scholarships, school supplies, and access to quality education.</li>
-            <li><strong>Healthcare Initiatives:</strong> Our mobile clinics and health camps bring essential medical services to remote areas, ensuring no one is left behind.</li>
-            <li><strong>Community Development:</strong> From building sustainable infrastructure to offering vocational training, we empower communities to become self-sufficient.</li>
-            <li><strong>Disaster Relief:</strong> In times of crisis, we provide immediate aid, including food, shelter, and medical support, to affected regions.</li>
-          </ul>
-          
-          <h5>Our Leadership</h5>
-          <p>Our organization is led by our dedicated Founder Directors:</p>
-          <ul>
-            <li><strong>Haresh Rupani</strong>: Founder Director, Contact: <a href="tel:+917021668519">+91 7021668519</a>, <a href="mailto:rupani.haresh@gmail.com">rupani.haresh@gmail.com</a></li>
-            <li><strong>CA Hari Dudani</strong>: Founder Director, Contact: <a href="tel:+919371262700">+91 9371262700</a>, <a href="mailto:ca.hari.dudani@gmail.com">ca.hari.dudani@gmail.com</a></li>
-          </ul>
-          
-          <h5>Our Impact</h5>
-          <p>Over the past decade, we’ve touched the lives of over 50,000 individuals, partnered with 100+ NGOs, and raised more than ₹1 crore to support our causes. Together, we are building a legacy of change—one step at a time.</p>
-          
-          <h5>Registration Details</h5>
-          <p>
-            CIN: U80301MH2015NPL262428<br>
-            PAN: AAVCS5664E<br>
-            80G Reg.: AAVCS5664EF20201<br>
-            CSR Reg.: CSR00005292<br>
-            Address: Block C-5/Room No 10, Dev Samaj Road, Netaji, Ulhasnagar 421004, Maharashtra, India<br>
-            Email: <a href="mailto:sindhuglobal.df@gmail.com">sindhuglobal.df@gmail.com</a>
-          </p>
-          
-          <p>Join us in our journey to create a better tomorrow. Together, we can make a difference!</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <footer>
-    <div>
-      <h4>Contact Us</h4>
-      <p>Sindhu Global Development Foundation</p>
-      <p>Block C-5/Room No 10, Dev Samaj Road, Netaji, Ulhasnagar 421004, Maharashtra, India</p>
-      <p>Phone: <a href="tel:+917021668519">+91 7021668519 (Haresh Rupani)</a></p>
-      <p>Phone: <a href="tel:+919371262700">+91 9371262700 (CA Hari Dudani)</a></p>
-      <p>Email: <a href="mailto:sindhuglobal.df@gmail.com">sindhuglobal.df@gmail.com</a></p>
-      <p>CIN: U80301MH2015NPL262428 | PAN: AAVCS5664E</p>
-      <p>80G Reg.: AAVCS5664EF20201 | CSR Reg.: CSR00005292</p>
-    </div>
-    <div>
-      <h4>Follow Us</h4>
-      <p><a href="https://www.facebook.com/sindhuglobaldevelopmentfoundation" target="_blank">Facebook</a></p>
-      <p><a href="https://www.instagram.com/sindhuglobaldevelopmentfoundation" target="_blank">Instagram</a></p>
-      <p><a href="https://www.linkedin.com/company/sindhuglobaldevelopmentfoundation" target="_blank">LinkedIn</a></p>
-    </div>
-    <div class="footer-bottom">
-      © 2025 Sindhu Global Development Foundation. All rights reserved.
-    </div>
-  </footer>
+  <!-- Include Footer -->
+  <div id="footer"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
-    import { getDatabase, ref, onValue, get, push } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
+    import { getDatabase, ref, onValue, get } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyDkLmo4Vf-1U8Vl_grn2waMigYCyMj1BaU",
@@ -897,6 +378,34 @@
     const app = initializeApp(firebaseConfig);
     const database = getDatabase(app);
 
+    // Load navbar
+    fetch('navbar.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('navbar').innerHTML = data;
+        // Highlight the active nav link
+        const currentPage = window.location.pathname.split('/').pop() || 'userDash.html';
+        document.querySelectorAll('nav a').forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === currentPage) {
+            link.classList.add('active');
+          }
+        });
+        // Ensure Log Out button is visible for logged-in users
+        updateUIForLoginState(true);
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+          logoutBtn.addEventListener('click', handleLogout);
+        }
+      });
+
+    // Load footer
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer').innerHTML = data;
+      });
+
     function getCookie(name) {
       const value = `; ${document.cookie}`;
       const parts = value.split(`; ${name}=`);
@@ -904,157 +413,133 @@
       return null;
     }
 
+    function setCookie(name, value, days) {
+      let expires = "";
+      if (days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+      }
+      document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
+
     function deleteCookie(name) {
       document.cookie = name + '=; Max-Age=0; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+    }
+
+    function updateUIForLoginState(isLoggedIn) {
+      const signInBtn = document.querySelector('.btn-signin');
+      const logoutBtn = document.getElementById('logoutBtn');
+
+      if (isLoggedIn) {
+        if (signInBtn) signInBtn.style.display = 'none';
+        if (logoutBtn) logoutBtn.style.display = 'inline-block';
+      } else {
+        if (signInBtn) signInBtn.style.display = 'inline-block';
+        if (logoutBtn) logoutBtn.style.display = 'none';
+      }
     }
 
     function handleLogout() {
       deleteCookie('isLoggedIn');
       deleteCookie('userEmail');
+      updateUIForLoginState(false);
       window.location.href = 'index.html';
     }
 
-    // Handle "Get in Touch" form submission
-    document.getElementById('contactForm')?.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const name = document.getElementById('contactName').value.trim();
-      const email = document.getElementById('contactEmail').value.trim();
-      const message = document.getElementById('contactMessage').value.trim();
-
-      if (!name || !email || !message) {
-        alert('Please fill in all required fields.');
+    window.onload = async function() {
+      const userEmail = getCookie('userEmail');
+      if (!userEmail) {
+        // Redirect to index if not logged in
+        window.location.href = 'index.html';
         return;
       }
 
+      // Update UI to show Log Out button
+      updateUIForLoginState(true);
+
+      // Fetch and display user's first name
+      const sanitizedEmail = userEmail.replace(/\./g, '_');
+      const userRef = ref(database, `donations/${sanitizedEmail}`);
       try {
-        const newQuery = {
-          name: name,
-          email: email,
-          message: message,
-          timestamp: Date.now()
-        };
-
-        const queriesRef = ref(database, 'viewQueries');
-        await push(queriesRef, newQuery);
-
-        alert('Your query has been submitted successfully!');
-        const modal = bootstrap.Modal.getInstance(document.getElementById('contactModal'));
-        modal.hide();
-        document.getElementById('contactForm').reset();
-      } catch (error) {
-        alert('Error submitting query: ' + error.message);
-      }
-    });
-
-    window.onload = async function() {
-      const logoutBtn = document.getElementById('logoutBtn');
-      if (logoutBtn) {
-        logoutBtn.addEventListener('click', handleLogout);
-      } else {
-        console.error("Logout button not found");
-      }
-
-      // Highlight the active nav link
-      const currentPage = window.location.pathname.split('/').pop() || 'userDash.html';
-      document.querySelectorAll('nav a').forEach(link => {
-        link.classList.remove('active');
-        const href = link.getAttribute('href');
-        if (href === currentPage) {
-          link.classList.add('active');
-        }
-      });
-
-      // Fetch and display user's full name
-      const userEmail = getCookie('userEmail');
-      if (userEmail) {
-        const sanitizedEmail = userEmail.replace(/\./g, '_');
-        const userRef = ref(database, `donations/${sanitizedEmail}`);
-        try {
-          const snapshot = await get(userRef);
-          if (snapshot.exists()) {
-            const userData = Object.values(snapshot.val())[0];
-            const fullName = userData.fullName || 'User';
-            document.getElementById('welcomeHeading').textContent = `Welcome ${fullName},`;
-          } else {
-            document.getElementById('welcomeHeading').textContent = 'Welcome User,';
-            console.error('No donation data found for email:', userEmail);
-          }
-        } catch (error) {
+        const snapshot = await get(userRef);
+        if (snapshot.exists()) {
+          const userData = Object.values(snapshot.val())[0];
+          const firstName = userData.firstName || 'User';
+          document.getElementById('welcomeHeading').textContent = `Welcome ${firstName},`;
+        } else {
           document.getElementById('welcomeHeading').textContent = 'Welcome User,';
-          console.error('Error fetching user data:', error);
+          console.error('No donation data found for email:', userEmail);
         }
+      } catch (error) {
+        document.getElementById('welcomeHeading').textContent = 'Welcome User,';
+        console.error('Error fetching user data:', error);
+      }
 
-        // Real-time update for donations and contributions
-        const contributionCards = document.getElementById('contributionCards');
-        const donationList = document.getElementById('donationList');
-        onValue(userRef, (snapshot) => {
-          contributionCards.innerHTML = '';
-          donationList.innerHTML = '';
-          if (snapshot.exists()) {
-            const donations = Object.values(snapshot.val());
-            if (donations.length > 0) {
-              let totalMoney = 0;
-              let inKindCount = 0;
+      // Real-time update for donations and contributions
+      const contributionCards = document.getElementById('contributionCards');
+      const donationList = document.getElementById('donationList');
+      onValue(userRef, (snapshot) => {
+        contributionCards.innerHTML = '';
+        donationList.innerHTML = '';
+        if (snapshot.exists()) {
+          const donations = Object.values(snapshot.val());
+          if (donations.length > 0) {
+            let totalMoney = 0;
+            let inKindCount = 0;
 
-              donations.forEach(donation => {
-                if (donation.donationType === 'money' && donation.amountOrItem) {
-                  totalMoney += parseFloat(donation.amountOrItem) || 0;
-                } else if (donation.donationType === 'inKind') {
-                  inKindCount++;
-                }
-
-                const statusClass = donation.status === 'Received' ? 'status-received' : 'status-pending';
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                  <td>${donation.donationType || 'N/A'}</td>
-                  <td>${donation.amountOrItem || 'N/A'}</td>
-                  <td>${new Date(donation.timestamp).toLocaleDateString()}</td>
-                  <td><span class="status-badge ${statusClass}">${donation.status || 'Pending'}</span></td>
-                `;
-                donationList.appendChild(row);
-              });
-
-              if (totalMoney > 0) {
-                contributionCards.innerHTML += `
-                  <div class="card">
-                    <i class="fas fa-rupee-sign"></i>
-                    <h4>Total Money Contributions</h4>
-                    <p>₹${totalMoney.toFixed(2)}</p>
-                  </div>
-                `;
+            donations.forEach(donation => {
+              if (donation.donationType === 'money' && donation.amountOrItem) {
+                totalMoney += parseFloat(donation.amountOrItem) || 0;
+              } else if (donation.donationType === 'inKind') {
+                inKindCount++;
               }
-              if (inKindCount > 0) {
-                contributionCards.innerHTML += `
-                  <div class="card">
-                    <i class="fas fa-box-open"></i>
-                    <h4>Total In-Kind Contributions</h4>
-                    <p>${inKindCount}</p>
-                  </div>
-                `;
-              }
-              if (totalMoney === 0 && inKindCount === 0) {
-                contributionCards.innerHTML = '<p class="loading-state">No contributions yet.</p>';
-              }
-            } else {
+
+              const statusClass = donation.status === 'Received' ? 'status-received' : 'status-pending';
+              const row = document.createElement('tr');
+              row.innerHTML = `
+                <td>${donation.donationType || 'N/A'}</td>
+                <td>${donation.amountOrItem || 'N/A'}</td>
+                <td>${new Date(donation.timestamp).toLocaleDateString()}</td>
+                <td><span class="status-badge ${statusClass}">${donation.status || 'Pending'}</span></td>
+              `;
+              donationList.appendChild(row);
+            });
+
+            if (totalMoney > 0) {
+              contributionCards.innerHTML += `
+                <div class="card">
+                  <i class="fas fa-rupee-sign"></i>
+                  <h4>Total Money Contributions</h4>
+                  <p>₹${totalMoney.toFixed(2)}</p>
+                </div>
+              `;
+            }
+            if (inKindCount > 0) {
+              contributionCards.innerHTML += `
+                <div class="card">
+                  <i class="fas fa-box-open"></i>
+                  <h4>Total In-Kind Contributions</h4>
+                  <p>${inKindCount}</p>
+                </div>
+              `;
+            }
+            if (totalMoney === 0 && inKindCount === 0) {
               contributionCards.innerHTML = '<p class="loading-state">No contributions yet.</p>';
-              donationList.innerHTML = '<tr><td colspan="4" class="loading-state">No donations found.</td></tr>';
             }
           } else {
             contributionCards.innerHTML = '<p class="loading-state">No contributions yet.</p>';
             donationList.innerHTML = '<tr><td colspan="4" class="loading-state">No donations found.</td></tr>';
           }
-        }, (error) => {
-          contributionCards.innerHTML = '<p class="loading-state">Error loading contributions.</p>';
-          donationList.innerHTML = '<tr><td colspan="4" class="loading-state">Error loading donations.</td></tr>';
-          console.error('Error fetching donations:', error);
-        });
-      } else {
-        document.getElementById('welcomeHeading').textContent = 'Welcome User,';
-        contributionCards.innerHTML = '<p class="loading-state">Please log in to view your contributions.</p>';
-        donationList.innerHTML = '<tr><td colspan="4" class="loading-state">Please log in to view your donations.</td></tr>';
-        console.error('No user email found in cookies');
-      }
+        } else {
+          contributionCards.innerHTML = '<p class="loading-state">No contributions yet.</p>';
+          donationList.innerHTML = '<tr><td colspan="4" class="loading-state">No donations found.</td></tr>';
+        }
+      }, (error) => {
+        contributionCards.innerHTML = '<p class="loading-state">Error loading contributions.</p>';
+        donationList.innerHTML = '<tr><td colspan="4" class="loading-state">Error loading donations.</td></tr>';
+        console.error('Error fetching donations:', error);
+      });
     };
 
     document.getElementById('ngo-activities-tab').addEventListener('shown.bs.tab', () => {
@@ -1148,5 +633,50 @@
         });
       }
     });
+
+    // Ensure loadAuthIframe is defined (though not needed for logged-in users)
+    window.loadAuthIframe = function() {
+      const iframe = document.createElement('iframe');
+      iframe.src = 'authh.html';
+      iframe.width = '100%';
+      iframe.height = '600px';
+      iframe.frameBorder = '0';
+      iframe.style.border = 'none';
+
+      const container = document.getElementById('iframe-container');
+      const blurOverlay = document.getElementById('blur-overlay');
+
+      if (container && blurOverlay) {
+        container.innerHTML = '';
+        container.appendChild(iframe);
+        blurOverlay.classList.add('active');
+        container.classList.add('active');
+
+        window.addEventListener('message', function(event) {
+          if (event.data === 'loginSuccess') {
+            setCookie('isLoggedIn', 'true', 7);
+            blurOverlay.classList.remove('active');
+            container.classList.remove('active');
+            setTimeout(() => {
+              container.innerHTML = '';
+              window.location.href = 'userDash.html';
+            }, 300);
+          }
+        });
+      } else {
+        console.error("Container or blur overlay not found");
+      }
+    };
+
+    window.onclick = function(event) {
+      const iframeContainer = document.getElementById('iframe-container');
+      const blurOverlay = document.getElementById('blur-overlay');
+      if (event.target === blurOverlay) {
+        iframeContainer.innerHTML = '';
+        iframeContainer.classList.remove('active');
+        blurOverlay.classList.remove('active');
+      }
+    };
   </script>
+</body>
 </html>
