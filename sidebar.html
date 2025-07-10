@@ -34,35 +34,3 @@
     <i class="fas fa-sign-out-alt"></i> LOGOUT
   </button>
 </div>
-
-<script>
-  // Hamburger menu toggle
-  document.addEventListener("DOMContentLoaded", () => {
-    const hamburger = document.createElement("button");
-    hamburger.className = "hamburger";
-    hamburger.innerHTML = "☰"; // Hamburger icon
-    document.body.prepend(hamburger);
-
-    const sidebar = document.querySelector(".sidebar");
-    const content = document.querySelector(".content") || document.body;
-
-    hamburger.addEventListener("click", () => {
-      sidebar.classList.toggle("active");
-      content.classList.toggle("shifted");
-    });
-
-    // Close sidebar if clicked outside on mobile
-    document.addEventListener("click", (e) => {
-      if (window.innerWidth <= 768 && !sidebar.contains(e.target) && !hamburger.contains(e.target)) {
-        sidebar.classList.remove("active");
-        content.classList.remove("shifted");
-      }
-    });
-  });
-
-  // Placeholder for logout function (to be defined in parent page)
-  function handleLogout() {
-    alert("Logout functionality to be implemented in parent page.");
-    // Add actual logout logic here or in the parent page
-  }
-</script>

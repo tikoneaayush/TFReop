@@ -115,6 +115,7 @@
       margin-left: 280px;
       padding: 40px;
       background: #f8f9fa;
+      transition: margin-left 0.3s ease;
     }
     .page-header {
       background: white;
@@ -307,7 +308,22 @@
     .donation-group.active {
       display: block;
     }
+    .hamburger {
+      display: none;
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 1001;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: #2d2d2d;
+      cursor: pointer;
+    }
     @media (max-width: 992px) {
+      .hamburger {
+        display: block;
+      }
       .sidebar {
         transform: translateX(-100%);
       }
@@ -317,6 +333,9 @@
       .main-content {
         margin-left: 0;
         padding: 30px;
+      }
+      .main-content.shifted {
+        margin-left: 280px;
       }
       .page-header h1 {
         font-size: 1.8rem;
@@ -343,6 +362,9 @@
 </head>
 <body>
 <div class="main-container">
+  <!-- Hamburger Button -->
+  <button class="hamburger">☰</button>
+
   <!-- Sidebar Placeholder -->
   <div id="sidebar-placeholder"></div>
 
@@ -475,11 +497,40 @@
           link.classList.add('active');
         }
       });
-    }).catch(error => console.error('Error loading sidebar:', error));
+
+      // Hamburger menu toggle
+      const hamburger = document.querySelector(".hamburger");
+      const sidebar = document.querySelector(".sidebar");
+      const mainContent = document.querySelector(".main-content");
+
+      if (hamburger && sidebar && mainContent) {
+        hamburger.addEventListener("click", () => {
+          sidebar.classList.toggle("show");
+          mainContent.classList.toggle("shifted");
+        });
+
+        // Close sidebar if clicked outside on mobile
+        document.addEventListener("click", (e) => {
+          if (window.innerWidth <= 992 && !sidebar.contains(e.target) && !hamburger.contains(e.target)) {
+            sidebar.classList.remove("show");
+            mainContent.classList.remove("shifted");
+          }
+        });
+      } else {
+        console.error("Hamburger, sidebar, or main-content not found in DOM");
+      }
+    })
+    .catch(error => console.error('Error loading sidebar:', error));
+
+  // Placeholder for handleLogout (should be defined in logout.js)
+  function handleLogout() {
+    alert("Logout functionality to be implemented in logout.js.");
+    // Actual logout logic should be in logout.js
+  }
 
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
   import { getDatabase, ref, onValue, remove, update } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
-  
+
   const firebaseConfig = {
     apiKey: "AIzaSyDkLmo4Vf-1U8Vl_grn2waMigYCyMj1BaU",
     authDomain: "formtestsgft.firebaseapp.com",
@@ -550,7 +601,7 @@
           <tr>
             <td>${i++}</td>
             <td>${ev.title || 'N/A'}</td>
-            <td>${ev.date || 'N/A'}</td>
+            <td>${ev.date ? new Date(ev.date).toLocaleDateString() : 'N/A'}</td>
             <td>${ev.peopleBenefitted || 0}</td>
             <td>${donationDisplay}</td>
             <td>

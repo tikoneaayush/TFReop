@@ -131,6 +131,8 @@
       margin-left: 280px;
       padding: 40px;
       background: #f8f9fa;
+      overflow-x: hidden;
+      transition: margin-left 0.3s ease;
     }
 
     .page-header {
@@ -276,20 +278,36 @@
       display: block;
     }
 
+    .hamburger {
+      display: none;
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 1001;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: #2d2d2d;
+      cursor: pointer;
+    }
+
     @media (max-width: 992px) {
+      .hamburger {
+        display: block;
+      }
       .sidebar {
         transform: translateX(-100%);
       }
-      
       .sidebar.show {
         transform: translateX(0);
       }
-      
       .main-content {
         margin-left: 0;
         padding: 30px;
       }
-
+      .main-content.shifted {
+        margin-left: 280px;
+      }
       .page-header h1 {
         font-size: 1.8rem;
       }
@@ -299,28 +317,22 @@
       .main-content {
         padding: 20px;
       }
-
       .page-header {
         padding: 20px 25px;
       }
-
       .page-header h1 {
         font-size: 1.5rem;
       }
-
       .card-body {
         padding: 20px;
       }
-
       .form-label {
         font-size: 0.9rem;
       }
-
       .form-control {
         font-size: 0.9rem;
         padding: 10px 12px;
       }
-
       .btn-primary,
       .btn-secondary {
         padding: 10px 20px;
@@ -332,6 +344,9 @@
 </head>
 <body>
 <div class="main-container">
+  <!-- Hamburger Button -->
+  <button class="hamburger">☰</button>
+
   <!-- Sidebar Placeholder -->
   <div id="sidebar-placeholder"></div>
 
@@ -425,7 +440,7 @@
     .then(response => response.text())
     .then(html => {
       document.getElementById('sidebar-placeholder').innerHTML = html;
-      const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+      const currentPage = window.location.pathname.split('/').pop() || 'addEvent.html';
       document.querySelectorAll('.sidebar-nav a').forEach(link => {
         link.classList.remove('active');
         const href = link.getAttribute('href');
@@ -433,12 +448,40 @@
           link.classList.add('active');
         }
       });
+
+      // Hamburger menu toggle
+      const hamburger = document.querySelector(".hamburger");
+      const sidebar = document.querySelector(".sidebar");
+      const mainContent = document.querySelector(".main-content");
+
+      if (hamburger && sidebar && mainContent) {
+        hamburger.addEventListener("click", () => {
+          sidebar.classList.toggle("show");
+          mainContent.classList.toggle("shifted");
+        });
+
+        // Close sidebar if clicked outside on mobile
+        document.addEventListener("click", (e) => {
+          if (window.innerWidth <= 992 && !sidebar.contains(e.target) && !hamburger.contains(e.target)) {
+            sidebar.classList.remove("show");
+            mainContent.classList.remove("shifted");
+          }
+        });
+      } else {
+        console.error("Hamburger, sidebar, or main-content not found in DOM");
+      }
     })
     .catch(error => console.error('Error loading sidebar:', error));
 
+  // Placeholder for handleLogout (should be defined in logout.js)
+  function handleLogout() {
+    alert("Logout functionality to be implemented in logout.js.");
+    // Actual logout logic should be in logout.js
+  }
+
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
   import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
-  
+
   const firebaseConfig = {
     apiKey: "AIzaSyDkLmo4Vf-1U8Vl_grn2waMigYCyMj1BaU",
     authDomain: "formtestsgft.firebaseapp.com",
@@ -623,7 +666,7 @@
   console.log('🚀 Initializing app...');
   console.log('🔧 Firebase config loaded');
   console.log('💾 Database reference initialized');
-  
+
   const connectedRef = ref(db, '.info/connected');
   onValue(connectedRef, (snapshot) => {
     if (snapshot.val() === true) {

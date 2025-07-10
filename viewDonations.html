@@ -132,6 +132,7 @@
       padding: 40px;
       background: #f8f9fa;
       overflow-x: hidden;
+      transition: margin-left 0.3s ease;
     }
 
     .page-header {
@@ -261,7 +262,7 @@
     }
 
     .donations-table tbody tr:nth-child(even) {
-      backgroundensorflow: #fafafa;
+      background: #fafafa;
     }
 
     .donations-table tbody tr:hover {
@@ -358,24 +359,39 @@
       width: 100%;
     }
 
+    .hamburger {
+      display: none;
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 1001;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: #2d2d2d;
+      cursor: pointer;
+    }
+
     @media (max-width: 992px) {
+      .hamburger {
+        display: block;
+      }
       .sidebar {
         transform: translateX(-100%);
       }
-      
       .sidebar.show {
         transform: translateX(0);
       }
-      
       .main-content {
         margin-left: 0;
         padding: 30px;
       }
-
+      .main-content.shifted {
+        margin-left: 280px;
+      }
       .page-header h1 {
         font-size: 1.8rem;
       }
-
       .donations-table thead th,
       .donations-table tbody td {
         padding: 8px 10px;
@@ -386,35 +402,28 @@
       .main-content {
         padding: 20px;
       }
-
       .page-header {
         padding: 20px 25px;
       }
-
       .page-header h1 {
         font-size: 1.5rem;
       }
-
       .donations-table thead th,
       .donations-table tbody td {
         font-size: 0.8rem;
         padding: 6px 8px;
       }
-
       .donations-table tbody td select {
         width: 80px;
         font-size: 0.8rem;
       }
-
       .donations-table tbody td .date-picker {
         width: 100px;
       }
-
       .action-buttons button {
         padding: 4px 8px;
         font-size: 0.8rem;
       }
-
       .donation-switch button {
         padding: 6px 12px;
         font-size: 0.8rem;
@@ -425,6 +434,9 @@
 </head>
 <body>
 <div class="main-container">
+  <!-- Hamburger Button -->
+  <button class="hamburger">☰</button>
+
   <!-- Sidebar Placeholder -->
   <div id="sidebar-placeholder"></div>
 
@@ -476,16 +488,14 @@
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle lambdawidget.min.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
-<script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script type="module">
   // Dynamically load sidebar content
   fetch('sidebar.html')
     .then(response => response.text())
     .then(html => {
       document.getElementById('sidebar-placeholder').innerHTML = html;
-      const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+      const currentPage = window.location.pathname.split('/').pop() || 'viewDonations.html';
       document.querySelectorAll('.sidebar-nav a').forEach(link => {
         link.classList.remove('active');
         const href = link.getAttribute('href');
@@ -493,10 +503,40 @@
           link.classList.add('active');
         }
       });
+
+      // Hamburger menu toggle
+      const hamburger = document.querySelector(".hamburger");
+      const sidebar = document.querySelector(".sidebar");
+      const mainContent = document.querySelector(".main-content");
+
+      if (hamburger && sidebar && mainContent) {
+        hamburger.addEventListener("click", () => {
+          sidebar.classList.toggle("show");
+          mainContent.classList.toggle("shifted");
+        });
+
+        // Close sidebar if clicked outside on mobile
+        document.addEventListener("click", (e) => {
+          if (window.innerWidth <= 992 && !sidebar.contains(e.target) && !hamburger.contains(e.target)) {
+            sidebar.classList.remove("show");
+            mainContent.classList.remove("shifted");
+          }
+        });
+      } else {
+        console.error("Hamburger, sidebar, or main-content not found in DOM");
+      }
     })
     .catch(error => console.error('Error loading sidebar:', error));
 
-  // Firebase Configuration
+  // Placeholder for handleLogout (should be defined in logout.js)
+  function handleLogout() {
+    alert("Logout functionality to be implemented in logout.js.");
+    // Actual logout logic should be in logout.js
+  }
+
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+  import { getDatabase, ref, onValue, update, remove } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
+
   const firebaseConfig = {
     apiKey: "AIzaSyDkLmo4Vf-1U8Vl_grn2waMigYCyMj1BaU",
     authDomain: "formtestsgft.firebaseapp.com",
@@ -507,16 +547,15 @@
     appId: "1:688396867961:web:8cc2136b755be21f4f77a8"
   };
 
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.database();
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
   const tableBody = document.querySelector("#donationsTable tbody");
 
   const fetchDonations = () => {
-    const donationsRef = db.ref('donations');
+    const donationsRef = ref(db, 'donations');
     console.log('Fetching donations from:', donationsRef.toString());
 
-    donationsRef.on('value', (snapshot) => {
+    onValue(donationsRef, (snapshot) => {
       console.log('Snapshot received at', new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }), ':', snapshot.val());
       tableBody.innerHTML = '';
 
@@ -669,7 +708,7 @@
         }
       } else {
         datePicker.style.display = 'none';
-        db.ref(path).update({ status: status, receivedDate: null })
+        update(ref(db, path), { status: status, receivedDate: null })
           .catch(error => {
             console.error('Status update error at', new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }), ':', error);
             alert('Error updating status. Please try again.');
@@ -692,7 +731,7 @@
         status: 'Received',
         receivedDate: date.getTime()
       };
-      db.ref(path).update(updates)
+      update(ref(db, path), updates)
         .then(() => {
           console.log('Received date updated successfully for path:', path);
         })
@@ -758,7 +797,7 @@
         }
       }
     });
-    db.ref(path).update(updates)
+    update(ref(db, path), updates)
       .then(() => {
         console.log('Donation updated successfully for path:', path);
         fetchDonations();
@@ -773,7 +812,7 @@
   // Delete donation
   window.deleteDonation = function(path) {
     if (confirm('Are you sure you want to delete this donation?')) {
-      db.ref(path).remove()
+      remove(ref(db, path))
         .then(() => {
           console.log('Donation deleted successfully for path:', path);
           fetchDonations();
@@ -786,12 +825,7 @@
   };
 
   // Load donations on page load
-  window.onload = fetchDonations;
-
-  // Placeholder for logout function
-  window.handleLogout = function() {
-    alert('Logout functionality to be implemented.');
-  };
+  fetchDonations();
 </script>
 </body>
 </html>
