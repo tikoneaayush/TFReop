@@ -12,13 +12,13 @@
 
   <style>
     :root {
-      --primary-color: #9c27b0;
-      --accent-color: #ff7b29;
-      --background-light: #f8f9fa;
+      --primary-color: #072140; /* Deeper Navy Blue */
+      --accent-color: #f5b041; /* Gold */
+      --background-light: #e6eef7; /* Light Blue tint */
       --background-white: #ffffff;
-      --text-dark: #333;
-      --text-muted: #666;
-      --border-light: #eee;
+      --text-dark: #072140; /* Deeper Navy Blue */
+      --text-muted: #4a6e9e; /* Muted Blue-gray */
+      --border-light: #b3c9e0; /* Light Blue border */
       --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
       --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
@@ -27,11 +27,11 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Poppins', sans-serif; /* Updated to Poppins for consistency with index.html */
     }
 
     body {
-      background-color: var(--background-white);
+      background-color: var(--background-light); /* Light Blue tint */
       color: var(--text-dark);
       line-height: 1.6;
     }
@@ -45,7 +45,7 @@
     .dashboard-section h1 {
       font-size: 2.5rem;
       font-weight: 800;
-      color: var(--text-dark);
+      color: var(--primary-color); /* Deeper Navy Blue */
       margin-bottom: 30px;
       text-align: left;
     }
@@ -57,17 +57,18 @@
       border-radius: 12px;
       box-shadow: var(--shadow-md);
       padding: 30px;
+      border: 2px solid var(--primary-color); /* Blue border */
     }
 
     .nav-tabs {
-      border-bottom: 2px solid var(--primary-color);
+      border-bottom: 2px solid var(--primary-color); /* Deeper Navy Blue */
       margin-bottom: 25px;
-      background: var(--background-light);
+      background: var(--background-light); /* Light Blue tint */
       border-radius: 8px 8px 0 0;
     }
 
     .nav-tabs .nav-link {
-      color: var(--text-muted);
+      color: var(--text-muted); /* Muted Blue-gray */
       font-weight: 700;
       margin-right: 15px;
       padding: 12px 20px;
@@ -78,14 +79,14 @@
     }
 
     .nav-tabs .nav-link:hover {
-      color: var(--accent-color);
+      color: var(--accent-color); /* Gold */
       background: var(--background-white);
     }
 
     .nav-tabs .nav-link.active {
-      color: var(--primary-color);
+      color: var(--primary-color); /* Deeper Navy Blue */
       background: var(--background-white);
-      border-bottom: 2px solid var(--primary-color);
+      border-bottom: 2px solid var(--primary-color); /* Deeper Navy Blue */
     }
 
     .contribution-cards {
@@ -99,7 +100,7 @@
       padding: 20px;
       background: var(--background-white);
       border-radius: 10px;
-      border: 1px solid var(--border-light);
+      border: 1px solid var(--border-light); /* Light Blue border */
       text-align: center;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       position: relative;
@@ -113,19 +114,19 @@
 
     .card i {
       font-size: 1.8rem;
-      color: var(--primary-color);
+      color: var(--primary-color); /* Deeper Navy Blue */
       margin-bottom: 10px;
     }
 
     .card h4 {
-      color: var(--primary-color);
+      color: var(--primary-color); /* Deeper Navy Blue */
       font-size: 1.1rem;
       font-weight: 600;
       margin-bottom: 10px;
     }
 
     .card p {
-      color: var(--text-dark);
+      color: var(--text-dark); /* Deeper Navy Blue */
       font-size: 1.6rem;
       font-weight: 700;
       margin: 0;
@@ -144,12 +145,12 @@
     .donation-table td {
       padding: 15px;
       text-align: left;
-      border-bottom: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light); /* Light Blue border */
     }
 
     .donation-table th {
-      background: var(--background-light);
-      color: var(--text-dark);
+      background: var(--background-light); /* Light Blue tint */
+      color: var(--text-dark); /* Deeper Navy Blue */
       font-weight: 700;
       font-size: 0.95rem;
       text-transform: uppercase;
@@ -157,15 +158,15 @@
 
     .donation-table td {
       font-size: 0.9rem;
-      color: var(--text-dark);
+      color: var(--text-dark); /* Deeper Navy Blue */
     }
 
     .donation-table tr:nth-child(even) {
-      background: #f9fafb;
+      background: #d1dfe9; /* Lighter Blue tint */
     }
 
     .donation-table tr:hover {
-      background: #f1f1f1;
+      background: #c0d1e0; /* Slightly darker Blue tint */
     }
 
     .donation-table .status-badge {
@@ -177,13 +178,13 @@
     }
 
     .donation-table .status-pending {
-      background: #fff3cd;
-      color: #856404;
+      background: #e6d8a0; /* Light gold tint */
+      color: #5a4e2e; /* Darker muted gold */
     }
 
     .donation-table .status-received {
-      background: #d4edda;
-      color: #155724;
+      background: #c6e0d2; /* Light teal tint */
+      color: #1e4d3c; /* Darker muted teal */
     }
 
     .event-gallery {
@@ -199,6 +200,7 @@
       box-shadow: var(--shadow-sm);
       overflow: hidden;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid var(--border-light); /* Light Blue border */
     }
 
     .event-card:hover {
@@ -210,7 +212,7 @@
       width: 100%;
       height: 180px;
       object-fit: cover;
-      border-bottom: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light); /* Light Blue border */
     }
 
     .event-details {
@@ -218,14 +220,14 @@
     }
 
     .event-details h4 {
-      color: var(--primary-color);
+      color: var(--primary-color); /* Deeper Navy Blue */
       font-size: 1.2rem;
       font-weight: 600;
       margin-bottom: 10px;
     }
 
     .event-details p {
-      color: var(--text-dark);
+      color: var(--text-dark); /* Deeper Navy Blue */
       font-size: 0.9rem;
       margin: 5px 0;
       line-height: 1.5;
@@ -243,7 +245,7 @@
     }
 
     .event-details .read-more {
-      color: var(--accent-color);
+      color: var(--accent-color); /* Gold */
       cursor: pointer;
       font-size: 0.85rem;
       font-weight: 600;
@@ -257,14 +259,14 @@
 
     .event-details .event-date,
     .event-details .event-status {
-      color: var(--text-muted);
+      color: var(--text-muted); /* Muted Blue-gray */
       font-size: 0.85rem;
       font-style: italic;
     }
 
     .loading-state {
       text-align: center;
-      color: var(--text-muted);
+      color: var(--text-muted); /* Muted Blue-gray */
       font-size: 0.9rem;
       padding: 20px;
     }
@@ -366,13 +368,13 @@
     import { getDatabase, ref, onValue, get } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
 
     const firebaseConfig = {
-    apiKey: "AIzaSyAcWaouAW_yfLE0NOKDmPR5UB0KJMn5IKk",
-    authDomain: "talreja-foundation.firebaseapp.com",
-    projectId: "talreja-foundation",
-    storageBucket: "talreja-foundation.firebasestorage.app",
-    messagingSenderId: "214919769344",
-    appId: "1:214919769344:web:1d776bcb2b54890c96d7e5"
-  };
+      apiKey: "AIzaSyAcWaouAW_yfLE0NOKDmPR5UB0KJMn5IKk",
+      authDomain: "talreja-foundation.firebaseapp.com",
+      projectId: "talreja-foundation",
+      storageBucket: "talreja-foundation.firebasestorage.app",
+      messagingSenderId: "214919769344",
+      appId: "1:214919769344:web:1d776bcb2b54890c96d7e5"
+    };
 
     const app = initializeApp(firebaseConfig);
     const database = getDatabase(app);

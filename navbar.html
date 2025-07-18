@@ -12,24 +12,26 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Poppins', sans-serif; /* Updated to Poppins for consistency with index.html */
     }
 
     :root {
-      --primary-color: #9c27b0;
-      --accent-color: #ff7b29;
+      --primary-color: #072140; /* Deeper Navy Blue */
+      --accent-color: #f5b041; /* Gold */
       --background-white: #ffffff;
-      --text-dark: #333;
+      --background-off-white: #e6eef7; /* Light Blue tint */
+      --text-dark: #072140; /* Deeper Navy Blue */
       --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     .navbar {
-      background-color: var(--background-white);
+      background-color: var(--background-off-white); /* Light Blue tint */
       padding: 15px 5%;
       box-shadow: var(--shadow-sm);
       position: sticky;
       top: 0;
       z-index: 1000;
+      border-bottom: 2px solid var(--primary-color); /* Blue border */
     }
 
     .navbar-brand {
@@ -42,9 +44,10 @@
     }
 
     .navbar-brand img {
-      width: 40px;
-      height: 40px;
+      width: 60px; /* Increased from 40px to 60px */
+      height: 60px; /* Increased from 40px to 60px */
       transition: transform 0.3s ease;
+      /* Removed border: 2px solid var(--primary-color); */
     }
 
     .navbar-brand img:hover {
@@ -62,18 +65,19 @@
       gap: 4px;
     }
 
-    .highlight-purple {
-      color: var(--primary-color);
+    .highlight-primary {
+      color: var(--primary-color); /* Deeper Navy Blue */
     }
 
-    .highlight-orange {
-      color: var(--accent-color);
+    .highlight-accent {
+      color: var(--accent-color); /* Gold */
     }
 
     .navbar-toggler {
       border: none;
       font-size: 1.5rem;
       padding: 10px;
+      color: var(--primary-color);
     }
 
     .navbar-collapse {
@@ -93,15 +97,15 @@
     }
 
     .nav-link:hover,
-    .nav-link.active {
-      color: var(--accent-color);
+    .nav-item.active .nav-link {
+      color: var(--primary-color); /* Deeper Navy Blue */
     }
 
     .btn-signin, .btn-logout {
       padding: 8px 16px;
-      background-color: var(--accent-color);
+      background: linear-gradient(135deg, var(--primary-color) 0%, #2dd4bf 100%); /* Blue to teal gradient */
       color: var(--background-white);
-      border: none;
+      border: 2px solid var(--primary-color); /* Blue border */
       border-radius: 6px;
       font-weight: 600;
       cursor: pointer;
@@ -109,8 +113,9 @@
     }
 
     .btn-signin:hover, .btn-logout:hover {
-      background-color: #e66a20;
+      background: linear-gradient(135deg, #05152e 0%, #26a69a 100%); /* Darker Blue to teal */
       transform: translateY(-2px);
+      box-shadow: 0 2px 8px rgba(7, 33, 64, 0.2);
     }
 
     @media (max-width: 992px) {
@@ -120,10 +125,11 @@
         right: 0;
         height: 100vh;
         width: 250px;
-        background: var(--background-white);
+        background: var(--background-off-white); /* Light Blue tint */
         transform: translateX(100%);
         padding: 20px;
         box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+        border-left: 2px solid var(--primary-color); /* Blue border */
       }
 
       .navbar-collapse.show {
@@ -153,8 +159,8 @@
       }
 
       .navbar-brand img {
-        width: 32px;
-        height: 32px;
+        width: 48px; /* Increased from 32px to 48px */
+        height: 48px; /* Increased from 32px to 48px */
       }
 
       .navbar-toggler {
@@ -174,10 +180,10 @@
         <img src="images/tf-logo.jpg" alt="Logo">
         <div class="logo-text">
           <div class="line1">
-            <span class="highlight-purple">Talreja</span>
+            <span class="highlight-primary">Talreja</span>
           </div>
           <div class="line2">
-            <span class="highlight-orange">Foundation</span>
+            <span class="highlight-accent">Foundation</span>
           </div>
         </div>
       </a>
@@ -208,5 +214,7 @@
       </div>
     </div>
   </nav>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

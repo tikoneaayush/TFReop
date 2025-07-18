@@ -15,7 +15,7 @@
       box-sizing: border-box;
     }
     body {
-      background: #f8f9fa;
+      background: #f5f5f5; /* Soft off-white background */
       min-height: 100vh;
     }
     .main-container {
@@ -35,7 +35,7 @@
     .sidebar-header {
       padding: 40px 20px;
       text-align: center;
-      background: linear-gradient(135deg, #ff7b29 0%, #9c27b0 100%);
+      background: linear-gradient(135deg, #1e3a8a 0%, #6b21a8 100%); /* Deep blue to muted purple */
       color: white;
     }
     .sidebar img {
@@ -68,7 +68,7 @@
       display: flex;
       align-items: center;
       text-decoration: none;
-      color: #444;
+      color: #1f2937; /* Dark gray for contrast */
       font-size: 1rem;
       font-weight: 600;
       padding: 14px 25px;
@@ -77,12 +77,12 @@
       transition: all 0.3s ease;
     }
     .sidebar a:hover {
-      background: #ff7b29;
+      background: #d97706; /* Warm amber for hover */
       color: white;
       transform: translateX(5px);
     }
     .sidebar a.active {
-      background: #ff7b29;
+      background: #1e3a8a; /* Deep blue for active state */
       color: white;
     }
     .sidebar a i {
@@ -92,7 +92,7 @@
       font-size: 1.1rem;
     }
     .btn-logout {
-      background: linear-gradient(135deg, #9c27b0 0%, #b039c4 100%);
+      background: linear-gradient(135deg, #6b21a8 0%, #8b5cf6 100%); /* Muted purple gradient */
       color: white;
       border: none;
       padding: 12px 20px;
@@ -103,18 +103,18 @@
       margin: 20px 15px;
       transition: all 0.3s ease;
       width: calc(100% - 30px);
-      box-shadow: 0 2px 8px rgba(156, 39, 176, 0.2);
+      box-shadow: 0 2px 8px rgba(107, 33, 168, 0.2);
     }
     .btn-logout:hover {
-      background: linear-gradient(135deg, #8b1a9f 0%, #a02bb3 100%);
+      background: linear-gradient(135deg, #5b21b6 0%, #7c3aed 100%); /* Darker muted purple */
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(156, 39, 176, 0.3);
+      box-shadow: 0 4px 12px rgba(107, 33, 168, 0.3);
     }
     .main-content {
       flex: 1;
       margin-left: 280px;
       padding: 40px;
-      background: #f8f9fa;
+      background: #f5f5f5; /* Soft off-white background */
       transition: margin-left 0.3s ease;
     }
     .page-header {
@@ -133,12 +133,12 @@
       left: 0;
       right: 0;
       height: 5px;
-      background: linear-gradient(90deg, #ff7b29 0%, #9c27b0 100%);
+      background: linear-gradient(90deg, #1e3a8a 0%, #6b21a8 100%); /* Deep blue to muted purple */
       border-top-left-radius: 12px;
       border-top-right-radius: 12px;
     }
     .page-header h1 {
-      color: #2d2d2d;
+      color: #1f2937; /* Dark gray for contrast */
       font-weight: 800;
       font-size: 2.2rem;
       margin: 0;
@@ -150,7 +150,7 @@
       overflow: hidden;
     }
     .events-card-header {
-      background: #ff7b29;
+      background: #1e3a8a; /* Deep blue */
       color: white;
       padding: 20px 30px;
       border-bottom: none;
@@ -167,20 +167,20 @@
       margin: 0;
     }
     .events-table thead th {
-      background: #f8f9fa;
-      color: #333;
+      background: #f5f5f5; /* Soft off-white */
+      color: #1f2937; /* Dark gray for contrast */
       font-weight: 600;
       font-size: 0.9rem;
       padding: 15px 20px;
       border: none;
-      border-bottom: 2px solid #e5e7eb;
+      border-bottom: 2px solid #d1d5db; /* Light gray border */
       text-transform: uppercase;
     }
     .events-table tbody td {
       padding: 15px 20px;
       border: none;
-      border-bottom: 1px solid #f0f0f0;
-      color: #444;
+      border-bottom: 1px solid #e5e7eb; /* Light gray border */
+      color: #1f2937; /* Dark gray for contrast */
       font-weight: 500;
       vertical-align: middle;
       font-size: 0.95rem;
@@ -202,11 +202,11 @@
       font-size: 0.9rem;
     }
     .icon-btn.edit {
-      color: #007bff;
-      background: #e3f2fd;
+      color: #6b21a8; /* Muted purple */
+      background: #ede9fe;
     }
     .icon-btn.edit:hover {
-      background: #bfdbfe;
+      background: #ddd6fe;
     }
     .icon-btn.delete {
       color: #dc3545;
@@ -221,7 +221,7 @@
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
     }
     .modal-header {
-      background: #ff7b29;
+      background: #1e3a8a; /* Deep blue */
       color: white;
       border-bottom: none;
       border-radius: 12px 12px 0 0;
@@ -243,28 +243,28 @@
       padding: 30px;
     }
     .form-label {
-      color: #444;
+      color: #1f2937; /* Dark gray for contrast */
       font-weight: 600;
       font-size: 0.95rem;
       margin-bottom: 8px;
     }
     .form-control {
-      border: 1px solid #ddd;
+      border: 1px solid #d1d5db; /* Light gray border */
       border-radius: 8px;
       padding: 12px 15px;
       font-size: 0.95rem;
       transition: all 0.2s ease;
     }
     .form-control:focus {
-      border-color: #ff7b29;
-      box-shadow: 0 0 0 3px rgba(255, 123, 41, 0.1);
+      border-color: #6b21a8; /* Muted purple */
+      box-shadow: 0 0 0 3px rgba(107, 33, 168, 0.1);
     }
     .modal-footer {
-      border-top: 1px solid #f0f0f0;
+      border-top: 1px solid #e5e7eb; /* Light gray border */
       padding: 20px 25px;
     }
     .btn-primary {
-      background: #ff7b29;
+      background: #6b21a8; /* Muted purple */
       border: none;
       padding: 12px 25px;
       border-radius: 8px;
@@ -272,7 +272,7 @@
       transition: all 0.3s ease;
     }
     .btn-primary:hover {
-      background: #e6691f;
+      background: #5b21b6; /* Darker muted purple */
       transform: translateY(-2px);
     }
     .btn-secondary {
@@ -290,7 +290,7 @@
     }
     #previewImage {
       border-radius: 8px;
-      border: 1px solid #ddd;
+      border: 1px solid #d1d5db; /* Light gray border */
       max-width: 100%;
       width: 200px;
       margin-top: 10px;
@@ -298,7 +298,7 @@
     .loading-message {
       text-align: center;
       padding: 40px;
-      color: #666;
+      color: #1f2937; /* Dark gray for contrast */
       font-style: italic;
       font-size: 1rem;
     }
@@ -317,7 +317,7 @@
       background: none;
       border: none;
       font-size: 24px;
-      color: #2d2d2d;
+      color: #1f2937; /* Dark gray for contrast */
       cursor: pointer;
     }
     @media (max-width: 992px) {
@@ -531,7 +531,7 @@
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
   import { getDatabase, ref, onValue, remove, update } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
 
- const firebaseConfig = {
+  const firebaseConfig = {
     apiKey: "AIzaSyAcWaouAW_yfLE0NOKDmPR5UB0KJMn5IKk",
     authDomain: "talreja-foundation.firebaseapp.com",
     projectId: "talreja-foundation",

@@ -1,6 +1,6 @@
 <div class="sidebar">
   <div class="sidebar-header">
-    <img src="images/adminicon.png" alt="Admin">
+    <img src="images/adminicon.png" alt="Admin" style="width: 60px; height: 60px; border-radius: 50%; border: 2px solid #072140;">
     <h5>ADMIN</h5>
     <p>ADMINISTRATOR - TF</p>
   </div>
@@ -34,3 +34,106 @@
     <i class="fas fa-sign-out-alt"></i> LOGOUT
   </button>
 </div>
+
+<style>
+  .sidebar {
+    width: 250px;
+    height: 100vh;
+    background: #e6eef7; /* Light Blue tint */
+    padding: 20px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
+  }
+
+  .sidebar-header {
+    text-align: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #b3c9e0; /* Light Blue border */
+  }
+
+  .sidebar-header img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid #072140; /* Deeper Navy Blue */
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+  }
+
+  .sidebar-header img:hover {
+    transform: scale(1.1);
+  }
+
+  .sidebar-header h5 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #072140; /* Deeper Navy Blue */
+    margin-bottom: 5px;
+  }
+
+  .sidebar-header p {
+    font-size: 0.9rem;
+    color: #4a6e9e; /* Muted Blue-gray */
+    font-weight: 400;
+  }
+
+  .sidebar-nav {
+    padding: 20px 0;
+  }
+
+  .sidebar-nav a {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: #072140; /* Deeper Navy Blue */
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .sidebar-nav a i {
+    margin-right: 10px;
+    color: #072140; /* Deeper Navy Blue */
+  }
+
+  .sidebar-nav a:hover,
+  .sidebar-nav a.active {
+    background-color: #d1dfe9; /* Lighter Blue tint */
+    color: #072140; /* Deeper Navy Blue */
+    border-left: 4px solid #f5b041; /* Gold accent */
+  }
+
+  .btn-logout {
+    width: 90%;
+    padding: 10px;
+    background: linear-gradient(135deg, #072140 0%, #2dd4bf 100%); /* Blue to teal gradient */
+    color: #ffffff;
+    border: 2px solid #072140; /* Deeper Navy Blue */
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
+    transition: all 0.3s ease;
+  }
+
+  .btn-logout:hover {
+    background: linear-gradient(135deg, #05152e 0%, #26a69a 100%); /* Darker Blue to teal */
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(7, 33, 64, 0.2);
+  }
+
+  @media (max-width: 768px) {
+    .sidebar {
+      transform: translateX(-100%);
+    }
+
+    .sidebar.active {
+      transform: translateX(0);
+    }
+  }
+</style>

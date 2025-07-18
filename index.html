@@ -6,17 +6,16 @@
   <title>Talreja Foundation</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary-color: #1e40af; /* Deep blue for trust */
-      --accent-color: #f59e0b; /* Warm amber for energy */
-      --secondary-accent: #6b21a8; /* Muted purple for compassion */
-      --background-light: #f9fafb; /* Soft off-white for background */
+      --primary-color: #072140; /* Deeper Navy Blue */
+      --accent-color: #f5b041; /* Gold */
+      --background-light: #e6eef7; /* Light Blue tint */
       --background-white: #ffffff;
-      --text-dark: #111827; /* Rich black for readability */
-      --text-muted: #6b7280; /* Soft gray for secondary text */
-      --border-light: #e5e7eb;
+      --text-dark: #072140; /* Deeper Navy Blue */
+      --text-muted: #4a6e9e; /* Muted Blue-gray */
+      --border-light: #b3c9e0; /* Light Blue border */
       --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
       --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
@@ -25,7 +24,7 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Poppins', sans-serif;
       scroll-behavior: smooth;
     }
 
@@ -45,7 +44,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(rgba(245, 158, 11, 0.05), rgba(107, 33, 168, 0.05)), url('data:image/svg+xml,%3Csvg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%23f59e0b" fill-opacity="0.05"%3E%3Cpath d="M0 0h20v20H0z"/%3E%3Ccircle cx="10" cy="10" r="2"/%3E%3C/g%3E%3C/svg%3E');
+      background: linear-gradient(rgba(7, 33, 64, 0.1), rgba(245, 176, 65, 0.05)), url('data:image/svg+xml,%3Csvg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%23072140" fill-opacity="0.05"%3E%3Cpath d="M0 0h20v20H0z"/%3E%3Ccircle cx="10" cy="10" r="2"/%3E%3C/g%3E%3C/svg%3E');
       z-index: -1;
     }
 
@@ -77,7 +76,7 @@
       left: -50%;
       width: 200%;
       height: 200%;
-      background: radial-gradient(circle, rgba(245, 158, 11, 0.1) 10%, transparent 70%);
+      background: radial-gradient(circle, rgba(7, 33, 64, 0.15) 10%, transparent 70%);
       opacity: 0.3;
       z-index: -1;
       transform: rotate(45deg);
@@ -95,7 +94,6 @@
     }
 
     .hero-left h1 {
-      font-family: 'Poppins', sans-serif;
       font-size: 3.5rem;
       font-weight: 800;
       line-height: 1.1;
@@ -104,11 +102,11 @@
     }
 
     .hero-left .highlight-purple {
-      color: var(--secondary-accent);
+      color: var(--accent-color); /* Gold */
     }
 
     .hero-left .highlight-orange {
-      color: var(--accent-color);
+      color: var(--accent-color); /* Gold */
     }
 
     .hero-left p {
@@ -122,9 +120,8 @@
       padding: 14px 32px;
       background: var(--accent-color);
       color: var(--background-white);
-      border: none;
+      border: 2px solid var(--primary-color); /* Blue border */
       border-radius: 8px;
-      font-family: 'Poppins', sans-serif;
       font-size: 1.1rem;
       font-weight: 600;
       cursor: pointer;
@@ -133,7 +130,7 @@
     }
 
     .btn-donate:hover {
-      background: #d97706;
+      background: #f1c40f; /* Lighter Gold */
       transform: translateY(-2px);
       box-shadow: var(--shadow-md);
     }
@@ -143,6 +140,7 @@
       width: 450px;
       border-radius: 12px;
       box-shadow: var(--shadow-sm);
+      border: 4px solid var(--primary-color); /* Blue border */
       transition: transform 0.3s ease;
       animation: fadeInRight 0.8s ease-out;
       display: block;
@@ -162,6 +160,8 @@
       margin: 40px auto;
       padding: 60px 5%;
       text-align: center;
+      background: var(--primary-color); /* Blue background */
+      color: var(--background-white);
       animation: fadeIn 0.5s ease-out 0.2s both;
     }
 
@@ -188,7 +188,7 @@
     .impact-icon {
       width: 60px;
       height: 60px;
-      background: var(--accent-color);
+      background: var(--primary-color); /* Blue icon background */
       border-radius: 12px;
       display: flex;
       align-items: center;
@@ -204,7 +204,6 @@
     }
 
     .impact-text h3 {
-      font-family: 'Poppins', sans-serif;
       font-size: 2rem;
       font-weight: 700;
       margin-bottom: 8px;
@@ -225,12 +224,11 @@
       background: var(--background-white);
       border-radius: 12px;
       box-shadow: var(--shadow-sm);
-      border: 1px solid var(--border-light);
+      border: 2px solid var(--primary-color); /* Blue border */
       animation: fadeIn 0.5s ease-out 0.4s both;
     }
 
     .section-contribution h2 {
-      font-family: 'Poppins', sans-serif;
       font-size: 2.5rem;
       font-weight: 700;
       color: var(--primary-color);
@@ -244,7 +242,7 @@
       gap: 24px;
       padding: 20px 0;
       scrollbar-width: thin;
-      scrollbar-color: var(--accent-color) var(--background-light);
+      scrollbar-color: var(--primary-color) var(--background-light);
     }
 
     .cards::-webkit-scrollbar {
@@ -252,12 +250,13 @@
     }
 
     .cards::-webkit-scrollbar-thumb {
-      background: var(--accent-color);
+      background: var(--primary-color);
       border-radius: 4px;
     }
 
     .card {
       background: var(--background-white);
+      border: 2px solid var(--primary-color); /* Blue border */
       border-radius: 12px;
       box-shadow: var(--shadow-sm);
       min-width: 300px;
@@ -276,14 +275,13 @@
       width: 100%;
       height: 220px;
       object-fit: cover;
-      border-top-left-radius: 12px;
-      border-top-right-radius: 12px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
       display: block;
     }
 
     .card h4 {
       margin: 20px 15px 10px;
-      font-family: 'Poppins', sans-serif;
       font-size: 1.5rem;
       font-weight: 600;
       color: var(--primary-color);
@@ -302,9 +300,8 @@
       padding: 10px 20px;
       background: var(--accent-color);
       color: var(--background-white);
-      border: none;
+      border: 2px solid var(--primary-color); /* Blue border */
       border-radius: 8px;
-      font-family: 'Poppins', sans-serif;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -312,7 +309,7 @@
     }
 
     .card button:hover {
-      background: #d97706;
+      background: #f1c40f; /* Lighter Gold */
       transform: scale(1.05);
       box-shadow: var(--shadow-md);
     }
@@ -342,7 +339,7 @@
     }
 
     .nav-arrow:hover {
-      background: #1e3a8a;
+      background: #05152e; /* Darker Blue */
       transform: translateY(-50%) scale(1.1);
       box-shadow: var(--shadow-md);
     }
@@ -373,7 +370,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(7, 33, 64, 0.7); /* Deeper Blue overlay */
       backdrop-filter: blur(8px);
       z-index: 1000;
       display: none;
@@ -397,6 +394,7 @@
       width: 90%;
       max-width: 450px;
       background: var(--background-white);
+      border: 2px solid var(--primary-color); /* Blue border */
       overflow: hidden;
       animation: popIn 0.3s ease-out;
     }
@@ -418,7 +416,7 @@
 
     .modal-content.popup-content {
       border-radius: 12px;
-      border: none;
+      border: 2px solid var(--primary-color); /* Blue border */
       box-shadow: var(--shadow-md);
       background: var(--background-white);
     }
@@ -426,12 +424,13 @@
     .modal-header {
       border-bottom: 1px solid var(--border-light);
       padding: 20px;
+      background: var(--primary-color); /* Blue header */
+      color: var(--background-white);
     }
 
     .modal-title {
-      font-family: 'Poppins', sans-serif;
       font-size: 1.5rem;
-      color: var(--primary-color);
+      color: var(--background-white);
     }
 
     .modal-body {
@@ -601,7 +600,7 @@
       <button class="btn-donate" onclick="window.location.href='donation.html'">Donate Now</button>
     </div>
     <div class="hero-right">
-      <img src="https://images.unsplash.com/photo-1491438594566-1d56ed1b73a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=450&h=300&q=80" alt="Happy children" onerror="this.src='https://via.placeholder.com/450x300?text=Happy+Children';">
+      <img src="images/happychildren.jpg" alt="Happy children" onerror="this.src='https://via.placeholder.com/450x300?text=Happy+Children';">
     </div>
   </section>
 
