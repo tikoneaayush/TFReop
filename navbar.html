@@ -16,7 +16,7 @@
     }
 
     :root {
-      --primary-color: #072140; /* Deeper Navy Blue */
+      --primary-color: #2d3748; /* Deeper Navy Blue */
       --accent-color: #f5b041; /* Gold */
       --background-white: #ffffff;
       --background-off-white: #e6eef7; /* Light Blue tint */
@@ -25,7 +25,7 @@
     }
 
     .navbar {
-      background-color: var(--background-off-white); /* Light Blue tint */
+      background-color: white; /* Light Blue tint */
       padding: 15px 5%;
       box-shadow: var(--shadow-sm);
       position: sticky;
@@ -56,13 +56,17 @@
 
     .navbar-brand .logo-text {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       line-height: 1.2;
     }
 
     .navbar-brand .line1, .navbar-brand .line2 {
       display: flex;
       gap: 4px;
+    }
+
+    .line2 {
+     margin-left: 4px;
     }
 
     .highlight-primary {
@@ -181,7 +185,7 @@
         <div class="logo-text">
           <div class="line1">
             <span class="highlight-primary">Talreja</span>
-          </div>
+          </div> 
           <div class="line2">
             <span class="highlight-accent">Foundation</span>
           </div>
