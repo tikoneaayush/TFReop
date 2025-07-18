@@ -1,105 +1,145 @@
 <footer>
-  <div>
-    <h4>Contact Us</h4>
-    <p>Sindhu Global Development Foundation</p>
-    <p>Block C-5/Room No 10, Dev Samaj Road, Netaji, Ulhasnagar 421004, Maharashtra, India</p>
-    <p>Phone: <a href="tel:+917021668519">+91 7021668519 (Haresh Rupani)</a></p>
-    <p>Phone: <a href="tel:+919371262700">+91 9371262700 (CA Hari Dudani)</a></p>
-    <p>Email: <a href="mailto:sindhuglobal.df@gmail.com">sindhuglobal.df@gmail.com</a></p>
-    <p>CIN: U80301MH2015NPL262428 | PAN: AAVCS5664E</p>
-    <p>80G Reg.: AAVCS5664EF20201 | CSR Reg.: CSR00005292</p>
-  </div>
-  <div>
-    <h4>Follow Us</h4>
-    <p><a href="https://www.facebook.com/sindhuglobaldevelopmentfoundation" target="_blank">Facebook</a></p>
-    <p><a href="https://www.instagram.com/sindhuglobaldevelopmentfoundation" target="_blank">Instagram</a></p>
-    <p><a href="https://www.linkedin.com/company/sindhuglobaldevelopmentfoundation" target="_blank">LinkedIn</a></p>
+  <div class="footer-content">
+    <div class="footer-section contact-us">
+      <h4>Contact Us</h4>
+      <p><i class="fas fa-map-marker-alt"></i> Talreja Foundation</p>
+      <p>Block C-5/Room No 10, Dev Samaj Road, Netaji, Ulhasnagar 421004, Maharashtra, India</p>
+      <p><i class="fas fa-phone-alt"></i> <a href="tel:+917021668519">+91 7021668519 (Haresh Rupani)</a></p>
+      <p><i class="fas fa-phone-alt"></i> <a href="tel:+919371262700">+91 9371262700 (CA Hari Dudani)</a></p>
+      <p><i class="fas fa-envelope"></i> <a href="mailto:sindhuglobal.df@gmail.com">sindhuglobal.df@gmail.com</a></p>
+      <p><i class="fas fa-id-card"></i> CIN: U80301MH2015NPL262428 | PAN: AAVCS5664E</p>
+      <p><i class="fas fa-certificate"></i> 80G Reg.: AAVCS5664EF20201 | CSR Reg.: CSR00005292</p>
+    </div>
+    <div class="footer-section follow-us">
+      <h4>Follow Us</h4>
+      <p><i class="fab fa-facebook-f"></i> <a href="https://www.facebook.com/talrejafoundation" target="_blank">Facebook</a></p>
+      <p><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/talrejafoundation" target="_blank">Instagram</a></p>
+      <p><i class="fab fa-linkedin-in"></i> <a href="https://www.linkedin.com/company/talrejafoundation" target="_blank">LinkedIn</a></p>
+    </div>
   </div>
   <div class="footer-bottom">
-    © 2025 Sindhu Global Development Foundation. All rights reserved.
+    © 2025 Talreja Foundation. All rights reserved.
   </div>
 </footer>
 
 <style>
   :root {
-    --accent-color: #ff7b29;
-    --text-dark: #333;
-    --text-light: #ccc;
+    --primary-color: #1e40af; /* Deep blue for trust */
+    --accent-color: #f59e0b; /* Warm amber for energy */
+    --secondary-accent: #6b21a8; /* Muted purple for compassion */
+    --background-dark: #111827; /* Rich black for footer */
+    --background-light: #f9fafb; /* Soft off-white for page background */
+    --background-white: #ffffff;
+    --text-dark: #111827; /* Rich black for readability */
+    --text-muted: #6b7280; /* Soft gray for secondary text */
+    --text-light: #d1d5db; /* Light gray for footer text */
+    --border-light: #e5e7eb;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
   footer {
-    background: #222;
-    color: white;
-    padding: 40px 5%;
+    background: var(--background-dark);
+    color: var(--text-light);
+    padding: 60px 5% 40px;
+    font-family: 'Inter', sans-serif;
+    animation: fadeIn 0.5s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+  }
+
+  .footer-section {
+    padding: 20px;
+  }
+
+  .footer-section h4 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--background-white);
+    margin-bottom: 20px;
+  }
+
+  .footer-section p {
+    font-size: 0.95rem;
+    margin-bottom: 12px;
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 20px;
-    font-family: 'Segoe UI', sans-serif;
-    overflow-y: hidden;
+    align-items: center;
+    gap: 8px;
   }
 
-  footer h4 {
-    font-size: 1.25rem;
-    margin-bottom: 15px;
-    color: white;
-  }
-
-  footer p, footer a {
-    font-size: 0.9rem;
-    opacity: 0.9;
-    margin-bottom: 8px;
+  .footer-section a {
     color: var(--text-light);
     text-decoration: none;
     transition: color 0.3s ease;
   }
 
-  footer a:hover {
+  .footer-section a:hover {
+    color: var(--accent-color);
+  }
+
+  .footer-section i {
+    font-size: 1rem;
     color: var(--accent-color);
   }
 
   .footer-bottom {
     text-align: center;
-    width: 100%;
-    margin-top: 30px;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-light);
     font-size: 0.9rem;
-    opacity: 0.9;
     color: var(--text-light);
+  }
+
+  @media (max-width: 992px) {
+    .footer-content {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
   }
 
   @media (max-width: 768px) {
     footer {
-      padding: 30px 5%;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
+      padding: 40px 5% 30px;
     }
 
-    footer h4 {
-      font-size: 1.1rem;
+    .footer-section h4 {
+      font-size: 1.3rem;
     }
 
-    footer p, footer a {
-      font-size: 0.85rem;
+    .footer-section p {
+      font-size: 0.9rem;
     }
 
     .footer-bottom {
       font-size: 0.85rem;
-      margin-top: 20px;
+      margin-top: 30px;
     }
   }
 
   @media (max-width: 576px) {
     footer {
-      padding: 20px 5%;
+      padding: 30px 5% 20px;
     }
 
-    footer h4 {
-      font-size: 1rem;
+    .footer-section h4 {
+      font-size: 1.2rem;
     }
 
-    footer p, footer a {
-      font-size: 0.8rem;
+    .footer-section p {
+      font-size: 0.85rem;
     }
 
     .footer-bottom {

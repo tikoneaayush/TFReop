@@ -1,79 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sindhu Global Development Foundation</title>
-  
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome icons -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Talreja Foundation</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary-color: #9c27b0;
-      --accent-color: #ff7b29;
-      --background-light: #f8f9fa;
+      --primary-color: #1e40af; /* Deep blue for trust */
+      --accent-color: #f59e0b; /* Warm amber for energy */
+      --secondary-accent: #6b21a8; /* Muted purple for compassion */
+      --background-light: #f9fafb; /* Soft off-white for background */
       --background-white: #ffffff;
-      --text-dark: #333;
-      --text-muted: #666;
-      --border-light: #eee;
-      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
-      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+      --text-dark: #111827; /* Rich black for readability */
+      --text-muted: #6b7280; /* Soft gray for secondary text */
+      --border-light: #e5e7eb;
+      --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Inter', sans-serif;
+      scroll-behavior: smooth;
     }
 
     body {
-      background-color: var(--background-white);
+      background: var(--background-light);
       color: var(--text-dark);
       line-height: 1.6;
       overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(245, 158, 11, 0.05), rgba(107, 33, 168, 0.05)), url('data:image/svg+xml,%3Csvg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%23f59e0b" fill-opacity="0.05"%3E%3Cpath d="M0 0h20v20H0z"/%3E%3Ccircle cx="10" cy="10" r="2"/%3E%3C/g%3E%3C/svg%3E');
+      z-index: -1;
     }
 
     .hero {
+      max-width: 1400px;
+      margin: 80px auto 40px;
+      padding: 60px 5%;
+      background: var(--background-white);
+      border-radius: 12px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-light);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 80px 5%;
-      background: linear-gradient(135deg, var(--background-light) 0%, var(--background-white) 100%);
-      min-height: 70vh;
       position: relative;
       overflow: hidden;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     .hero::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle, rgba(255, 123, 41, 0.1) 0%, transparent 70%);
-      z-index: 0;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.1) 10%, transparent 70%);
+      opacity: 0.3;
+      z-index: -1;
+      transform: rotate(45deg);
     }
 
     .hero-left {
       max-width: 50%;
       z-index: 1;
+      animation: fadeInLeft 0.8s ease-out;
+    }
+
+    @keyframes fadeInLeft {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
     }
 
     .hero-left h1 {
+      font-family: 'Poppins', sans-serif;
       font-size: 3.5rem;
-      font-weight: 900;
+      font-weight: 800;
       line-height: 1.1;
       margin-bottom: 20px;
-      color: var(--text-dark);
+      color: var(--primary-color);
     }
 
     .hero-left .highlight-purple {
-      color: var(--primary-color);
+      color: var(--secondary-accent);
     }
 
     .hero-left .highlight-orange {
@@ -84,105 +115,125 @@
       font-size: 1.2rem;
       color: var(--text-muted);
       margin-bottom: 30px;
-      font-weight: 500;
+      font-weight: 400;
     }
 
     .btn-donate {
-      padding: 12px 30px;
-      background-color: var(--accent-color);
+      padding: 14px 32px;
+      background: var(--accent-color);
       color: var(--background-white);
       border: none;
       border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
       font-size: 1.1rem;
-      font-weight: 700;
+      font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(255, 123, 41, 0.3);
+      box-shadow: var(--shadow-sm);
     }
 
     .btn-donate:hover {
-      background-color: #e66a20;
+      background: #d97706;
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(255, 123, 41, 0.4);
+      box-shadow: var(--shadow-md);
     }
 
     .hero-right img {
       max-width: 100%;
-      width: 350px;
-      border-radius: 16px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      width: 450px;
+      border-radius: 12px;
+      box-shadow: var(--shadow-sm);
       transition: transform 0.3s ease;
+      animation: fadeInRight 0.8s ease-out;
+      display: block;
     }
 
     .hero-right img:hover {
-      transform: scale(1.05);
+      transform: scale(1.03);
+    }
+
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
     }
 
     .impact-section {
+      max-width: 1200px;
+      margin: 40px auto;
       padding: 60px 5%;
-      background: var(--background-white);
       text-align: center;
+      animation: fadeIn 0.5s ease-out 0.2s both;
     }
 
     .impact-stats {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      max-width: 1200px;
-      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
     }
 
     .impact-item {
-      background: var(--primary-color);
+      background: var(--background-white);
+      border: 1px solid var(--border-light);
       border-radius: 12px;
-      padding: 25px 15px;
-      width: 280px;
-      color: var(--background-white);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      padding: 30px 20px;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-sm);
     }
 
     .impact-item:hover {
       transform: translateY(-5px);
-      box-shadow: 0 8px 16px rgba(156, 39, 176, 0.3);
+      box-shadow: var(--shadow-md);
     }
 
     .impact-icon {
-      width: 50px;
-      height: 50px;
+      width: 60px;
+      height: 60px;
       background: var(--accent-color);
-      border-radius: 10px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
+      font-size: 24px;
       color: var(--background-white);
-      margin: 0 auto 15px;
+      margin: 0 auto 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .impact-item:hover .impact-icon {
+      transform: rotate(10deg);
     }
 
     .impact-text h3 {
-      font-size: 1.8rem;
-      font-weight: 800;
-      margin-bottom: 5px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--primary-color);
     }
 
     .impact-text p {
-      font-size: 0.95rem;
-      opacity: 0.9;
-      margin: 0;
-      font-weight: 500;
+      font-size: 1rem;
+      color: var(--text-muted);
+      font-weight: 400;
     }
 
     .section-contribution {
-      text-align: center;
+      max-width: 1200px;
+      margin: 40px auto;
       padding: 60px 5%;
-      background-color: var(--background-light);
+      text-align: center;
+      background: var(--background-white);
+      border-radius: 12px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-light);
+      animation: fadeIn 0.5s ease-out 0.4s both;
     }
 
     .section-contribution h2 {
-      font-size: 2.2rem;
-      font-weight: 800;
-      color: var(--text-dark);
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
       margin-bottom: 30px;
     }
 
@@ -190,122 +241,140 @@
       display: flex;
       overflow-x: auto;
       scroll-behavior: smooth;
-      gap: 20px;
-      padding: 15px 0;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
+      gap: 24px;
+      padding: 20px 0;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent-color) var(--background-light);
     }
 
     .cards::-webkit-scrollbar {
-      display: none;
+      height: 8px;
+    }
+
+    .cards::-webkit-scrollbar-thumb {
+      background: var(--accent-color);
+      border-radius: 4px;
     }
 
     .card {
       background: var(--background-white);
       border-radius: 12px;
       box-shadow: var(--shadow-sm);
-      min-width: 280px;
+      min-width: 300px;
       flex-shrink: 0;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
 
     .card:hover {
-      transform: translateY(-8px);
+      transform: translateY(-5px);
       box-shadow: var(--shadow-md);
     }
 
     .card img {
       width: 100%;
-      height: 200px;
+      height: 220px;
       object-fit: cover;
       border-top-left-radius: 12px;
       border-top-right-radius: 12px;
+      display: block;
     }
 
     .card h4 {
-      margin: 15px 10px 8px 10px;
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--text-dark);
+      margin: 20px 15px 10px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--primary-color);
     }
 
     .card .event-summary {
-      margin: 0 10px 10px 10px;
-      font-size: 0.85rem;
+      margin: 0 15px 15px;
+      font-size: 0.9rem;
       color: var(--text-muted);
-      font-weight: 500;
-      line-height: 1.4;
+      font-weight: 400;
+      line-height: 1.5;
     }
 
     .card button {
-      margin: 10px;
-      padding: 8px 15px;
-      background-color: var(--accent-color);
+      margin: 15px;
+      padding: 10px 20px;
+      background: var(--accent-color);
       color: var(--background-white);
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
+      box-shadow: var(--shadow-sm);
     }
 
     .card button:hover {
-      background-color: #e66a20;
+      background: #d97706;
+      transform: scale(1.05);
+      box-shadow: var(--shadow-md);
     }
 
     .cards-navigation {
       position: relative;
-      margin-top: 20px;
+      margin-top: 30px;
     }
 
     .nav-arrow {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: var(--accent-color);
+      background: var(--primary-color);
       color: var(--background-white);
       border: none;
       border-radius: 50%;
-      width: 40px;
-      height: 40px;
+      width: 48px;
+      height: 48px;
       cursor: pointer;
-      font-size: 18px;
+      font-size: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background-color 0.3s ease, transform 0.3s ease;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-sm);
     }
 
     .nav-arrow:hover {
-      background: #e66a20;
+      background: #1e3a8a;
       transform: translateY(-50%) scale(1.1);
+      box-shadow: var(--shadow-md);
     }
 
     .nav-arrow.left {
-      left: -20px;
+      left: -30px;
     }
 
     .nav-arrow.right {
-      right: -20px;
+      right: -30px;
     }
 
     .scroll-indicator {
       text-align: center;
-      margin-top: 15px;
+      margin-top: 20px;
       color: var(--text-muted);
-      font-size: 0.9rem;
-      font-weight: 500;
+      font-size: 0.95rem;
+      font-weight: 400;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
 
-    /* Iframe Popup Styles */
     #blur-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(5px);
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
       z-index: 1000;
       display: none;
       transition: opacity 0.3s ease;
@@ -323,14 +392,18 @@
       transform: translate(-50%, -50%);
       z-index: 1001;
       display: none;
-      
-      border-radius: 10px; /* Added for rounded corners */
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      border-radius: 12px;
+      box-shadow: var(--shadow-md);
       width: 90%;
-      max-width: 400px;
+      max-width: 450px;
       background: var(--background-white);
-      
-      overflow: hidden; /* Ensures iframe content respects rounded corners */
+      overflow: hidden;
+      animation: popIn 0.3s ease-out;
+    }
+
+    @keyframes popIn {
+      from { transform: translate(-50%, -50%) scale(0.9); opacity: 0; }
+      to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
     }
 
     #iframe-container.active {
@@ -339,122 +412,147 @@
 
     #iframe-container iframe {
       width: 100%;
-      height: 400px; /* Adjusted height to fit reduced padding */
+      height: 420px;
       border: none;
-      scrolling: no;
     }
 
-    /* Mobile Responsive Styles */
+    .modal-content.popup-content {
+      border-radius: 12px;
+      border: none;
+      box-shadow: var(--shadow-md);
+      background: var(--background-white);
+    }
+
+    .modal-header {
+      border-bottom: 1px solid var(--border-light);
+      padding: 20px;
+    }
+
+    .modal-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.5rem;
+      color: var(--primary-color);
+    }
+
+    .modal-body {
+      padding: 20px;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+    }
+
+    .modal-body p {
+      margin-bottom: 12px;
+    }
+
     @media (max-width: 992px) {
       .hero {
         flex-direction: column;
         text-align: center;
-        padding: 50px 5%;
-        min-height: auto;
+        padding: 40px 5%;
+        margin: 60px auto 30px;
       }
 
       .hero-left {
         max-width: 100%;
-        margin-bottom: 20px;
-        order: 2; /* Text and button appear below image */
+        margin-bottom: 30px;
+        order: 2;
       }
 
       .hero-right {
-        order: 1; /* Image appears first, below navbar */
-        margin-bottom: 20px;
+        order: 1;
+        margin-bottom: 30px;
       }
 
       .hero-right img {
         width: 100%;
-        max-width: 300px;
+        max-width: 320px;
       }
 
       .hero-left h1 {
-        font-size: 2.2rem;
+        font-size: 2.5rem;
       }
 
       .hero-left p {
-        font-size: 1rem;
-      }
-
-      .impact-stats {
-        gap: 15px;
-      }
-
-      .impact-item {
-        width: 100%;
-        max-width: 280px;
-      }
-
-      .nav-arrow {
-        width: 35px;
-        height: 35px;
-        font-size: 16px;
-      }
-
-      .nav-arrow.left {
-        left: -10px;
-      }
-
-      .nav-arrow.right {
-        right: -10px;
-      }
-    }
-
-    @media (max-width: 576px) {
-      .hero-left h1 {
-        font-size: 1.8rem;
-      }
-
-      .hero-left p {
-        font-size: 0.9rem;
-      }
-
-      .btn-donate {
-        padding: 10px 25px;
-        font-size: 0.9rem;
+        font-size: 1.1rem;
       }
 
       .impact-section {
         padding: 40px 5%;
       }
 
+      .nav-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+      }
+
+      .nav-arrow.left {
+        left: -15px;
+      }
+
+      .nav-arrow.right {
+        right: -15px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .hero {
+        padding: 30px 5%;
+      }
+
+      .hero-left h1 {
+        font-size: 2rem;
+      }
+
+      .hero-left p {
+        font-size: 0.95rem;
+      }
+
+      .btn-donate {
+        padding: 12px 28px;
+        font-size: 1rem;
+      }
+
+      .impact-section {
+        padding: 30px 5%;
+      }
+
       .impact-item {
-        padding: 20px 10px;
+        padding: 20px 12px;
       }
 
       .impact-icon {
-        width: 45px;
-        height: 45px;
+        width: 50px;
+        height: 50px;
         font-size: 20px;
       }
 
       .impact-text h3 {
-        font-size: 1.6rem;
-      }
-
-      .section-contribution {
-        padding: 40px 5%;
-      }
-
-      .section-contribution h2 {
         font-size: 1.8rem;
       }
 
+      .section-contribution {
+        padding: 30px 5%;
+      }
+
+      .section-contribution h2 {
+        font-size: 2rem;
+      }
+
       .card {
-        min-width: 240px;
+        min-width: 260px;
       }
 
       .card img {
-        height: 180px;
+        height: 200px;
       }
 
       .card h4 {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
       }
 
       .card .event-summary {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
       }
 
       .nav-arrow {
@@ -462,19 +560,27 @@
       }
 
       .cards {
-        padding: 15px 5px;
+        padding: 15px 8px;
       }
 
       .hero-right img {
-        max-width: 250px;
+        max-width: 280px;
       }
 
       #iframe-container {
-        max-width: 340px; /* Slightly smaller for mobile */
+        max-width: 360px;
       }
 
       #iframe-container iframe {
-        height: 360px; /* Adjusted for mobile */
+        height: 380px;
+      }
+
+      .modal-title {
+        font-size: 1.3rem;
+      }
+
+      .modal-body {
+        font-size: 0.9rem;
       }
     }
   </style>
@@ -490,13 +596,12 @@
 
   <section class="hero">
     <div class="hero-left">
-      <h1><span class="highlight-purple">Sindhu</span> <span class="highlight-orange">Global</span><br>
-        Development <span class="highlight-orange">Foundation</span></h1>
+      <h1><span class="highlight-purple">Talreja</span><span class="highlight-orange">Foundation</span></h1>
       <p>Together for Change, United for Impact.</p>
       <button class="btn-donate" onclick="window.location.href='donation.html'">Donate Now</button>
     </div>
     <div class="hero-right">
-      <img src="images/sgdf-logo.png" alt="Happy children">
+      <img src="https://images.unsplash.com/photo-1491438594566-1d56ed1b73a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=450&h=300&q=80" alt="Happy children" onerror="this.src='https://via.placeholder.com/450x300?text=Happy+Children';">
     </div>
   </section>
 
@@ -565,19 +670,18 @@
   <!-- Include Footer -->
   <div id="footer"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
     import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
 
     const firebaseConfig = {
-      apiKey: "AIzaSyDkLmo4Vf-1U8Vl_grn2waMigYCyMj1BaU",
-      authDomain: "formtestsgft.firebaseapp.com",
-      databaseURL: "https://formtestsgft-default-rtdb.firebaseio.com",
-      projectId: "formtestsgft",
-      storageBucket: "formtestsgft.appspot.com",
-      messagingSenderId: "688396867961",
-      appId: "1:688396867961:web:8cc2136b755be21f4f77a8"
+      apiKey: "AIzaSyAcWaouAW_yfLE0NOKDmPR5UB0KJMn5IKk",
+      authDomain: "talreja-foundation.firebaseapp.com",
+      projectId: "talreja-foundation",
+      storageBucket: "talreja-foundation.firebasestorage.app",
+      messagingSenderId: "214919769344",
+      appId: "1:214919769344:web:1d776bcb2b54890c96d7e5"
     };
 
     const app = initializeApp(firebaseConfig);
@@ -589,7 +693,6 @@
       .then(response => response.text())
       .then(data => {
         document.getElementById('navbar').innerHTML = data;
-        // Highlight the active nav link
         const currentPage = window.location.pathname.split('/').pop() || 'index.html';
         document.querySelectorAll('.nav-link').forEach(link => {
           link.classList.remove('active');
@@ -605,6 +708,49 @@
       .then(data => {
         document.getElementById('footer').innerHTML = data;
       });
+
+    // Counter persistence and increment
+    function initializeCounters() {
+      const baseValues = {
+        funds: 1000000,
+        people: 50000,
+        ngos: 100
+      };
+
+      // Retrieve or initialize counters in localStorage
+      let counters = JSON.parse(localStorage.getItem('impactCounters')) || {
+        funds: baseValues.funds,
+        people: baseValues.people,
+        ngos: baseValues.ngos
+      };
+
+      // Increment counters (e.g., +1% or small fixed amount)
+      counters.funds = Math.ceil(counters.funds * 1.01); // +1% for funds
+      counters.people = Math.ceil(counters.people * 1.01); // +1% for people
+      counters.ngos = Math.ceil(counters.ngos * 1.01); // +1% for NGOs
+
+      // Save updated counters
+      localStorage.setItem('impactCounters', JSON.stringify(counters));
+
+      // Update DOM with final values
+      const counterElements = document.querySelectorAll('.impact-number');
+      counterElements.forEach(counter => {
+        const targetKey = counter.getAttribute('data-target');
+        let value;
+        if (targetKey === '1000000') {
+          value = counters.funds;
+          counter.innerText = '₹' + value.toLocaleString('en-IN') + '+';
+        } else if (targetKey === '50000') {
+          value = counters.people;
+          counter.innerText = value.toLocaleString('en-IN') + '+';
+        } else if (targetKey === '100') {
+          value = counters.ngos;
+          counter.innerText = value.toLocaleString('en-IN') + '+';
+        }
+        // Update data-target for consistency
+        counter.setAttribute('data-target', value);
+      });
+    }
 
     function fetchInkindItems() {
       const inkindRef = ref(database, 'inkindItems');
@@ -820,50 +966,6 @@
       }
     }
 
-    function animateImpactCounters() {
-      const counters = document.querySelectorAll('.impact-number');
-      const speed = 200;
-
-      counters.forEach(counter => {
-        const target = +counter.getAttribute('data-target');
-        const increment = target / speed;
-
-        function updateCount() {
-          const current = +counter.innerText.replace(/[^0-9]/g, '');
-          if (current < target) {
-            counter.innerText = Math.ceil(current + increment).toLocaleString('en-IN');
-            setTimeout(updateCount, 20);
-          } else {
-            if (counter.getAttribute('data-target') === '1000000') {
-              counter.innerText = '₹' + target.toLocaleString('en-IN') + '+';
-            } else {
-              counter.innerText = target.toLocaleString('en-IN') + '+';
-            }
-          }
-        }
-
-        updateCount();
-      });
-    }
-
-    function initImpactAnimation() {
-      const impactSection = document.querySelector('.impact-section');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            animateImpactCounters();
-            observer.unobserve(entry.target);
-          }
-        });
-      }, {
-        threshold: 0.5
-      });
-
-      if (impactSection) {
-        observer.observe(impactSection);
-      }
-    }
-
     function handleLogout() {
       deleteCookie('isLoggedIn');
       deleteCookie('userEmail');
@@ -877,8 +979,8 @@
         window.location.href = 'userDash.html';
         return;
       }
+      initializeCounters();
       fetchInkindItems();
-      initImpactAnimation();
       updateUIForLoginState(isLoggedIn);
       const logoutBtn = document.getElementById('logoutBtn');
       if (logoutBtn) {
@@ -910,7 +1012,7 @@
             if (event.data === 'loginSuccess') {
               setCookie('isLoggedIn', 'true', 7);
               blurOverlay.classList.remove('active');
-              container.classList.remove('active');
+              container.classList.add('active');
               setTimeout(() => {
                 container.innerHTML = '';
                 window.location.href = 'userDash.html';

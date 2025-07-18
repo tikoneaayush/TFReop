@@ -3,51 +3,86 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Get in Touch - Sindhu Global Development Foundation</title>
-  
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome icons -->
+  <title>Get in Touch - Talreja Foundation</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary-color: #1e40af; /* Deep blue for trust */
+      --accent-color: #f59e0b; /* Warm amber for energy */
+      --secondary-accent: #6b21a8; /* Muted purple for compassion */
+      --background-light: #f9fafb; /* Soft off-white for clean background */
+      --background-white: #ffffff;
+      --text-dark: #111827; /* Rich black for readability */
+      --text-muted: #6b7280; /* Soft gray for secondary text */
+      --border-light: #e5e7eb;
+      --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Inter', sans-serif;
     }
 
     body {
-      background-color: #fff;
-      color: #333;
+      background: var(--background-light);
+      color: var(--text-dark);
       line-height: 1.6;
       overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(245, 158, 11, 0.05), rgba(107, 33, 168, 0.05)), url('data:image/svg+xml,%3Csvg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%23f59e0b" fill-opacity="0.05"%3E%3Cpath d="M0 0h20v20H0z"/%3E%3Ccircle cx="10" cy="10" r="2"/%3E%3C/g%3E%3C/svg%3E');
+      z-index: -1;
     }
 
     .contact-section {
       padding: 60px 5%;
-      background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
       min-height: calc(100vh - 200px);
-      max-width: 900px;
+      max-width: 1000px;
       margin: 0 auto;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     .contact-section h1 {
+      font-family: 'Poppins', sans-serif;
       font-size: 2.5rem;
-      font-weight: 800;
-      color: #333;
+      font-weight: 700;
+      color: var(--primary-color);
       margin-bottom: 30px;
       text-align: center;
     }
 
     .contact-content {
       padding: 30px;
-      background: #fff;
+      background: var(--background-white);
       border-radius: 12px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-light);
       display: flex;
       gap: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .contact-content:hover {
+      transform: translateY(-5px);
     }
 
     .contact-form {
@@ -57,28 +92,33 @@
     .contact-info {
       flex: 1;
       padding: 20px;
-      background: #f8f9fa;
+      background: var(--background-white);
       border-radius: 8px;
+      border: 1px solid var(--border-light);
     }
 
     .contact-info h5 {
-      color: #9c27b0;
-      font-weight: 700;
+      font-family: 'Poppins', sans-serif;
+      color: var(--primary-color);
+      font-weight: 600;
+      font-size: 1.3rem;
       margin-bottom: 15px;
     }
 
     .contact-info p {
-      font-size: 0.9rem;
-      color: #333;
+      font-size: 0.95rem;
+      color: var(--text-dark);
       margin-bottom: 8px;
     }
 
     .contact-info a {
-      color: #ff7b29;
+      color: var(--accent-color);
       text-decoration: none;
+      transition: color 0.3s ease;
     }
 
     .contact-info a:hover {
+      color: #d97706;
       text-decoration: underline;
     }
 
@@ -90,56 +130,71 @@
       width: 100%;
       height: 300px;
       border-radius: 8px;
-      border: 1px solid #ddd;
+      border: 1px solid var(--border-light);
     }
 
     .form-label {
-      color: #444;
-      font-weight: 600;
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-dark);
+      font-weight: 500;
       font-size: 0.95rem;
       margin-bottom: 8px;
     }
 
     .form-control {
-      border: 1px solid #ddd;
+      border: 1px solid var(--border-light);
       border-radius: 8px;
       padding: 12px 15px;
       font-size: 0.95rem;
-      transition: all 0.2s ease;
+      transition: border-color 0.3s ease;
+      background: var(--background-white);
     }
 
     .form-control:focus {
-      border-color: #ff7b29;
-      box-shadow: 0 0 0 3px rgba(255, 123, 41, 0.1);
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+      outline: none;
+    }
+
+    .form-control::placeholder {
+      color: var(--text-muted);
     }
 
     .btn-primary {
-      background: #ff7b29;
+      background: var(--accent-color);
       border: none;
       padding: 12px 25px;
       border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
       font-weight: 600;
+      font-size: 0.95rem;
       transition: all 0.3s ease;
+      box-shadow: var(--shadow-sm);
     }
 
     .btn-primary:hover {
-      background: #e6691f;
+      background: #d97706;
       transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
     }
 
     .btn-secondary {
-      background: #6c757d;
+      background: var(--text-muted);
       border: none;
-      color: white;
+      color: var(--background-white);
       padding: 12px 25px;
       border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
       font-weight: 600;
+      font-size: 0.95rem;
       transition: all 0.3s ease;
+      box-shadow: var(--shadow-sm);
     }
 
     .btn-secondary:hover {
-      background: #5c636a;
+      background: #4b5563;
       transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
     }
 
     @media (max-width: 992px) {
@@ -159,6 +214,24 @@
     @media (max-width: 768px) {
       .contact-section h1 {
         font-size: 2rem;
+      }
+
+      .contact-content {
+        padding: 20px;
+      }
+
+      .contact-info {
+        padding: 15px;
+      }
+
+      .form-control {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+      }
+
+      .btn-primary, .btn-secondary {
+        padding: 10px 20px;
+        font-size: 0.9rem;
       }
     }
   </style>
@@ -192,7 +265,7 @@
       </div>
       <div class="contact-info">
         <h5>Contact Us</h5>
-        <p>Sindhu Global Development Foundation</p>
+        <p>Talreja Foundation</p>
         <p>Block C-5/Room No 10, Dev Samaj Road, Netaji, Ulhasnagar 421004, Maharashtra, India</p>
         <p>Phone: <a href="tel:+917021668519">+91 7021668519 (Haresh Rupani)</a></p>
         <p>Phone: <a href="tel:+919371262700">+91 9371262700 (CA Hari Dudani)</a></p>
@@ -207,19 +280,18 @@
   <!-- Include Footer -->
   <div id="footer"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
     import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
 
     const firebaseConfig = {
-      apiKey: "AIzaSyDkLmo4Vf-1U8Vl_grn2waMigYCyMj1BaU",
-      authDomain: "formtestsgft.firebaseapp.com",
-      databaseURL: "https://formtestsgft-default-rtdb.firebaseio.com",
-      projectId: "formtestsgft",
-      storageBucket: "formtestsgft.appspot.com",
-      messagingSenderId: "688396867961",
-      appId: "1:688396867961:web:8cc2136b755be21f4f77a8"
+      apiKey: "AIzaSyAcWaouAW_yfLE0NOKDmPR5UB0KJMn5IKk",
+      authDomain: "talreja-foundation.firebaseapp.com",
+      projectId: "talreja-foundation",
+      storageBucket: "talreja-foundation.firebasestorage.app",
+      messagingSenderId: "214919769344",
+      appId: "1:214919769344:web:1d776bcb2b54890c96d7e5"
     };
 
     const app = initializeApp(firebaseConfig);
@@ -333,7 +405,7 @@
     // Ensure loadAuthIframe is defined
     window.loadAuthIframe = function() {
       const iframe = document.createElement('iframe');
-      iframe.src = 'authh.html';
+      iframe.src = 'athh.html';
       iframe.width = '100%';
       iframe.height = '600px';
       iframe.frameBorder = '0';

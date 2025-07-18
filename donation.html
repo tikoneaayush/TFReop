@@ -3,78 +3,167 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Donate - Sindhu Global Development Foundation</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>Donate - Talreja Foundation</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary-color: #9c27b0;
-      --accent-color: #ff7b29;
-      --text-dark: #333;
-      --background-white: #fff;
-      --border-light: #eee;
+      --primary-color: #1e40af; /* Deep blue for trust */
+      --accent-color: #f59e0b; /* Warm amber for energy */
+      --secondary-accent: #6b21a8; /* Muted purple for compassion */
+      --background-light: #f9fafb; /* Soft off-white for clean background */
+      --background-white: #ffffff;
+      --text-dark: #111827; /* Rich black for readability */
+      --text-muted: #6b7280; /* Soft gray for secondary text */
+      --border-light: #e5e7eb;
+      --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--background-light);
       color: var(--text-dark);
       line-height: 1.6;
-      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-      margin: 0;
-      padding: 0;
       overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
     }
 
-    .container {
-      max-width: 900px;
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(245, 158, 11, 0.05), rgba(107, 33, 168, 0.05)), url('data:image/svg+xml,%3Csvg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%23f59e0b" fill-opacity="0.05"%3E%3Cpath d="M0 0h20v20H0z"/%3E%3Ccircle cx="10" cy="10" r="2"/%3E%3C/g%3E%3C/svg%3E');
+      z-index: -1;
+    }
+
+    .donation-section {
+      max-width: 1200px;
       margin: 80px auto 40px auto;
+      padding: 0 5%;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .donate-hero {
+      text-align: center;
+      padding: 40px 20px;
       background: var(--background-white);
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-light);
+      position: relative;
       overflow: hidden;
-      padding: 30px;
+      margin-bottom: 30px;
+    }
+
+    .donate-hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.1) 10%, transparent 70%);
+      opacity: 0.3;
+      z-index: -1;
+      transform: rotate(45deg);
+    }
+
+    .donate-hero h2 {
+      font-family: 'Poppins', sans-serif;
+      color: var(--primary-color);
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .donate-hero p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto 20px auto;
     }
 
     .nav-tabs {
-      border-bottom: 2px solid var(--border-light);
-      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+      border: none;
+      margin-bottom: 30px;
     }
 
     .nav-tabs .nav-link {
       color: var(--text-dark);
+      font-family: 'Poppins', sans-serif;
       font-weight: 600;
-      font-size: 1.1rem;
-      padding: 10px 20px;
-      border: none;
-      border-bottom: 3px solid transparent;
+      font-size: 1.2rem;
+      padding: 12px 30px;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      margin: 0 10px;
+      background: var(--background-white);
       transition: all 0.3s ease;
+      box-shadow: var(--shadow-sm);
     }
 
     .nav-tabs .nav-link:hover {
       color: var(--accent-color);
-      border-bottom: 3px solid var(--accent-color);
+      border-color: var(--accent-color);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
     }
 
     .nav-tabs .nav-link.active {
-      color: var(--accent-color);
-      border-bottom: 3px solid var(--accent-color);
-      background: none;
+      color: var(--background-white);
+      background: var(--accent-color);
+      border-color: var(--accent-color);
+      box-shadow: var(--shadow-md);
     }
 
-    .tab-content {
-      padding: 20px 0;
+    .donation-content {
+      display: flex;
+      gap: 30px;
+      background: var(--background-white);
+      border-radius: 12px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-light);
+      padding: 30px;
     }
 
-    .donate-info h2 {
-      color: var(--accent-color);
-      font-size: 1.8rem;
-      font-weight: 700;
+    .donation-form {
+      flex: 1;
+    }
+
+    .donation-details {
+      flex: 1;
+      padding: 20px;
+      background: var(--background-white);
+      border-radius: 8px;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .donation-details h3 {
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-dark);
+      font-size: 1.4rem;
+      font-weight: 600;
       margin-bottom: 20px;
-    }
-
-    .donate-info p {
-      color: #555;
-      margin-bottom: 15px;
     }
 
     .form-group {
@@ -82,8 +171,9 @@
     }
 
     .form-label {
-      color: #444;
-      font-weight: 600;
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-dark);
+      font-weight: 500;
       font-size: 0.95rem;
       margin-bottom: 8px;
       display: block;
@@ -95,13 +185,18 @@
       border: 1px solid var(--border-light);
       border-radius: 8px;
       font-size: 0.95rem;
-      transition: all 0.2s ease;
+      transition: border-color 0.3s ease;
+      background: var(--background-white);
     }
 
     .form-control:focus, .form-select:focus {
       border-color: var(--accent-color);
-      box-shadow: 0 0 0 3px rgba(255, 123, 41, 0.1);
+      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
       outline: none;
+    }
+
+    .form-control::placeholder, .form-select::placeholder {
+      color: var(--text-muted);
     }
 
     .form-control.is-invalid {
@@ -122,104 +217,119 @@
 
     .form-select {
       appearance: none;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23333' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E") no-repeat right 12px center;
-    }
-
-    .donation-details {
-      background: var(--background-white);
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
-    }
-
-    .donation-details h3 {
-      color: var(--text-dark);
-      font-size: 1.4rem;
-      font-weight: 600;
-      margin-bottom: 20px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236b7280' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E") no-repeat right 12px center;
     }
 
     .btn-pay, .btn-submit {
       width: 100%;
-      padding: 15px;
-      color: #fff;
+      padding: 12px;
+      color: var(--background-white);
       border: none;
       border-radius: 8px;
-      font-size: 1.1rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
+      box-shadow: var(--shadow-sm);
     }
 
     .btn-pay {
-      background: #007bff;
+      background: var(--primary-color);
     }
 
     .btn-pay:hover {
-      background: #0056b3;
+      background: #1e3a8a;
       transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
     }
 
     .btn-submit {
-      background: #28a745;
+      background: var(--accent-color);
     }
 
     .btn-submit:hover {
-      background: #218838;
+      background: #d97706;
       transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
     }
 
     .payment-options {
       display: flex;
-      justify-content: space-between;
-      margin-top: 10px;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 15px;
     }
 
     .payment-options img {
-      height: 20px;
+      height: 24px;
+      transition: transform 0.3s ease;
     }
 
-    .terms {
-      color: #6c757d;
-      font-size: 0.85rem;
-      margin-top: 15px;
-      text-align: center;
+    .payment-options img:hover {
+      transform: scale(1.1);
     }
 
     .queries-section {
       text-align: center;
-      padding: 15px;
-      background: #f8f9fa;
-      border: 1px solid var(--border-light);
+      padding: 20px;
+      background: var(--background-white);
       border-radius: 8px;
-      margin: 20px 0;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+      margin: 30px auto;
+      max-width: 600px;
     }
 
     .queries-section h4 {
-      color: var(--accent-color);
-      font-size: 1.2rem;
-      margin-bottom: 10px;
+      font-family: 'Poppins', sans-serif;
+      color: var(--primary-color);
+      font-size: 1.3rem;
+      margin-bottom: 15px;
     }
 
     .queries-section p {
-      font-size: 0.9rem;
-      color: #555;
-      margin-bottom: 8px;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
 
     .queries-section a {
       color: var(--accent-color);
       text-decoration: none;
+      transition: color 0.3s ease;
     }
 
     .queries-section a:hover {
+      color: #d97706;
       text-decoration: underline;
+    }
+
+    .terms {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      text-align: center;
+      padding: 15px 0;
+      border-top: 1px solid var(--border-light);
+      margin-top: 20px;
     }
 
     .modal-content {
       border-radius: 12px;
       text-align: center;
       padding: 30px;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+      animation: scaleIn 0.3s ease-out;
+    }
+
+    @keyframes scaleIn {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
     }
 
     .modal-header {
@@ -228,8 +338,9 @@
     }
 
     .modal-title {
+      font-family: 'Poppins', sans-serif;
       font-size: 1.5rem;
-      color: #28a745;
+      color: var(--accent-color);
       font-weight: 700;
     }
 
@@ -239,28 +350,61 @@
       margin-bottom: 20px;
     }
 
-    #otherItemContainer {
+    .modal-footer .btn-primary {
+      background: var(--accent-color);
+    }
+
+    .modal-footer .btn-primary:hover {
+      background: #d97706;
+      transform: translateY(-2px);
+    }
+
+    #otherItemContainer, #otherItemContainerInKind {
       display: none;
       margin-top: 10px;
     }
 
-    @media (max-width: 768px) {
-      .container {
-        margin: 70px auto 30px auto;
-        padding: 20px;
+    @media (max-width: 992px) {
+      .donation-content {
+        flex-direction: column;
       }
 
       .donation-details {
         padding: 15px;
       }
+    }
 
-      .queries-section {
-        padding: 10px;
+    @media (max-width: 768px) {
+      .donation-section {
+        margin: 60px auto 30px auto;
+        padding: 0 3%;
+      }
+
+      .donate-hero h2 {
+        font-size: 2rem;
+      }
+
+      .donate-hero p {
+        font-size: 1rem;
       }
 
       .nav-tabs .nav-link {
         font-size: 1rem;
-        padding: 8px 15px;
+        padding: 10px 20px;
+      }
+
+      .form-control, .form-select {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+      }
+
+      .btn-pay, .btn-submit {
+        padding: 10px;
+        font-size: 0.9rem;
+      }
+
+      .queries-section {
+        padding: 15px;
       }
     }
   </style>
@@ -269,10 +413,10 @@
   <!-- Include Navbar -->
   <div id="navbar"></div>
 
-  <div class="container">
-    <div class="donate-info">
-      <h2>Make a Difference</h2>
-      <p>Support our mission to empower underprivileged!</p>
+  <section class="donation-section">
+    <div class="donate-hero">
+      <h2>Make a Difference Today</h2>
+      <p>Join us in empowering underprivileged communities with your generous support.</p>
     </div>
 
     <!-- Tab Navigation -->
@@ -288,132 +432,142 @@
     <!-- Tab Content -->
     <div class="tab-content" id="donationTabContent">
       <div class="tab-pane fade show active" id="money" role="tabpanel" aria-labelledby="money-tab">
-        <div class="donation-details">
-          <h3>Donation Details</h3>
-          <div id="standardFields">
-            <div class="form-group">
-              <label for="firstName" class="form-label">First Name *</label>
-              <input type="text" class="form-control" id="firstName" required>
-              <div class="invalid-feedback">First name must be at least 2 characters long and contain only letters.</div>
+        <div class="donation-content">
+          <div class="donation-form">
+            <div id="standardFields">
+              <div class="form-group">
+                <label for="firstName" class="form-label">First Name *</label>
+                <input type="text" class="form-control" id="firstName" required>
+                <div class="invalid-feedback">First name must be at least 2 characters long and contain only letters.</div>
+              </div>
+              <div class="form-group">
+                <label for="lastName" class="form-label">Last Name *</label>
+                <input type="text" class="form-control" id="lastName" required>
+                <div class="invalid-feedback">Last name must be at least 2 characters long and contain only letters.</div>
+              </div>
+              <div class="form-group">
+                <label for="email" class="form-label">Email *</label>
+                <input type="email" class="form-control" id="email" required>
+                <div class="invalid-feedback">Please enter a valid email address.</div>
+              </div>
+              <div class="form-group">
+                <label for="address" class="form-label">Address *</label>
+                <input type="text" class="form-control" id="address" required>
+                <div class="invalid-feedback">Address must be at least 5 characters long.</div>
+              </div>
+              <div class="form-group">
+                <label for="panNo" class="form-label">PAN No. *</label>
+                <input type="text" class="form-control" id="panNo" required>
+                <div class="invalid-feedback">Please enter a valid PAN number (e.g., ABCDE1234F).</div>
+              </div>
             </div>
-            <div class="form-group">
-              <label for="lastName" class="form-label">Last Name *</label>
-              <input type="text" class="form-control" id="lastName" required>
-              <div class="invalid-feedback">Last name must be at least 2 characters long and contain only letters.</div>
+            <div class="form-group" id="subOptionContainer">
+              <label for="subOption" class="form-label">Select Sub-Option *</label>
+              <select class="form-select" id="subOption" onchange="updateDetails()" required>
+                <option value="">-Select-</option>
+              </select>
+              <div class="invalid-feedback">Please select a sub-option.</div>
             </div>
-            <div class="form-group">
-              <label for="email" class="form-label">Email *</label>
-              <input type="email" class="form-control" id="email" required>
-              <div class="invalid-feedback">Please enter a valid email address.</div>
-            </div>
-            <div class="form-group">
-              <label for="address" class="form-label">Address *</label>
-              <input type="text" class="form-control" id="address" required>
-              <div class="invalid-feedback">Address must be at least 5 characters long.</div>
-            </div>
-            <div class="form-group">
-              <label for="panNo" class="form-label">PAN No. *</label>
-              <input type="text" class="form-control" id="panNo" required>
-              <div class="invalid-feedback">Please enter a valid PAN number (e.g., ABCDE1234F).</div>
+            <div class="form-group" id="otherItemContainer" style="display: none;">
+              <label for="otherItem" class="form-label">Other Item (Optional)</label>
+              <input type="text" class="form-control" id="otherItem" placeholder="Enter custom item if 'Other' is selected">
+              <div class="invalid-feedback">Custom item must be at least 3 characters long.</div>
             </div>
           </div>
-          <div class="form-group" id="subOptionContainer">
-            <label for="subOption" class="form-label">Select Sub-Option *</label>
-            <select class="form-select" id="subOption" onchange="updateDetails()" required>
-              <option value="">-Select-</option>
-            </select>
-            <div class="invalid-feedback">Please select a sub-option.</div>
-          </div>
-          <div class="form-group" id="otherItemContainer" style="display: none;">
-            <label for="otherItem" class="form-label">Other Item (Optional)</label>
-            <input type="text" class="form-control" id="otherItem" placeholder="Enter custom item if 'Other' is selected">
-            <div class="invalid-feedback">Custom item must be at least 3 characters long.</div>
-          </div>
-          <div id="dynamicFields"></div>
-          <div id="donationTypeDisplay" class="form-group" style="display: none;">
-            <label class="form-label">Donation Type:</label>
-            <p id="selectedType" style="margin: 0;"></p>
-          </div>
-          <button type="button" class="btn-pay" id="payButton" style="display: none;" onclick="handleOnlinePayment()">Pay Amount <span id="displayAmount">0.00</span></button>
-          <button type="button" class="btn-submit" id="submitButton" style="display: none;" onclick="handleSubmission()">Submit</button>
-          <div class="payment-options" style="display: none;" id="paymentOptions">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/UPI-Logo.svg/1200px-UPI-Logo.svg.png" alt="UPI">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/200px-Visa_Inc._logo.svg.png" alt="Visa">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/MasterCard_2019_logo.svg/1200px-MasterCard_ 2019_logo.svg.png" alt="MasterCard">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/RuPay_Logo.svg/1200px-RuPay_Logo.svg.png" alt="RuPay">
+          <div class="donation-details">
+            <h3>Donation Details</h3>
+            <div id="dynamicFields"></div>
+            <div id="donationTypeDisplay" class="form-group" style="display: none;">
+              <label class="form-label">Donation Type:</label>
+              <p id="selectedType" style="margin: 0;"></p>
+            </div>
+            <button type="button" class="btn-pay" id="payButton" style="display: none;" onclick="handleOnlinePayment()">Pay Amount <span id="displayAmount">0.00</span></button>
+            <button type="button" class="btn-submit" id="submitButton" style="display: none;" onclick="handleSubmission()">Submit</button>
+            <div class="payment-options" style="display: none;" id="paymentOptions">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/UPI-Logo.svg/1200px-UPI-Logo.svg.png" alt="UPI">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/200px-Visa_Inc._logo.svg.png" alt="Visa">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/MasterCard_2019_logo.svg/1200px-MasterCard_2019_logo.svg.png" alt="MasterCard">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/RuPay_Logo.svg/1200px-RuPay_Logo.svg.png" alt="RuPay">
+            </div>
           </div>
         </div>
       </div>
       <div class="tab-pane fade" id="inKind" role="tabpanel" aria-labelledby="inKind-tab">
-        <div class="donation-details">
-          <h3>Donation Details</h3>
-          <div id="standardFieldsInKind">
-            <div class="form-group">
-              <label for="firstName" class="form-label">First Name *</label>
-              <input type="text" class="form-control" id="firstName" required>
-              <div class="invalid-feedback">First name must be at least 2 characters long and contain only letters.</div>
+        <div class="donation-content">
+          <div class="donation-form">
+            <div id="standardFieldsInKind">
+              <div class="form-group">
+                <label for="firstName" class="form-label">First Name *</label>
+                <input type="text" class="form-control" id="firstName" required>
+                <div class="invalid-feedback">First name must be at least 2 characters long and contain only letters.</div>
+              </div>
+              <div class="form-group">
+                <label for="lastName" class="form-label">Last Name *</label>
+                <input type="text" class="form-control" id="lastName" required>
+                <div class="invalid-feedback">Last name must be at least 2 characters long and contain only letters.</div>
+              </div>
+              <div class="form-group">
+                <label for="email" class="form-label">Email *</label>
+                <input type="email" class="form-control" id="email" required>
+                <div class="invalid-feedback">Please enter a valid email address.</div>
+              </div>
+              <div class="form-group">
+                <label for="address" class="form-label">Address *</label>
+                <input type="text" class="form-control" id="address" required>
+                <div class="invalid-feedback">Address must be at least 5 characters long.</div>
+              </div>
+              <div class="form-group">
+                <label for="panNo" class="form-label">PAN No. *</label>
+                <input type="text" class="form-control" id="panNo" required>
+                <div class="invalid-feedback">Please enter a valid PAN number (e.g., ABCDE1234F).</div>
+              </div>
             </div>
-            <div class="form-group">
-              <label for="lastName" class="form-label">Last Name *</label>
-              <input type="text" class="form-control" id="lastName" required>
-              <div class="invalid-feedback">Last name must be at least 2 characters long and contain only letters.</div>
+            <div class="form-group" id="subOptionContainerInKind">
+              <label for="subOption" class="form-label">Select Sub-Option *</label>
+              <select class="form-select" id="subOption" onchange="updateDetails()" required>
+                <option value="">-Select-</option>
+              </select>
+              <div class="invalid-feedback">Please select a sub-option.</div>
             </div>
-            <div class="form-group">
-              <label for="email" class="form-label">Email *</label>
-              <input type="email" class="form-control" id="email" required>
-              <div class="invalid-feedback">Please enter a valid email address.</div>
-            </div>
-            <div class="form-group">
-              <label for="address" class="form-label">Address *</label>
-              <input type="text" class="form-control" id="address" required>
-              <div class="invalid-feedback">Address must be at least 5 characters long.</div>
-            </div>
-            <div class="form-group">
-              <label for="panNo" class="form-label">PAN No. *</label>
-              <input type="text" class="form-control" id="panNo" required>
-              <div class="invalid-feedback">Please enter a valid PAN number (e.g., ABCDE1234F).</div>
+            <div class="form-group" id="otherItemContainerInKind" style="display: none;">
+              <label for="otherItem" class="form-label">Other Item (Optional)</label>
+              <input type="text" class="form-control" id="otherItem" placeholder="Enter custom item if 'Other' is selected">
+              <div class="invalid-feedback">Custom item must be at least 3 characters long.</div>
             </div>
           </div>
-          <div class="form-group" id="subOptionContainerInKind">
-            <label for="subOption" class="form-label">Select Sub-Option *</label>
-            <select class="form-select" id="subOption" onchange="updateDetails()" required>
-              <option value="">-Select-</option>
-            </select>
-            <div class="invalid-feedback">Please select a sub-option.</div>
-          </div>
-          <div class="form-group" id="otherItemContainerInKind" style="display: none;">
-            <label for="otherItem" class="form-label">Other Item (Optional)</label>
-            <input type="text" class="form-control" id="otherItem" placeholder="Enter custom item if 'Other' is selected">
-            <div class="invalid-feedback">Custom item must be at least 3 characters long.</div>
-          </div>
-          <div id="dynamicFieldsInKind"></div>
-          <div id="donationTypeDisplayInKind" class="form-group" style="display: none;">
-            <label class="form-label">Donation Type:</label>
-            <p id="selectedType" style="margin: 0;"></p>
-          </div>
-          <button type="button" class="btn-pay" id="payButtonInKind" style="display: none;" onclick="handleOnlinePayment()">Pay Amount <span id="displayAmountInKind">0.00</span></button>
-          <button type="button" class="btn-submit" id="submitButtonInKind" style="display: none;" onclick="handleSubmission()">Submit</button>
-          <div class="payment-options" style="display: none;" id="paymentOptionsInKind">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/UPI-Logo.svg/1200px-UPI-Logo.svg.png" alt="UPI">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/200px-Visa_Inc._logo.svg.png" alt="Visa">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/MasterCard_2019_logo.svg/1200px-MasterCard_2019_logo.svg.png" alt="MasterCard">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/RuPay_Logo.svg/1200px-RuPay_Logo.svg.png" alt="RuPay">
+          <div class="donation-details">
+            <h3>Donation Details</h3>
+            <div id="dynamicFieldsInKind"></div>
+            <div id="donationTypeDisplayInKind" class="form-group" style="display: none;">
+              <label class="form-label">Donation Type:</label>
+              <p id="selectedType" style="margin: 0;"></p>
+            </div>
+            <button type="button" class="btn-pay" id="payButtonInKind" style="display: none;" onclick="handleOnlinePayment()">Pay Amount <span id="displayAmountInKind">0.00</span></button>
+            <button type="button" class="btn-submit" id="submitButtonInKind" style="display: none;" onclick="handleSubmission()">Submit</button>
+            <div class="payment-options" style="display: none;" id="paymentOptionsInKind">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/UPI-Logo.svg/1200px-UPI-Logo.svg.png" alt="UPI">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/200px-Visa_Inc._logo.svg.png" alt="Visa">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/MasterCard_2019_logo.svg/1200px-MasterCard_2019_logo.svg.png" alt="MasterCard">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/RuPay_Logo.svg/1200px-RuPay_Logo.svg.png" alt="RuPay">
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Queries and Terms Section -->
+    <!-- Queries Section -->
     <div class="queries-section">
-      <h4>In Case of Queries</h4>
-      <p>Phone: <a href="tel:+917021668519">+91 7021668519 (Haresh Rupani)</a></p>
-      <p>Phone: <a href="tel:+919371262700">+91 9371262700 (CA Hari Dudani)</a></p>
-      <p>Email: <a href="mailto:sindhuglobal.df@gmail.com">sindhuglobal.df@gmail.com</a></p>
+      <h4>Have Questions?</h4>
+      <p><i class="fas fa-phone-alt"></i> <a href="tel:+917021668519">+91 7021668519 (Haresh Rupani)</a></p>
+      <p><i class="fas fa-phone-alt"></i> <a href="tel:+919371262700">+91 9371262700 (CA Hari Dudani)</a></p>
+      <p><i class="fas fa-envelope"></i> <a href="mailto:sindhuglobal.df@gmail.com">sindhuglobal.df@gmail.com</a></p>
     </div>
+
+    <!-- Terms Section -->
     <div class="terms">
-      Terms & Conditions: You agree to share information entered on this page with Sindhu Global Development Foundation (owner of this page) and Razorpay, adhering to applicable laws.
+      Terms & Conditions: You agree to share information entered on this page with Talreja Foundation (owner of this page) and Razorpay, adhering to applicable laws.
     </div>
-  </div>
+  </section>
 
   <!-- Include Footer -->
   <div id="footer"></div>
@@ -427,9 +581,9 @@
         </div>
         <div class="modal-body">
           <p>Thank you for your generous donation. Your support makes a difference!</p>
-          <p><b>Access Your Donation Dashboard</b>
-To view your donation details, please log in using the same email ID you provided during your donation process.
-Use the following format as your username:
+          <p><b>Access Your Donation Dashboard</b><br>
+To view your donation details, please log in using the same email ID you provided during your donation process.<br>
+Use the following format as your username:<br>
 FIRSTNAME@FIRST4CHARACTERSOFPAN (all in UPPERCASE)
 </p>
         </div>
@@ -443,7 +597,7 @@ FIRSTNAME@FIRST4CHARACTERSOFPAN (all in UPPERCASE)
   <!-- Firebase SDK (Compatibility Mode) -->
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     // Declare variables at the top to avoid TDZ
     let selectedType = 'money';
@@ -452,13 +606,12 @@ FIRSTNAME@FIRST4CHARACTERSOFPAN (all in UPPERCASE)
 
     // Firebase Configuration
     const firebaseConfig = {
-      apiKey: "AIzaSyDkLmo4Vf-1U8Vl_grn2waMigYCyMj1BaU",
-      authDomain: "formtestsgft.firebaseapp.com",
-      databaseURL: "https://formtestsgft-default-rtdb.firebaseio.com",
-      projectId: "formtestsgft",
-      storageBucket: "formtestsgft.appspot.com",
-      messagingSenderId: "688396867961",
-      appId: "1:688396867961:web:099be0b0c1a3f81e4f77a8"
+      apiKey: "AIzaSyAcWaouAW_yfLE0NOKDmPR5UB0KJMn5IKk",
+      authDomain: "talreja-foundation.firebaseapp.com",
+      projectId: "talreja-foundation",
+      storageBucket: "talreja-foundation.firebasestorage.app",
+      messagingSenderId: "214919769344",
+      appId: "1:214919769344:web:1d776bcb2b54890c96d7e5"
     };
 
     // Initialize Firebase
@@ -540,7 +693,7 @@ FIRSTNAME@FIRST4CHARACTERSOFPAN (all in UPPERCASE)
     // Authentication iframe
     window.loadAuthIframe = function() {
       const iframe = document.createElement('iframe');
-      iframe.src = 'authh.html';
+      iframe.src = 'athh.html';
       iframe.width = '100%';
       iframe.height = '600px';
       iframe.frameBorder = '0';
