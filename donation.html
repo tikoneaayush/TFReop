@@ -3,166 +3,78 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Donate - Talreja Foundation</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>Donate - Sindhu Global Development Foundation</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"> <!-- Updated to Poppins for consistency -->
   <style>
     :root {
-      --primary-color: #072140; /* Blue */
-      --accent-color: #f5b041; /* Gold */
-      --background-light: #e6eef7; /* Light Blue tint derived from Blue */
-      --background-white: #ffffff;
-      --text-dark: #072140; /* Blue */
-      --text-muted: #4a6e9e; /* Muted Blue-gray derived from Blue */
-      --border-light: #b3c9e0; /* Light Blue border derived from Blue */
-      --shadow-sm: 0 2px 4px rgba(7, 33, 64, 0.05); /* Blue shadow */
-      --shadow-md: 0 4px 8px rgba(7, 33, 64, 0.1); /* Blue shadow */
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif; /* Updated to Poppins for consistency */
+      --primary-color: #9c27b0;
+      --accent-color: #ff7b29;
+      --text-dark: #333;
+      --background-white: #fff;
+      --border-light: #eee;
     }
 
     body {
-      background: var(--background-light); /* Light Blue tint */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: var(--text-dark);
       line-height: 1.6;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      margin: 0;
+      padding: 0;
       overflow-x: hidden;
-      position: relative;
-      min-height: 100vh;
     }
 
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(rgba(245, 176, 65, 0.05), rgba(7, 33, 64, 0.05)), url('data:image/svg+xml,%3Csvg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%23f5b041" fill-opacity="0.05"%3E%3Cpath d="M0 0h20v20H0z"/%3E%3Ccircle cx="10" cy="10" r="2"/%3E%3C/g%3E%3C/svg%3E');
-      z-index: -1;
-    }
-
-    .donation-section {
-      max-width: 1200px;
+    .container {
+      max-width: 900px;
       margin: 80px auto 40px auto;
-      padding: 0 5%;
-      animation: fadeIn 0.5s ease-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .donate-hero {
-      text-align: center;
-      padding: 40px 20px;
       background: var(--background-white);
-      border-radius: 12px;
-      box-shadow: var(--shadow-sm);
-      border: 1px solid var(--border-light);
-      position: relative;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       overflow: hidden;
-      margin-bottom: 30px;
-    }
-
-    .donate-hero::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(245, 176, 65, 0.1) 10%, transparent 70%);
-      opacity: 0.3;
-      z-index: -1;
-      transform: rotate(45deg);
-    }
-
-    .donate-hero h2 {
-      font-family: 'Poppins', sans-serif;
-      color: var(--primary-color); /* Blue */
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 15px;
-    }
-
-    .donate-hero p {
-      color: var(--text-muted); /* Muted Blue-gray */
-      font-size: 1.1rem;
-      max-width: 600px;
-      margin: 0 auto 20px auto;
-    }
-
-    .nav-tabs {
-      display: flex;
-      justify-content: center;
-      border: none;
-      margin-bottom: 30px;
-    }
-
-    .nav-tabs .nav-link {
-      color: var(--text-dark); /* Blue */
-      font-family: 'Poppins', sans-serif;
-      font-weight: 600;
-      font-size: 1.2rem;
-      padding: 12px 30px;
-      border: 1px solid var(--border-light);
-      border-radius: 8px;
-      margin: 0 10px;
-      background: var(--background-white);
-      transition: all 0.3s ease;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .nav-tabs .nav-link:hover {
-      color: var(--accent-color); /* Gold */
-      border-color: var(--accent-color);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-    }
-
-    .nav-tabs .nav-link.active {
-      color: var(--background-white);
-      background: var(--accent-color); /* Gold */
-      border-color: var(--accent-color);
-      box-shadow: var(--shadow-md);
-    }
-
-    .donation-content {
-      display: flex;
-      gap: 30px;
-      background: var(--background-white);
-      border-radius: 12px;
-      box-shadow: var(--shadow-sm);
-      border: 1px solid var(--border-light);
       padding: 30px;
     }
 
-    .donation-form {
-      flex: 1;
-    }
-
-    .donation-details {
-      flex: 1;
-      padding: 20px;
-      background: var(--background-white);
-      border-radius: 8px;
-      border: 1px solid var(--border-light);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .donation-details h3 {
-      font-family: 'Poppins', sans-serif;
-      color: var(--text-dark); /* Blue */
-      font-size: 1.4rem;
-      font-weight: 600;
+    .nav-tabs {
+      border-bottom: 2px solid var(--border-light);
       margin-bottom: 20px;
+    }
+
+    .nav-tabs .nav-link {
+      color: var(--text-dark);
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 10px 20px;
+      border: none;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .nav-tabs .nav-link:hover {
+      color: var(--accent-color);
+      border-bottom: 3px solid var(--accent-color);
+    }
+
+    .nav-tabs .nav-link.active {
+      color: var(--accent-color);
+      border-bottom: 3px solid var(--accent-color);
+      background: none;
+    }
+
+    .tab-content {
+      padding: 20px 0;
+    }
+
+    .donate-info h2 {
+      color: var(--accent-color);
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .donate-info p {
+      color: #555;
+      margin-bottom: 15px;
     }
 
     .form-group {
@@ -170,9 +82,8 @@
     }
 
     .form-label {
-      font-family: 'Poppins', sans-serif;
-      color: var(--text-dark); /* Blue */
-      font-weight: 500;
+      color: #444;
+      font-weight: 600;
       font-size: 0.95rem;
       margin-bottom: 8px;
       display: block;
@@ -184,18 +95,13 @@
       border: 1px solid var(--border-light);
       border-radius: 8px;
       font-size: 0.95rem;
-      transition: border-color 0.3s ease;
-      background: var(--background-white);
+      transition: all 0.2s ease;
     }
 
     .form-control:focus, .form-select:focus {
-      border-color: var(--accent-color); /* Gold */
-      box-shadow: 0 0 0 3px rgba(245, 176, 65, 0.1);
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 3px rgba(255, 123, 41, 0.1);
       outline: none;
-    }
-
-    .form-control::placeholder, .form-select::placeholder {
-      color: var(--text-muted); /* Muted Blue-gray */
     }
 
     .form-control.is-invalid {
@@ -216,119 +122,104 @@
 
     .form-select {
       appearance: none;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%234a6e9e' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E") no-repeat right 12px center;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23333' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E") no-repeat right 12px center;
+    }
+
+    .donation-details {
+      background: var(--background-white);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .donation-details h3 {
+      color: var(--text-dark);
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 20px;
     }
 
     .btn-pay, .btn-submit {
       width: 100%;
-      padding: 12px;
-      color: var(--background-white);
+      padding: 15px;
+      color: #fff;
       border: none;
       border-radius: 8px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: var(--shadow-sm);
     }
 
     .btn-pay {
-      background: var(--primary-color); /* Blue */
+      background: #007bff;
     }
 
     .btn-pay:hover {
-      background: #05152e; /* Darker Blue */
+      background: #0056b3;
       transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
     }
 
     .btn-submit {
-      background: var(--accent-color); /* Gold */
+      background: #28a745;
     }
 
     .btn-submit:hover {
-      background: #d99c33; /* Darker Gold */
+      background: #218838;
       transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
     }
 
     .payment-options {
       display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 15px;
+      justify-content: space-between;
+      margin-top: 10px;
     }
 
     .payment-options img {
-      height: 24px;
-      transition: transform 0.3s ease;
+      height: 20px;
     }
 
-    .payment-options img:hover {
-      transform: scale(1.1);
+    .terms {
+      color: #6c757d;
+      font-size: 0.85rem;
+      margin-top: 15px;
+      text-align: center;
     }
 
     .queries-section {
       text-align: center;
-      padding: 20px;
-      background: var(--background-white);
-      border-radius: 8px;
+      padding: 15px;
+      background: #f8f9fa;
       border: 1px solid var(--border-light);
-      box-shadow: var(--shadow-sm);
-      margin: 30px auto;
-      max-width: 600px;
+      border-radius: 8px;
+      margin: 20px 0;
     }
 
     .queries-section h4 {
-      font-family: 'Poppins', sans-serif;
-      color: var(--primary-color); /* Blue */
-      font-size: 1.3rem;
-      margin-bottom: 15px;
+      color: var(--accent-color);
+      font-size: 1.2rem;
+      margin-bottom: 10px;
     }
 
     .queries-section p {
-      font-size: 0.95rem;
-      color: var(--text-dark); /* Blue */
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 8px;
     }
 
     .queries-section a {
-      color: var(--accent-color); /* Gold */
+      color: var(--accent-color);
       text-decoration: none;
-      transition: color 0.3s ease;
     }
 
     .queries-section a:hover {
-      color: #d99c33; /* Darker Gold */
       text-decoration: underline;
-    }
-
-    .terms {
-      color: var(--text-muted); /* Muted Blue-gray */
-      font-size: 0.85rem;
-      text-align: center;
-      padding: 15px 0;
-      border-top: 1px solid var(--border-light);
-      margin-top: 20px;
     }
 
     .modal-content {
       border-radius: 12px;
       text-align: center;
       padding: 30px;
-      border: 1px solid var(--border-light);
-      box-shadow: var(--shadow-sm);
-      animation: scaleIn 0.3s ease-out;
-    }
-
-    @keyframes scaleIn {
-      from { transform: scale(0.95); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
     }
 
     .modal-header {
@@ -337,73 +228,55 @@
     }
 
     .modal-title {
-      font-family: 'Poppins', sans-serif;
       font-size: 1.5rem;
-      color: var(--accent-color); /* Gold */
+      color: #28a745;
       font-weight: 700;
     }
 
     .modal-body p {
       font-size: 1rem;
-      color: var(--text-dark); /* Blue */
+      color: var(--text-dark);
       margin-bottom: 20px;
     }
 
-    .modal-footer .btn-primary {
-      background: var(--accent-color); /* Gold */
-    }
-
-    .modal-footer .btn-primary:hover {
-      background: #d99c33; /* Darker Gold */
-      transform: translateY(-2px);
-    }
-
-    #otherItemContainer, #otherItemContainerInKind {
+    #otherItemContainer {
       display: none;
       margin-top: 10px;
     }
 
-    @media (max-width: 992px) {
-      .donation-content {
-        flex-direction: column;
+    .quantity-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .quantity-group input {
+      flex: 1;
+    }
+
+    .quantity-group span {
+      font-size: 0.95rem;
+      color: #444;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        margin: 70px auto 30px auto;
+        padding: 20px;
       }
 
       .donation-details {
         padding: 15px;
       }
-    }
 
-    @media (max-width: 768px) {
-      .donation-section {
-        margin: 60px auto 30px auto;
-        padding: 0 3%;
-      }
-
-      .donate-hero h2 {
-        font-size: 2rem;
-      }
-
-      .donate-hero p {
-        font-size: 1rem;
+      .queries-section {
+        padding: 10px;
       }
 
       .nav-tabs .nav-link {
         font-size: 1rem;
-        padding: 10px 20px;
-      }
-
-      .form-control, .form-select {
-        padding: 10px 12px;
-        font-size: 0.9rem;
-      }
-
-      .btn-pay, .btn-submit {
-        padding: 10px;
-        font-size: 0.9rem;
-      }
-
-      .queries-section {
-        padding: 15px;
+        padding: 8px 15px;
       }
     }
   </style>
@@ -412,10 +285,10 @@
   <!-- Include Navbar -->
   <div id="navbar"></div>
 
-  <section class="donation-section">
-    <div class="donate-hero">
-      <h2>Make a Difference Today</h2>
-      <p>Join us in empowering underprivileged communities with your generous support.</p>
+  <div class="container">
+    <div class="donate-info">
+      <h2>Make a Difference</h2>
+      <p>Support our mission to empower underprivileged!</p>
     </div>
 
     <!-- Tab Navigation -->
@@ -431,142 +304,127 @@
     <!-- Tab Content -->
     <div class="tab-content" id="donationTabContent">
       <div class="tab-pane fade show active" id="money" role="tabpanel" aria-labelledby="money-tab">
-        <div class="donation-content">
-          <div class="donation-form">
-            <div id="standardFields">
-              <div class="form-group">
-                <label for="firstName" class="form-label">First Name *</label>
-                <input type="text" class="form-control" id="firstName" required>
-                <div class="invalid-feedback">First name must be at least 2 characters long and contain only letters.</div>
-              </div>
-              <div class="form-group">
-                <label for="lastName" class="form-label">Last Name *</label>
-                <input type="text" class="form-control" id="lastName" required>
-                <div class="invalid-feedback">Last name must be at least 2 characters long and contain only letters.</div>
-              </div>
-              <div class="form-group">
-                <label for="email" class="form-label">Email *</label>
-                <input type="email" class="form-control" id="email" required>
-                <div class="invalid-feedback">Please enter a valid email address.</div>
-              </div>
-              <div class="form-group">
-                <label for="address" class="form-label">Address *</label>
-                <input type="text" class="form-control" id="address" required>
-                <div class="invalid-feedback">Address must be at least 5 characters long.</div>
-              </div>
-              <div class="form-group">
-                <label for="panNo" class="form-label">PAN No. *</label>
-                <input type="text" class="form-control" id="panNo" required>
-                <div class="invalid-feedback">Please enter a valid PAN number (e.g., ABCDE1234F).</div>
-              </div>
+        <div class="donation-details">
+          <h3>Donation Details</h3>
+          <div id="standardFields">
+            <div class="form-group">
+              <label for="firstName" class="form-label">First Name *</label>
+              <input type="text" class="form-control" id="firstName" required>
+              <div class="invalid-feedback">First name must be at least 2 characters long and contain only letters.</div>
             </div>
-            <div class="form-group" id="subOptionContainer">
-              <label for="subOption" class="form-label">Select Sub-Option *</label>
-              <select class="form-select" id="subOption" onchange="updateDetails()" required>
-                <option value="">-Select-</option>
-              </select>
-              <div class="invalid-feedback">Please select a sub-option.</div>
+            <div class="form-group">
+              <label for="lastName" class="form-label">Last Name *</label>
+              <input type="text" class="form-control" id="lastName" required>
+              <div class="invalid-feedback">Last name must be at least 2 characters long and contain only letters.</div>
             </div>
-            <div class="form-group" id="otherItemContainer" style="display: none;">
-              <label for="otherItem" class="form-label">Other Item (Optional)</label>
-              <input type="text" class="form-control" id="otherItem" placeholder="Enter custom item if 'Other' is selected">
-              <div class="invalid-feedback">Custom item must be at least 3 characters long.</div>
+            <div class="form-group">
+              <label for="email" class="form-label">Email *</label>
+              <input type="email" class="form-control" id="email" required>
+              <div class="invalid-feedback">Please enter a valid email address.</div>
+            </div>
+            <div class="form-group">
+              <label for="address" class="form-label">Address *</label>
+              <input type="text" class="form-control" id="address" required>
+              <div class="invalid-feedback">Address must be at least 5 characters long.</div>
+            </div>
+            <div class="form-group">
+              <label for="panNo" class="form-label">PAN No. *</label>
+              <input type="text" class="form-control" id="panNo" required>
+              <div class="invalid-feedback">Please enter a valid PAN number (e.g., ABCDE1234F).</div>
             </div>
           </div>
-          <div class="donation-details">
-            <h3>Donation Details</h3>
-            <div id="dynamicFields"></div>
-            <div id="donationTypeDisplay" class="form-group" style="display: none;">
-              <label class="form-label">Donation Type:</label>
-              <p id="selectedType" style="margin: 0;"></p>
-            </div>
-            <button type="button" class="btn-pay" id="payButton" style="display: none;" onclick="handleOnlinePayment()">Pay Amount <span id="displayAmount">0.00</span></button>
-            <button type="button" class="btn-submit" id="submitButton" style="display: none;" onclick="handleSubmission()">Submit</button>
-            <div class="payment-options" style="display: none;" id="paymentOptions">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/UPI-Logo.svg/1200px-UPI-Logo.svg.png" alt="UPI">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/200px-Visa_Inc._logo.svg.png" alt="Visa">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/MasterCard_2019_logo.svg/1200px-MasterCard_2019_logo.svg.png" alt="MasterCard">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/RuPay_Logo.svg/1200px-RuPay_Logo.svg.png" alt="RuPay">
-            </div>
+          <div class="form-group" id="subOptionContainer">
+            <label for="subOption" class="form-label">Select Sub-Option *</label>
+            <select class="form-select" id="subOption" onchange="updateDetails()" required>
+              <option value="">-Select-</option>
+            </select>
+            <div class="invalid-feedback">Please select a sub-option.</div>
+          </div>
+          <div class="form-group" id="otherItemContainer" style="display: none;">
+            <label for="otherItem" class="form-label">Other Item (Optional)</label>
+            <input type="text" class="form-control" id="otherItem" placeholder="Enter custom item if 'Other' is selected">
+            <div class="invalid-feedback">Custom item must be at least 3 characters long.</div>
+          </div>
+          <div id="dynamicFields"></div>
+          <div id="donationTypeDisplay" class="form-group" style="display: none;">
+            <label class="form-label">Donation Type:</label>
+            <p id="selectedType" style="margin: 0;"></p>
+          </div>
+          <button type="button" class="btn-pay" id="payButton" style="display: none;" onclick="handleOnlinePayment()">Pay Amount <span id="displayAmount">0.00</span></button>
+          <button type="button" class="btn-submit" id="submitButton" style="display: none;" onclick="handleSubmission()">Submit</button>
+          <div class="payment-options" style="display: none;" id="paymentOptions">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/UPI-Logo.svg/1200px-UPI-Logo.svg.png" alt="UPI">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/200px-Visa_Inc._logo.svg.png" alt="Visa">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/MasterCard_2019_logo.svg/1200px-MasterCard_2019_logo.svg.png" alt="MasterCard">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/RuPay_Logo.svg/1200px-RuPay_Logo.svg.png" alt="RuPay">
           </div>
         </div>
       </div>
       <div class="tab-pane fade" id="inKind" role="tabpanel" aria-labelledby="inKind-tab">
-        <div class="donation-content">
-          <div class="donation-form">
-            <div id="standardFieldsInKind">
-              <div class="form-group">
-                <label for="firstName" class="form-label">First Name *</label>
-                <input type="text" class="form-control" id="firstName" required>
-                <div class="invalid-feedback">First name must be at least 2 characters long and contain only letters.</div>
-              </div>
-              <div class="form-group">
-                <label for="lastName" class="form-label">Last Name *</label>
-                <input type="text" class="form-control" id="lastName" required>
-                <div class="invalid-feedback">Last name must be at least 2 characters long and contain only letters.</div>
-              </div>
-              <div class="form-group">
-                <label for="email" class="form-label">Email *</label>
-                <input type="email" class="form-control" id="email" required>
-                <div class="invalid-feedback">Please enter a valid email address.</div>
-              </div>
-              <div class="form-group">
-                <label for="address" class="form-label">Address *</label>
-                <input type="text" class="form-control" id="address" required>
-                <div class="invalid-feedback">Address must be at least 5 characters long.</div>
-              </div>
-              <div class="form-group">
-                <label for="panNo" class="form-label">PAN No. *</label>
-                <input type="text" class="form-control" id="panNo" required>
-                <div class="invalid-feedback">Please enter a valid PAN number (e.g., ABCDE1234F).</div>
-              </div>
+        <div class="donation-details">
+          <h3>Donation Details</h3>
+          <div id="standardFieldsInKind">
+            <div class="form-group">
+              <label for="firstName" class="form-label">First Name *</label>
+              <input type="text" class="form-control" id="firstName" required>
+              <div class="invalid-feedback">First name must be at least 2 characters long and contain only letters.</div>
             </div>
-            <div class="form-group" id="subOptionContainerInKind">
-              <label for="subOption" class="form-label">Select Sub-Option *</label>
-              <select class="form-select" id="subOption" onchange="updateDetails()" required>
-                <option value="">-Select-</option>
-              </select>
-              <div class="invalid-feedback">Please select a sub-option.</div>
+            <div class="form-group">
+              <label for="lastName" class="form-label">Last Name *</label>
+              <input type="text" class="form-control" id="lastName" required>
+              <div class="invalid-feedback">Last name must be at least 2 characters long and contain only letters.</div>
             </div>
-            <div class="form-group" id="otherItemContainerInKind" style="display: none;">
-              <label for="otherItem" class="form-label">Other Item (Optional)</label>
-              <input type="text" class="form-control" id="otherItem" placeholder="Enter custom item if 'Other' is selected">
-              <div class="invalid-feedback">Custom item must be at least 3 characters long.</div>
+            <div class="form-group">
+              <label for="email" class="form-label">Email *</label>
+              <input type="email" class="form-control" id="email" required>
+              <div class="invalid-feedback">Please enter a valid email address.</div>
+            </div>
+            <div class="form-group">
+              <label for="address" class="form-label">Address *</label>
+              <input type="text" class="form-control" id="address" required>
+              <div class="invalid-feedback">Address must be at least 5 characters long.</div>
+            </div>
+            <div class="form-group">
+              <label for="panNo" class="form-label">PAN No. *</label>
+              <input type="text" class="form-control" id="panNo" required>
+              <div class="invalid-feedback">Please enter a valid PAN number (e.g., ABCDE1234F).</div>
             </div>
           </div>
-          <div class="donation-details">
-            <h3>Donation Details</h3>
-            <div id="dynamicFieldsInKind"></div>
-            <div id="donationTypeDisplayInKind" class="form-group" style="display: none;">
-              <label class="form-label">Donation Type:</label>
-              <p id="selectedType" style="margin: 0;"></p>
-            </div>
-            <button type="button" class="btn-pay" id="payButtonInKind" style="display: none;" onclick="handleOnlinePayment()">Pay Amount <span id="displayAmountInKind">0.00</span></button>
-            <button type="button" class="btn-submit" id="submitButtonInKind" style="display: none;" onclick="handleSubmission()">Submit</button>
-            <div class="payment-options" style="display: none;" id="paymentOptionsInKind">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/UPI-Logo.svg/1200px-UPI-Logo.svg.png" alt="UPI">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/200px-Visa_Inc._logo.svg.png" alt="Visa">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/MasterCard_2019_logo.svg/1200px-MasterCard_2019_logo.svg.png" alt="MasterCard">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/RuPay_Logo.svg/1200px-RuPay_Logo.svg.png" alt="RuPay">
-            </div>
+          <div class="form-group" id="subOptionContainerInKind">
+            <label for="subOption" class="form-label">Select Sub-Option *</label>
+            <select class="form-select" id="subOption" onchange="updateDetails()" required>
+              <option value="">-Select-</option>
+            </select>
+            <div class="invalid-feedback">Please select a sub-option.</div>
+          </div>
+          <div id="dynamicFieldsInKind"></div>
+          <div id="donationTypeDisplayInKind" class="form-group" style="display: none;">
+            <label class="form-label">Donation Type:</label>
+            <p id="selectedType" style="margin: 0;"></p>
+          </div>
+          <button type="button" class="btn-pay" id="payButtonInKind" style="display: none;" onclick="handleOnlinePayment()">Pay Amount <span id="displayAmountInKind">0.00</span></button>
+          <button type="button" class="btn-submit" id="submitButtonInKind" style="display: none;" onclick="handleSubmission()">Submit</button>
+          <div class="payment-options" style="display: none;" id="paymentOptionsInKind">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/UPI-Logo.svg/1200px-UPI-Logo.svg.png" alt="UPI">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/200px-Visa_Inc._logo.svg.png" alt="Visa">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/MasterCard_2019_logo.svg/1200px-MasterCard_2019_logo.svg.png" alt="MasterCard">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/RuPay_Logo.svg/1200px-RuPay_Logo.svg.png" alt="RuPay">
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Queries Section -->
+    <!-- Queries and Terms Section -->
     <div class="queries-section">
-      <h4>Have Questions?</h4>
-      <p><i class="fas fa-phone-alt"></i> <a href="tel:+917021668519">+91 7021668519 (Haresh Rupani)</a></p>
-      <p><i class="fas fa-phone-alt"></i> <a href="tel:+919371262700">+91 9371262700 (CA Hari Dudani)</a></p>
-      <p><i class="fas fa-envelope"></i> <a href="mailto:sindhuglobal.df@gmail.com">sindhuglobal.df@gmail.com</a></p>
+      <h4>In Case of Queries</h4>
+      <p>Phone: <a href="tel:+917021668519">+91 7021668519 (Haresh Rupani)</a></p>
+      <p>Phone: <a href="tel:+919371262700">+91 9371262700 (CA Hari Dudani)</a></p>
+      <p>Email: <a href="mailto:sindhuglobal.df@gmail.com">sindhuglobal.df@gmail.com</a></p>
     </div>
-
-    <!-- Terms Section -->
     <div class="terms">
-      Terms & Conditions: You agree to share information entered on this page with Talreja Foundation (owner of this page) and Razorpay, adhering to applicable laws.
+      Terms & Conditions: You agree to share information entered on this page with Sindhu Global Development Foundation (owner of this page) and Razorpay, adhering to applicable laws.
     </div>
-  </section>
+  </div>
 
   <!-- Include Footer -->
   <div id="footer"></div>
@@ -580,9 +438,9 @@
         </div>
         <div class="modal-body">
           <p>Thank you for your generous donation. Your support makes a difference!</p>
-          <p><b>Access Your Donation Dashboard</b><br>
-To view your donation details, please log in using the same email ID you provided during your donation process.<br>
-Use the following format as your username:<br>
+          <p><b>Access Your Donation Dashboard</b>
+To view your donation details, please log in using the same email ID you provided during your donation process.
+Use the following format as your password:
 FIRSTNAME@FIRST4CHARACTERSOFPAN (all in UPPERCASE)
 </p>
         </div>
@@ -596,7 +454,7 @@ FIRSTNAME@FIRST4CHARACTERSOFPAN (all in UPPERCASE)
   <!-- Firebase SDK (Compatibility Mode) -->
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     // Declare variables at the top to avoid TDZ
     let selectedType = 'money';
@@ -692,7 +550,7 @@ FIRSTNAME@FIRST4CHARACTERSOFPAN (all in UPPERCASE)
     // Authentication iframe
     window.loadAuthIframe = function() {
       const iframe = document.createElement('iframe');
-      iframe.src = 'athh.html';
+      iframe.src = 'authh.html';
       iframe.width = '100%';
       iframe.height = '600px';
       iframe.frameBorder = '0';
@@ -748,9 +606,10 @@ FIRSTNAME@FIRST4CHARACTERSOFPAN (all in UPPERCASE)
       const address = activeTab.querySelector('#address');
       const panNo = activeTab.querySelector('#panNo');
       const subOption = activeTab.querySelector('#subOption');
-      const otherItem = activeTab.querySelector('#otherItem');
       const donationAmount = activeTab.querySelector('#donationAmount');
       const itemDetails = activeTab.querySelector('#itemDetails');
+      const itemQuantity = activeTab.querySelector('#itemQuantity');
+      const chequeNumber = activeTab.querySelector('#chequeNumber');
       const submissionType = activeTab.querySelector('#submissionType');
       const submissionDate = activeTab.querySelector('#submissionDate');
 
@@ -762,18 +621,16 @@ FIRSTNAME@FIRST4CHARACTERSOFPAN (all in UPPERCASE)
       isValid &= validateField(panNo, value => /^[A-Z]{5}[0-9]{4}[A-Z]$/.test(value), 'Please enter a valid PAN number (e.g., ABCDE1234F).');
 
       // Sub-option
-      if (activeTab.querySelector('#subOptionContainer').style.display !== 'none') {
+      if (activeTab.querySelector('#subOptionContainer')?.style.display !== 'none' || activeTab.querySelector('#subOptionContainerInKind')?.style.display !== 'none') {
         isValid &= validateField(subOption, value => value !== '', 'Please select a sub-option.');
-      }
-
-      // Other item (optional, but validated if provided)
-      if (otherItem && activeTab.querySelector('#otherItemContainer').style.display !== 'none' && otherItem.value.trim()) {
-        isValid &= validateField(otherItem, value => value.length >= 3, 'Custom item must be at least 3 characters long.');
       }
 
       // Dynamic fields
       if (selectedType === 'money' && donationAmount) {
         isValid &= validateField(donationAmount, value => value >= 100 && !isNaN(value), 'Donation amount must be at least ₹100.');
+        if (selectedSubOption === 'cheque' && chequeNumber) {
+          isValid &= validateField(chequeNumber, value => /^[0-9]{6}$/.test(value), 'Cheque number must be exactly 6 digits.');
+        }
         if (selectedSubOption !== 'online') {
           if (submissionType) {
             isValid &= validateField(submissionType, value => value !== '', 'Please select a submission type.');
@@ -786,6 +643,9 @@ FIRSTNAME@FIRST4CHARACTERSOFPAN (all in UPPERCASE)
         }
       } else if (selectedType === 'inKind' && itemDetails) {
         isValid &= validateField(itemDetails, value => value.length >= 5, 'Item details must be at least 5 characters long.');
+        if (itemQuantity) {
+          isValid &= validateField(itemQuantity, value => value >= 1 && !isNaN(value), 'Quantity must be at least 1 unit.');
+        }
         if (submissionType) {
           isValid &= validateField(submissionType, value => value !== '', 'Please select a submission type.');
         }
@@ -801,49 +661,73 @@ FIRSTNAME@FIRST4CHARACTERSOFPAN (all in UPPERCASE)
 
     function setDonationType(type) {
       selectedType = type;
-      const subOptionSelect = document.querySelector(`#${type} #subOption`);
-      const subOptionContainer = document.querySelector(`#${type} #subOptionContainer`);
-      const donationTypeDisplay = document.querySelector(`#${type} #donationTypeDisplay`);
-      const selectedTypeElement = document.querySelector(`#${type} #selectedType`);
+      console.log(`Setting donation type: ${type}`);
+      
+      // Determine which tab-specific elements to target
+      const tabId = type === 'money' ? 'money' : 'inKind';
+      const subOptionSelect = document.querySelector(`#${tabId} #subOption`);
+      const subOptionContainer = document.querySelector(`#${tabId} #subOptionContainer${type === 'inKind' ? 'InKind' : ''}`);
+      const donationTypeDisplay = document.querySelector(`#${tabId} #donationTypeDisplay${type === 'inKind' ? 'InKind' : ''}`);
+      const selectedTypeElement = document.querySelector(`#${tabId} #selectedType`);
+      const dynamicFields = document.querySelector(`#${tabId} #dynamicFields${type === 'inKind' ? 'InKind' : ''}`);
+      const payButton = document.querySelector(`#${tabId} #payButton${type === 'inKind' ? 'InKind' : ''}`);
+      const submitButton = document.querySelector(`#${tabId} #submitButton${type === 'inKind' ? 'InKind' : ''}`);
+      const paymentOptions = document.querySelector(`#${tabId} #paymentOptions${type === 'inKind' ? 'InKind' : ''}`);
 
-      subOptionSelect.innerHTML = '<option value="">-Select-</option>';
-      donationTypeDisplay.style.display = 'none';
-      document.querySelector(`#${type} #dynamicFields`).innerHTML = '';
-      document.querySelector(`#${type} #payButton`).style.display = 'none';
-      document.querySelector(`#${type} #submitButton`).style.display = 'none';
-      document.querySelector(`#${type} #paymentOptions`).style.display = 'none';
+      // Reset fields
+      if (subOptionSelect) subOptionSelect.innerHTML = '<option value="">-Select-</option>';
+      if (donationTypeDisplay) donationTypeDisplay.style.display = 'none';
+      if (dynamicFields) dynamicFields.innerHTML = '';
+      if (payButton) payButton.style.display = 'none';
+      if (submitButton) submitButton.style.display = 'none';
+      if (paymentOptions) paymentOptions.style.display = 'none';
       isOnlineProcessed = false;
-      document.querySelector(`#${type} #otherItemContainer`).style.display = 'none';
 
-      subOptionContainer.style.display = 'block';
-      selectedTypeElement.textContent = type.charAt(0).toUpperCase() + type.slice(1).replace(/([A-Z])/g, ' $1');
-      donationTypeDisplay.style.display = 'block';
-      if (type === 'money') {
-        const options = ['cash', 'cheque', 'online'];
-        options.forEach(option => {
-          const optionText = option.charAt(0).toUpperCase() + option.slice(1).replace(/([A-Z])/g, ' $1');
-          subOptionSelect.innerHTML += `<option value="${option}">${optionText}</option>`;
-        });
-      } else if (type === 'inKind') {
-        db.ref('inkindItems').once('value', (snapshot) => {
-          subOptionSelect.innerHTML = '<option value="">-Select-</option>';
-          snapshot.forEach(childSnapshot => {
-            const item = childSnapshot.val();
-            const optionText = item.charAt(0).toUpperCase() + item.slice(1).replace(/([A-Z])/g, ' $1');
-            subOptionSelect.innerHTML += `<option value="${item}">${optionText}</option>`;
+      // Set up sub-option container and donation type display
+      if (subOptionContainer) {
+        subOptionContainer.style.display = 'block';
+        console.log(`Sub-option container for ${type} set to visible`);
+      } else {
+        console.error(`Sub-option container for ${type} not found`);
+      }
+      
+      if (selectedTypeElement && donationTypeDisplay) {
+        selectedTypeElement.textContent = type.charAt(0).toUpperCase() + type.slice(1).replace(/([A-Z])/g, ' $1');
+        donationTypeDisplay.style.display = 'block';
+        console.log(`Donation type display for ${type} set to: ${selectedTypeElement.textContent}`);
+      } else {
+        console.error(`Donation type display or selected type element for ${type} not found`);
+      }
+
+      // Populate sub-options
+      if (subOptionSelect) {
+        if (type === 'money') {
+          const options = ['cash', 'cheque', 'online'];
+          options.forEach(option => {
+            const optionText = option.charAt(0).toUpperCase() + option.slice(1).replace(/([A-Z])/g, ' $1');
+            subOptionSelect.innerHTML += `<option value="${option}">${optionText}</option>`;
           });
-          subOptionSelect.innerHTML += '<option value="other">Other</option>';
-        }).catch(error => console.error('Error fetching in-kind items:', error));
+          console.log(`Populated money sub-options: ${options}`);
+        } else if (type === 'inKind') {
+          const options = ['grocery', 'stationary', 'clothes', 'toiletaries', 'blankets', 'shoes'];
+          options.forEach(option => {
+            const optionText = option.charAt(0).toUpperCase() + option.slice(1).replace(/([A-Z])/g, ' $1');
+            subOptionSelect.innerHTML += `<option value="${option}">${optionText}</option>`;
+          });
+          console.log(`Populated in-kind sub-options: ${options}`);
+        }
+      } else {
+        console.error(`Sub-option select for ${type} not found`);
       }
     }
 
     function updateDetails() {
       const activeTab = document.querySelector('.tab-pane.active').id;
       const subOption = document.querySelector(`#${activeTab} #subOption`).value;
-      const dynamicFields = document.querySelector(`#${activeTab} #dynamicFields`);
-      const payButton = document.querySelector(`#${activeTab} #payButton`);
-      const submitButton = document.querySelector(`#${activeTab} #submitButton`);
-      const paymentOptions = document.querySelector(`#${activeTab} #paymentOptions`);
+      const dynamicFields = document.querySelector(`#${activeTab} #dynamicFields${activeTab === 'inKind' ? 'InKind' : ''}`);
+      const payButton = document.querySelector(`#${activeTab} #payButton${activeTab === 'inKind' ? 'InKind' : ''}`);
+      const submitButton = document.querySelector(`#${activeTab} #submitButton${activeTab === 'inKind' ? 'InKind' : ''}`);
+      const paymentOptions = document.querySelector(`#${activeTab} #paymentOptions${activeTab === 'inKind' ? 'InKind' : ''}`);
 
       dynamicFields.innerHTML = '';
       payButton.style.display = 'none';
@@ -861,6 +745,15 @@ FIRSTNAME@FIRST4CHARACTERSOFPAN (all in UPPERCASE)
               <div class="invalid-feedback">Donation amount must be at least ₹100.</div>
             </div>
           `;
+          if (subOption === 'cheque') {
+            dynamicFields.innerHTML += `
+              <div class="form-group">
+                <label for="chequeNumber" class="form-label">Cheque Number *</label>
+                <input type="text" class="form-control" id="chequeNumber" required>
+                <div class="invalid-feedback">Cheque number must be exactly 6 digits.</div>
+              </div>
+            `;
+          }
           if (subOption === 'online') {
             payButton.style.display = 'block';
             paymentOptions.style.display = 'flex';
@@ -892,6 +785,12 @@ FIRSTNAME@FIRST4CHARACTERSOFPAN (all in UPPERCASE)
               <input type="text" class="form-control" id="itemDetails" placeholder="Describe the items" required>
               <div class="invalid-feedback">Item details must be at least 5 characters long.</div>
             </div>
+            <div class="form-group quantity-group">
+              <label for="itemQuantity" class="form-label">Quantity *</label>
+              <input type="number" class="form-control" id="itemQuantity" min="1" required>
+              <span>Units</span>
+              <div class="invalid-feedback">Quantity must be at least 1 unit.</div>
+            </div>
             <div class="form-group">
               <label for="submissionType" class="form-label">Submission Type *</label>
               <select class="form-select" id="submissionType" onchange="toggleSubmissionDate()" required>
@@ -910,14 +809,6 @@ FIRSTNAME@FIRST4CHARACTERSOFPAN (all in UPPERCASE)
           submitButton.style.display = 'block';
         }
       }
-
-      // Toggle other item field for inKind tab
-      if (selectedType === 'inKind' && subOption === 'other') {
-        document.querySelector(`#${activeTab} #otherItemContainer`).style.display = 'block';
-      } else {
-        document.querySelector(`#${activeTab} #otherItemContainer`).style.display = 'none';
-        document.querySelector(`#${activeTab} #otherItem`).value = '';
-      }
     }
 
     function toggleSubmissionDate() {
@@ -935,7 +826,7 @@ FIRSTNAME@FIRST4CHARACTERSOFPAN (all in UPPERCASE)
     function updatePayButtonText() {
       const activeTab = document.querySelector('.tab-pane.active').id;
       const amount = document.querySelector(`#${activeTab} #donationAmount`).value || 0;
-      const payButton = document.querySelector(`#${activeTab} #payButton`);
+      const payButton = document.querySelector(`#${activeTab} #payButton${activeTab === 'inKind' ? 'InKind' : ''}`);
       payButton.textContent = `Pay ₹${amount}.00`;
     }
 
@@ -952,8 +843,8 @@ FIRSTNAME@FIRST4CHARACTERSOFPAN (all in UPPERCASE)
       }
       alert('Payment processing via gateway');
       isOnlineProcessed = true;
-      document.querySelector(`#${activeTab} #payButton`).style.display = 'none';
-      document.querySelector(`#${activeTab} #submitButton`).style.display = 'block';
+      document.querySelector(`#${activeTab} #payButton${activeTab === 'inKind' ? 'InKind' : ''}`).style.display = 'none';
+      document.querySelector(`#${activeTab} #submitButton${activeTab === 'inKind' ? 'InKind' : ''}`).style.display = 'block';
     }
 
     function handleSubmission() {
@@ -969,15 +860,23 @@ FIRSTNAME@FIRST4CHARACTERSOFPAN (all in UPPERCASE)
       const address = document.querySelector(`#${activeTab} #address`).value.trim();
       const panNo = document.querySelector(`#${activeTab} #panNo`).value.trim();
       let amountOrItem = '';
+      let itemQuantity = '';
+      let chequeNumber = '';
       let submissionType = '';
       let submissionDate = '';
-      let otherItem = document.querySelector(`#${activeTab} #otherItem`)?.value.trim();
 
       if (selectedType === 'money') {
         amountOrItem = document.querySelector(`#${activeTab} #donationAmount`).value.trim();
         if (!amountOrItem || amountOrItem < 100) {
           alert('Please enter a valid donation amount of at least ₹100.');
           return;
+        }
+        if (selectedSubOption === 'cheque') {
+          chequeNumber = document.querySelector(`#${activeTab} #chequeNumber`)?.value.trim();
+          if (!chequeNumber || !/^[0-9]{6}$/.test(chequeNumber)) {
+            alert('Please enter a valid 6-digit cheque number.');
+            return;
+          }
         }
         if (selectedSubOption !== 'online' || isOnlineProcessed) {
           submissionType = document.querySelector(`#${activeTab} #submissionType`)?.value;
@@ -992,12 +891,13 @@ FIRSTNAME@FIRST4CHARACTERSOFPAN (all in UPPERCASE)
               return;
             }
           }
-          alert(`Thank you ${firstName}! Your ${selectedSubOption} donation of ₹${amountOrItem} shall be ${submissionType === 'ngo' ? 'submitted by you to NGO' : 'collected'} on ${submissionDate || 'a communicated date and time'}.`);
+          alert(`Thank you ${firstName}! Your ${selectedSubOption} donation of ₹${amountOrItem}${chequeNumber ? ' (Cheque No: ' + chequeNumber + ')' : ''} shall be ${submissionType === 'ngo' ? 'submitted by you to NGO' : 'collected'} on ${submissionDate || 'a communicated date and time'}.`);
         }
       } else if (selectedType === 'inKind') {
         amountOrItem = document.querySelector(`#${activeTab} #itemDetails`)?.value.trim();
+        itemQuantity = document.querySelector(`#${activeTab} #itemQuantity`)?.value.trim();
         submissionType = document.querySelector(`#${activeTab} #submissionType`)?.value;
-        if (!amountOrItem || !submissionType) {
+        if (!amountOrItem || !submissionType || !itemQuantity || itemQuantity < 1) {
           alert('Please fill in all required fields for in-kind donation.');
           return;
         }
@@ -1008,19 +908,14 @@ FIRSTNAME@FIRST4CHARACTERSOFPAN (all in UPPERCASE)
             return;
           }
         }
-        if (selectedSubOption === 'other' && otherItem && otherItem.length < 3) {
-          alert('Custom item must be at least 3 characters long if provided.');
-          return;
-        }
-        amountOrItem = otherItem ? `${amountOrItem} (${otherItem})` : amountOrItem;
-        alert(`Thank you ${firstName}! Your in-kind donation of ${amountOrItem} will be ${submissionType === 'ngo' ? 'submitted to NGO' : 'collected'} on ${submissionDate}.`);
+        alert(`Thank you ${firstName}! Your in-kind donation of ${amountOrItem} (${itemQuantity} units) will be ${submissionType === 'ngo' ? 'submitted to NGO' : 'collected'} on ${submissionDate}.`);
       }
 
       // Save to Firebase Realtime Database
       try {
         const sanitizedEmail = email.replace(/\./g, '_');
         const donationRef = db.ref(`donations/${sanitizedEmail}`).push();
-        donationRef.set({
+        const donationData = {
           firstName,
           lastName,
           email,
@@ -1032,7 +927,14 @@ FIRSTNAME@FIRST4CHARACTERSOFPAN (all in UPPERCASE)
           submissionType: submissionType || 'online',
           submissionDate: submissionDate ? new Date(submissionDate).getTime() : null,
           timestamp: firebase.database.ServerValue.TIMESTAMP
-        }).then(() => {
+        };
+        if (selectedType === 'inKind') {
+          donationData.itemQuantity = itemQuantity;
+        }
+        if (selectedSubOption === 'cheque') {
+          donationData.chequeNumber = chequeNumber;
+        }
+        donationRef.set(donationData).then(() => {
           // Generate and store credentials in userCreds node
           const password = `${firstName.toUpperCase()}@${panNo.slice(0, 4).toUpperCase()}`;
           return db.ref(`userCreds/${sanitizedEmail}`).set({
@@ -1046,18 +948,6 @@ FIRSTNAME@FIRST4CHARACTERSOFPAN (all in UPPERCASE)
             throw new Error('Error saving credentials');
           });
         }).then(() => {
-          if (selectedType === 'inKind' && selectedSubOption === 'other' && otherItem) {
-            return db.ref('otherItems').push({
-              item: otherItem,
-              donationId: donationRef.key,
-              pendingApproval: true,
-              timestamp: firebase.database.ServerValue.TIMESTAMP
-            }).catch(error => {
-              console.error('Error saving other item:', error);
-              throw new Error('Error saving other item');
-            });
-          }
-        }).then(() => {
           // Show the thank you modal
           const modal = new bootstrap.Modal(document.getElementById('thankYouModal'));
           modal.show();
@@ -1070,9 +960,8 @@ FIRSTNAME@FIRST4CHARACTERSOFPAN (all in UPPERCASE)
               input.value = '';
               input.classList.remove('is-invalid');
             });
-            document.querySelector(`#${activeTab} #displayAmount`).textContent = '0.00';
+            document.querySelector(`#${activeTab} #displayAmount${activeTab === 'inKind' ? 'InKind' : ''}`).textContent = '0.00';
             document.querySelector(`#${activeTab} #subOption`).value = '';
-            document.querySelector(`#${activeTab} #otherItemContainer`).style.display = 'none';
             document.querySelector(`#${activeTab} #submissionDateContainer`).style.display = 'none';
             setDonationType(selectedType);
             this.removeEventListener('hidden.bs.modal', handler);
@@ -1094,7 +983,7 @@ FIRSTNAME@FIRST4CHARACTERSOFPAN (all in UPPERCASE)
       // Add real-time validation listeners
       const tabs = ['money', 'inKind'];
       tabs.forEach(tab => {
-        const fields = ['firstName', 'lastName', 'email', 'address', 'panNo', 'subOption'];
+        const fields = ['firstName', 'lastName', 'email', 'address', 'panNo', 'subOption', 'itemQuantity', 'chequeNumber'];
         fields.forEach(id => {
           const field = document.querySelector(`#${tab} #${id}`);
           if (field) {
@@ -1108,8 +997,11 @@ FIRSTNAME@FIRST4CHARACTERSOFPAN (all in UPPERCASE)
         });
       });
 
-      // Initialize the default tab
-      setDonationType('money');
+      // Initialize both tabs to ensure sub-options are populated
+      setDonationType('money'); // Set default tab
+      setDonationType('inKind'); // Ensure inKind tab is initialized
+      // Revert to money tab as default
+      document.querySelector('#money-tab').click();
     };
 
     function getValidationFn(id) {
@@ -1120,6 +1012,8 @@ FIRSTNAME@FIRST4CHARACTERSOFPAN (all in UPPERCASE)
         case 'address': return value => value.length >= 5;
         case 'panNo': return value => /^[A-Z]{5}[0-9]{4}[A-Z]$/.test(value);
         case 'subOption': return value => value !== '';
+        case 'itemQuantity': return value => value >= 1 && !isNaN(value);
+        case 'chequeNumber': return value => /^[0-9]{6}$/.test(value);
         default: return () => true;
       }
     }
@@ -1132,6 +1026,8 @@ FIRSTNAME@FIRST4CHARACTERSOFPAN (all in UPPERCASE)
         case 'address': return 'Address must be at least 5 characters long.';
         case 'panNo': return 'Please enter a valid PAN number (e.g., ABCDE1234F).';
         case 'subOption': return 'Please select a sub-option.';
+        case 'itemQuantity': return 'Quantity must be at least 1 unit.';
+        case 'chequeNumber': return 'Cheque number must be exactly 6 digits.';
         default: return '';
       }
     }
@@ -1142,3 +1038,5 @@ FIRSTNAME@FIRST4CHARACTERSOFPAN (all in UPPERCASE)
       }
     });
   </script>
+</body>
+</html>

@@ -3,29 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Manage Donations - TF</title>
+  <title>Manage Donations - SGFT</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Inter', sans-serif;
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    :root {
-      --primary-color: #072140; /* Blue */
-      --accent-color: #f5b041; /* Gold */
-      --background-light: #e6eef7; /* Light Blue tint derived from Blue */
-      --background-white: #ffffff;
-      --text-dark: #072140; /* Blue */
-      --border-light: #b3c9e0; /* Light Blue border derived from Blue */
-    }
-
     body {
-      background: var(--background-light); /* Light Blue tint */
+      background: #f8f9fa;
       min-height: 100vh;
     }
 
@@ -36,8 +27,8 @@
 
     .sidebar {
       width: 280px;
-      background: var(--background-white); /* White */
-      box-shadow: 2px 0 10px rgba(7, 33, 64, 0.05); /* Blue shadow */
+      background: #ffffff;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
       padding: 0;
       position: fixed;
       height: 100vh;
@@ -48,7 +39,7 @@
     .sidebar-header {
       padding: 40px 20px;
       text-align: center;
-      background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 100%); /* Gold to Blue */
+      background: linear-gradient(135deg, #ff7b29 0%, #9c27b0 100%);
       color: white;
     }
 
@@ -87,7 +78,7 @@
       display: flex;
       align-items: center;
       text-decoration: none;
-      color: var(--text-dark); /* Blue */
+      color: #444;
       font-size: 1rem;
       font-weight: 600;
       padding: 14px 25px;
@@ -97,13 +88,13 @@
     }
 
     .sidebar a:hover {
-      background: var(--accent-color); /* Gold */
+      background: #ff7b29;
       color: white;
       transform: translateX(5px);
     }
 
     .sidebar a.active {
-      background: var(--accent-color); /* Gold */
+      background: #ff7b29;
       color: white;
     }
 
@@ -115,7 +106,7 @@
     }
 
     .btn-logout {
-      background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-color) 100%); /* Blue */
+      background: linear-gradient(135deg, #9c27b0 0%, #b039c4 100%);
       color: white;
       border: none;
       padding: 12px 20px;
@@ -126,30 +117,30 @@
       margin: 20px 15px;
       transition: all 0.3s ease;
       width: calc(100% - 30px);
-      box-shadow: 0 2px 8px rgba(7, 33, 64, 0.2); /* Blue shadow */
+      box-shadow: 0 2px 8px rgba(156, 39, 176, 0.2);
     }
 
     .btn-logout:hover {
-      background: linear-gradient(135deg, #05152e 0%, #05152e 100%); /* Darker Blue */
+      background: linear-gradient(135deg, #8b1a9f 0%, #a02bb3 100%);
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(7, 33, 64, 0.3); /* Darker Blue shadow */
+      box-shadow: 0 4px 12px rgba(156, 39, 176, 0.3);
     }
 
     .main-content {
       flex: 1;
       margin-left: 280px;
       padding: 40px;
-      background: var(--background-light); /* Light Blue tint */
+      background: #f8f9fa;
       overflow-x: hidden;
       transition: margin-left 0.3s ease;
     }
 
     .page-header {
-      background: var(--background-white); /* White */
+      background: white;
       border-radius: 12px;
       padding: 25px 30px;
       margin-bottom: 30px;
-      box-shadow: 0 2px 8px rgba(7, 33, 64, 0.05); /* Blue shadow */
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
       border: none;
       position: relative;
       display: flex;
@@ -164,20 +155,20 @@
       left: 0;
       right: 0;
       height: 5px;
-      background: linear-gradient(90deg, var(--accent-color) 0%, var(--primary-color) 100%); /* Gold to Blue */
+      background: linear-gradient(90deg, #ff7b29 0%, #9c27b0 100%);
       border-top-left-radius: 12px;
       border-top-right-radius: 12px;
     }
 
     .page-header h1 {
-      color: var(--text-dark); /* Blue */
+      color: #2d2d2d;
       font-weight: 800;
       font-size: 2.2rem;
       margin: 0;
     }
 
     .page-header i {
-      color: var(--accent-color); /* Gold */
+      color: #ff7b29;
       font-size: 1.8rem;
     }
 
@@ -198,40 +189,54 @@
     }
 
     .donation-switch .active-btn {
-      background: var(--accent-color); /* Gold */
+      background: #ff7b29;
       color: white;
     }
 
     .donation-switch .inactive-btn {
-      background: var(--primary-color); /* Blue */
+      background: #6c757d;
       color: white;
     }
 
     .donation-switch .inactive-btn:hover {
-      background: #05152e; /* Darker Blue */
+      background: #5a6268;
+    }
+
+    .nav-tabs {
+      border-bottom: 2px solid #e5e7eb;
+      margin-bottom: 20px;
+    }
+
+    .nav-tabs .nav-link {
+      color: #444;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 10px 20px;
+      border: none;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .nav-tabs .nav-link:hover {
+      color: #ff7b29;
+      border-bottom: 3px solid #ff7b29;
+    }
+
+    .nav-tabs .nav-link.active {
+      color: #ff7b29;
+      border-bottom: 3px solid #ff7b29;
+      background: none;
+    }
+
+    .tab-content {
+      padding: 20px 0;
     }
 
     .donations-card {
-      background: var(--background-white); /* White */
+      background: white;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(7, 33, 64, 0.05); /* Blue shadow */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
       overflow: hidden;
-    }
-
-    .donations-card-header {
-      background: var(--accent-color); /* Gold */
-      color: white;
-      padding: 20px 30px;
-      border-bottom: none;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .donations-card-header h5 {
-      margin: 0;
-      font-weight: 700;
-      font-size: 1.2rem;
     }
 
     .donations-table-wrapper {
@@ -247,13 +252,13 @@
     }
 
     .donations-table thead th {
-      background: var(--background-light); /* Light Blue tint */
-      color: var(--text-dark); /* Blue */
+      background: #f8f9fa;
+      color: #333;
       font-weight: 600;
       font-size: 0.85rem;
       padding: 10px 12px;
       border: none;
-      border-bottom: 2px solid var(--border-light); /* Light Blue border */
+      border-bottom: 2px solid #e5e7eb;
       text-transform: uppercase;
       white-space: nowrap;
     }
@@ -261,8 +266,8 @@
     .donations-table tbody td {
       padding: 10px 12px;
       border: none;
-      border-bottom: 1px solid var(--border-light); /* Light Blue border */
-      color: var(--text-dark); /* Blue */
+      border-bottom: 1px solid #f0f0f0;
+      color: #444;
       font-weight: 500;
       font-size: 0.9rem;
       vertical-align: middle;
@@ -271,11 +276,11 @@
     }
 
     .donations-table tbody tr:nth-child(even) {
-      background: #d1dfe9; /* Lighter Blue tint */
+      background: #fafafa;
     }
 
     .donations-table tbody tr:hover {
-      background: #c0d1e0; /* Slightly darker Blue tint */
+      background: #f1f5f9;
     }
 
     .donations-table tbody td .status-group {
@@ -287,7 +292,7 @@
 
     .donations-table tbody td .date-picker {
       padding: 4px;
-      border: 1px solid var(--border-light); /* Light Blue border */
+      border: 1px solid #ddd;
       border-radius: 5px;
       font-size: 0.85rem;
       width: 120px;
@@ -296,7 +301,7 @@
 
     .donations-table tbody td select {
       padding: 4px;
-      border: 1px solid var(--border-light); /* Light Blue border */
+      border: 1px solid #ddd;
       border-radius: 5px;
       font-size: 0.85rem;
       width: 90px;
@@ -305,7 +310,7 @@
     .loading-message {
       text-align: center;
       padding: 40px;
-      color: var(--text-dark); /* Blue */
+      color: #666;
       font-style: italic;
       font-size: 1rem;
     }
@@ -325,44 +330,44 @@
     }
 
     .action-buttons .edit-btn {
-      background: var(--primary-color); /* Blue */
+      background: #007bff;
       color: white;
     }
 
     .action-buttons .edit-btn:hover {
-      background: #05152e; /* Darker Blue */
+      background: #0056b3;
     }
 
     .action-buttons .delete-btn {
-      background: var(--primary-color); /* Blue */
+      background: #dc3545;
       color: white;
     }
 
     .action-buttons .delete-btn:hover {
-      background: #05152e; /* Darker Blue */
+      background: #b02a37;
     }
 
     .action-buttons .save-btn {
-      background: var(--accent-color); /* Gold */
+      background: #28a745;
       color: white;
     }
 
     .action-buttons .save-btn:hover {
-      background: #d99c33; /* Darker Gold */
+      background: #218838;
     }
 
     .action-buttons .cancel-btn {
-      background: var(--primary-color); /* Blue */
+      background: #6c757d;
       color: white;
     }
 
     .action-buttons .cancel-btn:hover {
-      background: #05152e; /* Darker Blue */
+      background: #5a6268;
     }
 
     .editable-field {
       padding: 4px;
-      border: 1px solid var(--border-light); /* Light Blue border */
+      border: 1px solid #ddd;
       border-radius: 5px;
       font-size: 0.85rem;
       width: 100%;
@@ -377,7 +382,7 @@
       background: none;
       border: none;
       font-size: 24px;
-      color: var(--text-dark); /* Blue */
+      color: #2d2d2d;
       cursor: pointer;
     }
 
@@ -456,41 +461,78 @@
       <h1>Manage Donations</h1>
       <div class="donation-switch">
         <button class="active-btn">All Donations</button>
-        <button class="inactive-btn" onclick="window.location.href='inkindMana.html'">In-Kind Donations</button>
+        <button class="inactive-btn" onclick="window.location.href='reports.html'">Get Reports</button>
       </div>
     </div>
 
-    <!-- Donations Table -->
-    <div class="donations-card">
-      <div class="donations-card-header">
-        <i class="fas fa-credit-card"></i>
-        <h5>Manage Donations</h5>
+    <!-- Tab Navigation -->
+    <ul class="nav nav-tabs" id="donationTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="money-tab" data-bs-toggle="tab" data-bs-target="#money" type="button" role="tab" aria-controls="money" aria-selected="true">Money</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="inKind-tab" data-bs-toggle="tab" data-bs-target="#inKind" type="button" role="tab" aria-controls="inKind" aria-selected="false">In-Kind</button>
+      </li>
+    </ul>
+
+    <!-- Tab Content -->
+    <div class="tab-content" id="donationTabContent">
+      <div class="tab-pane fade show active" id="money" role="tabpanel" aria-labelledby="money-tab">
+        <div class="donations-card">
+          <div class="donations-table-wrapper">
+            <table class="table table-hover mb-0 donations-table" id="moneyDonationsTable">
+              <thead>
+                <tr>
+                  <th><i class="fas fa-user me-1"></i> Full Name</th>
+                  <th><i class="fas fa-envelope me-1"></i> Email</th>
+                  <th><i class="fas fa-map-marker-alt me-1"></i> Address</th>
+                  <th><i class="fas fa-id-card me-1"></i> PAN No.</th>
+                  <th><i class="fas fa-list me-1"></i> Sub Option</th>
+                  <th><i class="fas fa-rupee-sign me-1"></i> Amount</th>
+                  <th><i class="fas fa-money-check me-1"></i> Cheque No.</th>
+                  <th><i class="fas fa-paper-plane me-1"></i> Submission Type</th>
+                  <th><i class="fas fa-calendar me-1"></i> Submission Date</th>
+                  <th><i class="fas fa-clock me-1"></i> Date</th>
+                  <th><i class="fas fa-check-circle me-1"></i> Status</th>
+                  <th><i class="fas fa-cog me-1"></i> Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colspan="12" class="loading-message">Loading donations...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-      <div class="card-body p-0">
-        <div class="donations-table-wrapper">
-          <table class="table table-hover mb-0 donations-table" id="donationsTable">
-            <thead>
-              <tr>
-                <th><i class="fas fa-user me-1"></i> Full Name</th>
-                <th><i class="fas fa-envelope me-1"></i> Email</th>
-                <th><i class="fas fa-map-marker-alt me-1"></i> Address</th>
-                <th><i class="fas fa-id-card me-1"></i> PAN No.</th>
-                <th><i class="fas fa-donate me-1"></i> Donation Type</th>
-                <th><i class="fas fa-list me-1"></i> Sub Option</th>
-                <th><i class="fas fa-rupee-sign me-1"></i> Amount/Item</th>
-                <th><i class="fas fa-paper-plane me-1"></i> Submission Type</th>
-                <th><i class="fas fa-calendar me-1"></i> Submission Date</th>
-                <th><i class="fas fa-clock me-1"></i> Date</th>
-                <th><i class="fas fa-check-circle me-1"></i> Status</th>
-                <th><i class="fas fa-cog me-1"></i> Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td colspan="12" class="loading-message">Loading donations...</td>
-              </tr>
-            </tbody>
-          </table>
+      <div class="tab-pane fade" id="inKind" role="tabpanel" aria-labelledby="inKind-tab">
+        <div class="donations-card">
+          <div class="donations-table-wrapper">
+            <table class="table table-hover mb-0 donations-table" id="inKindDonationsTable">
+              <thead>
+                <tr>
+                  <th><i class="fas fa-user me-1"></i> Full Name</th>
+                  <th><i class="fas fa-envelope me-1"></i> Email</th>
+                  <th><i class="fas fa-map-marker-alt me-1"></i> Address</th>
+                  <th><i class="fas fa-id-card me-1"></i> PAN No.</th>
+                  <th><i class="fas fa-list me-1"></i> Sub Option</th>
+                  <th><i class="fas fa-box me-1"></i> Item Details</th>
+                  <th><i class="fas fa-sort-numeric-up me-1"></i> Quantity</th>
+                  <th><i class="fas fa-paper-plane me-1"></i> Submission Type</th>
+                  <th><i class="fas fa-calendar me-1"></i> Submission Date</th>
+                  <th><i class="fas fa-clock me-1"></i> Date</th>
+                  <th><i class="fas fa-check-circle me-1"></i> Status</th>
+                  <th><i class="fas fa-cog me-1"></i> Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colspan="12" class="loading-message">Loading donations...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -544,168 +586,388 @@
   }
 
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
-  import { getDatabase, ref, onValue, update, remove } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
+  import { getDatabase, ref, onValue, update, remove, set } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
 
   const firebaseConfig = {
-    apiKey: "AIzaSyAcWaouAW_yfLE0NOKDmPR5UB0KJMn5IKk",
-    authDomain: "talreja-foundation.firebaseapp.com",
-    projectId: "talreja-foundation",
-    storageBucket: "talreja-foundation.firebasestorage.app",
-    messagingSenderId: "214919769344",
-    appId: "1:214919769344:web:1d776bcb2b54890c96d7e5"
+      apiKey: "AIzaSyAcWaouAW_yfLE0NOKDmPR5UB0KJMn5IKk",
+      authDomain: "talreja-foundation.firebaseapp.com",
+      projectId: "talreja-foundation",
+      storageBucket: "talreja-foundation.firebasestorage.app",
+      messagingSenderId: "214919769344",
+      appId: "1:214919769344:web:1d776bcb2b54890c96d7e5"
   };
 
   const app = initializeApp(firebaseConfig);
   const db = getDatabase(app);
-  const tableBody = document.querySelector("#donationsTable tbody");
+  const moneyTableBody = document.querySelector("#moneyDonationsTable tbody");
+  const inKindTableBody = document.querySelector("#inKindDonationsTable tbody");
 
-  const fetchDonations = () => {
-    const donationsRef = ref(db, 'donations');
-    console.log('Fetching donations from:', donationsRef.toString());
+  // Function to update totalDonations node
+  const updateTotalDonations = (donations, events) => {
+    let moneyTotalAmount = 0;
+    let moneyAmountSpent = 0;
+    const moneyCategories = {
+      cash: 0,
+      cheque: 0,
+      online: 0
+    };
+    let inKindTotalCount = 0;
+    let inKindCountSpent = 0;
+    const inKindCategories = {
+      grocery: 0,
+      stationary: 0,
+      clothes: 0,
+      toiletaries: 0,
+      blankets: 0,
+      shoes: 0
+    };
+    const inKindSpentCategories = {
+      grocery: 0,
+      stationary: 0,
+      clothes: 0,
+      toiletaries: 0,
+      blankets: 0,
+      shoes: 0
+    };
 
-    onValue(donationsRef, (snapshot) => {
-      console.log('Snapshot received at', new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }), ':', snapshot.val());
-      tableBody.innerHTML = '';
-
-      if (!snapshot.exists()) {
-        console.log('No data exists at donations node.');
-        tableBody.innerHTML = '<tr><td colspan="12" class="loading-message">No donations found.</td></tr>';
-        return;
-      }
-
-      const data = snapshot.val();
-      let donationsArray = [];
-      for (let email in data) {
-        if (data.hasOwnProperty(email)) {
-          const userDonations = data[email];
-          for (let donationId in userDonations) {
-            if (userDonations.hasOwnProperty(donationId)) {
-              donationsArray.push({
-                email: email,
-                id: donationId,
-                path: `donations/${email}/${donationId}`,
-                ...userDonations[donationId]
-              });
+    // Calculate received donations
+    for (let email in donations) {
+      if (donations.hasOwnProperty(email)) {
+        const userDonations = donations[email];
+        for (let donationId in userDonations) {
+          if (userDonations.hasOwnProperty(donationId)) {
+            const donation = userDonations[donationId];
+            if (donation.status === 'Received') {
+              if (donation.donationType === 'money') {
+                const amount = parseFloat(donation.amountOrItem) || 0;
+                moneyTotalAmount += amount;
+                if (donation.subOption && moneyCategories.hasOwnProperty(donation.subOption)) {
+                  moneyCategories[donation.subOption] += amount;
+                }
+              } else if (donation.donationType === 'inKind') {
+                const quantity = parseInt(donation.itemQuantity) || 0;
+                inKindTotalCount += quantity;
+                const subOption = donation.subOption === 'stationery' ? 'stationary' : donation.subOption;
+                if (subOption && inKindCategories.hasOwnProperty(subOption)) {
+                  inKindCategories[subOption] += quantity;
+                }
+              }
             }
           }
         }
       }
-      console.log('Parsed donations array:', donationsArray);
+    }
 
-      if (donationsArray.length === 0) {
-        console.log('No valid donations in array.');
-        tableBody.innerHTML = '<tr><td colspan="12" class="loading-message">No valid donations found.</td></tr>';
-        return;
-      }
-
-      let htmlContent = '';
-      donationsArray.forEach((donation) => {
-        const date = donation.timestamp ? new Date(donation.timestamp).toLocaleString('en-IN', {
-          day: '2-digit',
-          month: '2-digit',
-          year: 'numeric',
-          hour: '2-digit',
-          minute: '2-digit',
-          hour12: true
-        }) : 'N/A';
-        const status = donation.status || 'Pending';
-        const receivedDate = donation.receivedDate ? new Date(donation.receivedDate).toLocaleDateString('en-IN', {
-          day: '2-digit',
-          month: '2-digit',
-          year: 'numeric'
-        }) : '';
-        const submissionDate = donation.submissionDate ? new Date(donation.submissionDate).toLocaleDateString('en-IN', {
-          day: '2-digit',
-          month: '2-digit',
-          year: 'numeric'
-        }) : 'N/A';
-        const statusOptions = status === 'Received' 
-          ? `<option value="Received" selected disabled>Received</option>`
-          : `
-            <option value="Pending" ${status === 'Pending' ? 'selected' : ''}>Pending</option>
-            <option value="Received" ${status === 'Received' ? 'selected' : ''}>Received</option>
-          `;
-        const donationTypeOptions = `
-          <option value="money" ${donation.donationType === 'money' ? 'selected' : ''}>Money</option>
-          <option value="item" ${donation.donationType === 'item' ? 'selected' : ''}>Item</option>
-        `;
-        const subOptionOptions = donation.donationType === 'money' ? `
-          <option value="oneTime" ${donation.subOption === 'oneTime' ? 'selected' : ''}>One Time</option>
-          <option value="monthly" ${donation.subOption === 'monthly' ? 'selected' : ''}>Monthly</option>
-          <option value="quarterly" ${donation.subOption === 'quarterly' ? 'selected' : ''}>Quarterly</option>
-        ` : `
-          <option value="clothes" ${donation.subOption === 'clothes' ? 'selected' : ''}>Clothes</option>
-          <option value="books" ${donation.subOption === 'books' ? 'selected' : ''}>Books</option>
-          <option value="stationery" ${donation.subOption === 'stationery' ? 'selected' : ''}>Stationery</option>
-        `;
-        const submissionTypeOptions = `
-          <option value="online" ${donation.submissionType === 'online' ? 'selected' : ''}>Online</option>
-          <option value="ngo" ${donation.submissionType === 'ngo' ? 'selected' : ''}>Submit to NGO</option>
-          <option value="collect" ${donation.submissionType === 'collect' ? 'selected' : ''}>Needs to be Collected</option>
-        `;
-        const actions = status === 'Pending' ? `
-          <div class="action-buttons">
-            <button class="edit-btn" onclick="enableEdit('${donation.path}', '${donation.id}')">Edit</button>
-            <button class="delete-btn" onclick="deleteDonation('${donation.path}')">Delete</button>
-          </div>
-        ` : '';
-        htmlContent += `
-          <tr id="row-${donation.id}">
-            <td class="editable" data-field="fullName">${(donation.firstName || '') + ' ' + (donation.lastName || '') || 'N/A'}</td>
-            <td class="editable" data-field="email">${donation.email || 'N/A'}</td>
-            <td class="editable" data-field="address">${donation.address || 'N/A'}</td>
-            <td class="editable" data-field="panNo">${donation.panNo || 'N/A'}</td>
-            <td class="editable" data-field="donationType">
-              ${status === 'Pending' ? `<select class="editable-field" disabled>${donationTypeOptions}</select>` : (donation.donationType ? donation.donationType.charAt(0).toUpperCase() + donation.donationType.slice(1).replace(/([A-Z])/g, ' $1') : 'N/A')}
-            </td>
-            <td class="editable" data-field="subOption">
-              ${status === 'Pending' ? `<select class="editable-field" disabled>${subOptionOptions}</select>` : (donation.subOption ? donation.subOption.charAt(0).toUpperCase() + donation.subOption.slice(1).replace(/([A-Z])/g, ' $1') : 'N/A')}
-            </td>
-            <td>${donation.donationType === 'money' ? '₹' + (donation.amountOrItem || '0') : donation.amountOrItem || 'N/A'}</td>
-            <td class="editable" data-field="submissionType">
-              ${status === 'Pending' ? `<select class="editable-field" disabled>${submissionTypeOptions}</select>` : (donation.submissionType === 'ngo' ? 'Submit to NGO' : donation.submissionType === 'collect' ? 'Needs to be Collected' : 'Online')}
-            </td>
-            <td class="editable" data-field="submissionDate">
-              ${status === 'Pending' ? `<input type="date" class="editable-field" value="${donation.submissionDate ? new Date(donation.submissionDate).toISOString().split('T')[0] : ''}" disabled>` : submissionDate}
-            </td>
-            <td>${date}</td>
-            <td>
-              <div class="status-group">
-                <select onchange="updateStatus('${donation.path}', this.value, this)" ${status === 'Received' ? 'disabled' : ''}>
-                  ${statusOptions}
-                </select>
-                <input type="date" class="date-picker" id="date-${donation.id}" onchange="saveReceivedDate('${donation.path}', this.value)">
-              </div>
-              ${receivedDate ? `<br><small>Received: ${receivedDate}</small>` : ''}
-              ${donation.submissionDate && (donation.submissionType === 'ngo' || donation.submissionType === 'collect') ? `<br><small>Scheduled: ${submissionDate}</small>` : ''}
-            </td>
-            <td>${actions}</td>
-          </tr>
-        `;
-      });
-      tableBody.innerHTML = htmlContent;
-      // Set initial date picker value and visibility
-      donationsArray.forEach((donation) => {
-        const datePicker = document.getElementById(`date-${donation.id}`);
-        if (datePicker) {
-          if (donation.receivedDate) {
-            const d = new Date(donation.receivedDate);
-            datePicker.value = d.toISOString().split('T')[0];
-          }
-          if (donation.status !== 'Received') {
-            datePicker.style.display = 'none';
+    // Calculate spent amounts and counts from events
+    for (let eventId in events) {
+      if (events.hasOwnProperty(eventId)) {
+        const event = events[eventId];
+        if (event.utilizedMoney) {
+          for (let category in event.utilizedMoney) {
+            if (event.utilizedMoney.hasOwnProperty(category) && moneyCategories.hasOwnProperty(category)) {
+              const amount = parseFloat(event.utilizedMoney[category]) || 0;
+              moneyAmountSpent += amount;
+            }
           }
         }
+        if (event.utilizedInKind) {
+          for (let category in event.utilizedInKind) {
+            if (event.utilizedInKind.hasOwnProperty(category)) {
+              const normalizedCategory = category === 'stationery' ? 'stationary' : category;
+              if (inKindSpentCategories.hasOwnProperty(normalizedCategory)) {
+                const quantity = parseInt(event.utilizedInKind[category]) || 0;
+                inKindCountSpent += quantity;
+                inKindSpentCategories[normalizedCategory] += quantity;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // Update totalDonations node
+    set(ref(db, 'totalDonations'), {
+      totalMoney: {
+        categories: moneyCategories,
+        totalAmount: moneyTotalAmount,
+        amountSpent: moneyAmountSpent,
+        balanceAmt: moneyTotalAmount - moneyAmountSpent
+      },
+      totalInKind: {
+        categories: inKindCategories,
+        totalCount: inKindTotalCount,
+        countSpent: inKindCountSpent,
+        balanceCount: inKindTotalCount - inKindCountSpent
+      }
+    })
+      .then(() => {
+        console.log('totalDonations updated:', {
+          totalMoney: { categories: moneyCategories, totalAmount: moneyTotalAmount, amountSpent: moneyAmountSpent, balanceAmt: moneyTotalAmount - moneyAmountSpent },
+          totalInKind: { categories: inKindCategories, totalCount: inKindTotalCount, countSpent: inKindCountSpent, balanceCount: inKindTotalCount - inKindCountSpent }
+        });
+      })
+      .catch(error => {
+        console.error('Error updating totalDonations at', new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }), ':', error);
       });
-      console.log('Table updated with', donationsArray.length, 'donations at', new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }));
+  };
+
+  const fetchDonations = () => {
+    const donationsRef = ref(db, 'donations');
+    const eventsRef = ref(db, 'events');
+    console.log('Fetching donations from:', donationsRef.toString());
+    console.log('Fetching events from:', eventsRef.toString());
+
+    // Fetch donations
+    onValue(donationsRef, (donationSnapshot) => {
+      // Fetch events
+      onValue(eventsRef, (eventSnapshot) => {
+        console.log('Donation snapshot received at', new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }), ':', donationSnapshot.val());
+        console.log('Event snapshot received at', new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }), ':', eventSnapshot.val());
+        moneyTableBody.innerHTML = '';
+        inKindTableBody.innerHTML = '';
+
+        if (!donationSnapshot.exists()) {
+          console.log('No data exists at donations node.');
+          moneyTableBody.innerHTML = '<tr><td colspan="12" class="loading-message">No money donations found.</td></tr>';
+          inKindTableBody.innerHTML = '<tr><td colspan="12" class="loading-message">No in-kind donations found.</td></tr>';
+          // Clear totalDonations if no donations exist
+          set(ref(db, 'totalDonations'), {
+            totalMoney: { categories: { cash: 0, cheque: 0, online: 0 }, totalAmount: 0, amountSpent: 0, balanceAmt: 0 },
+            totalInKind: { categories: { grocery: 0, stationary: 0, clothes: 0, toiletaries: 0, blankets: 0, shoes: 0 }, totalCount: 0, countSpent: 0, balanceCount: 0 }
+          });
+          return;
+        }
+
+        const donationData = donationSnapshot.val();
+        const eventData = eventSnapshot.exists() ? eventSnapshot.val() : {};
+        let moneyDonations = [];
+        let inKindDonations = [];
+        for (let email in donationData) {
+          if (donationData.hasOwnProperty(email)) {
+            const userDonations = donationData[email];
+            for (let donationId in userDonations) {
+              if (userDonations.hasOwnProperty(donationId)) {
+                const donation = {
+                  email: email.replace(/_/g, '.'),
+                  id: donationId,
+                  path: `donations/${email}/${donationId}`,
+                  ...userDonations[donationId]
+                };
+                if (donation.donationType === 'money') {
+                  moneyDonations.push(donation);
+                } else if (donation.donationType === 'inKind') {
+                  inKindDonations.push(donation);
+                }
+              }
+            }
+          }
+        }
+        console.log('Parsed money donations:', moneyDonations);
+        console.log('Parsed in-kind donations:', inKindDonations);
+        console.log('Parsed events:', eventData);
+
+        // Update totalDonations node
+        updateTotalDonations(donationData, eventData);
+
+        // Populate Money Donations Table
+        if (moneyDonations.length === 0) {
+          moneyTableBody.innerHTML = '<tr><td colspan="12" class="loading-message">No money donations found.</td></tr>';
+        } else {
+          let htmlContent = '';
+          moneyDonations.forEach((donation) => {
+            const date = donation.timestamp ? new Date(donation.timestamp).toLocaleString('en-IN', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+              hour12: true
+            }) : 'N/A';
+            const status = donation.status || 'Pending';
+            const receivedDate = donation.receivedDate ? new Date(donation.receivedDate).toLocaleDateString('en-IN', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric'
+            }) : '';
+            const submissionDate = donation.submissionDate ? new Date(donation.submissionDate).toLocaleDateString('en-IN', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric'
+            }) : 'N/A';
+            const statusOptions = status === 'Received'
+              ? `<option value="Received" selected disabled>Received</option>`
+              : `
+                <option value="Pending" ${status === 'Pending' ? 'selected' : ''}>Pending</option>
+                <option value="Received" ${status === 'Received' ? 'selected' : ''}>Received</option>
+              `;
+            const subOptionOptions = `
+              <option value="cash" ${donation.subOption === 'cash' ? 'selected' : ''}>Cash</option>
+              <option value="cheque" ${donation.subOption === 'cheque' ? 'selected' : ''}>Cheque</option>
+              <option value="online" ${donation.subOption === 'online' ? 'selected' : ''}>Online</option>
+            `;
+            const submissionTypeOptions = `
+              <option value="online" ${donation.submissionType === 'online' ? 'selected' : ''}>Online</option>
+              <option value="ngo" ${donation.submissionType === 'ngo' ? 'selected' : ''}>Submit to NGO</option>
+              <option value="collect" ${donation.submissionType === 'collect' ? 'selected' : ''}>Needs to be Collected</option>
+            `;
+            const actions = status === 'Pending' ? `
+              <div class="action-buttons">
+                <button class="edit-btn" onclick="enableEdit('${donation.path}', '${donation.id}', 'money')">Edit</button>
+                <button class="delete-btn" onclick="deleteDonation('${donation.path}')">Delete</button>
+              </div>
+            ` : '';
+            htmlContent += `
+              <tr id="row-${donation.id}">
+                <td class="editable" data-field="fullName">${(donation.firstName || '') + ' ' + (donation.lastName || '') || 'N/A'}</td>
+                <td class="editable" data-field="email">${donation.email || 'N/A'}</td>
+                <td class="editable" data-field="address">${donation.address || 'N/A'}</td>
+                <td class="editable" data-field="panNo">${donation.panNo || 'N/A'}</td>
+                <td class="editable" data-field="subOption">
+                  ${status === 'Pending' ? `<select class="editable-field" disabled>${subOptionOptions}</select>` : (donation.subOption ? donation.subOption.charAt(0).toUpperCase() + donation.subOption.slice(1) : 'N/A')}
+                </td>
+                <td class="editable" data-field="amountOrItem">₹${donation.amountOrItem || '0'}</td>
+                <td class="editable" data-field="chequeNumber">${donation.chequeNumber || 'N/A'}</td>
+                <td class="editable" data-field="submissionType">
+                  ${status === 'Pending' ? `<select class="editable-field" disabled>${submissionTypeOptions}</select>` : (donation.submissionType === 'ngo' ? 'Submit to NGO' : donation.submissionType === 'collect' ? 'Needs to be Collected' : 'Online')}
+                </td>
+                <td class="editable" data-field="submissionDate">
+                  ${status === 'Pending' ? `<input type="date" class="editable-field" value="${donation.submissionDate ? new Date(donation.submissionDate).toISOString().split('T')[0] : ''}" disabled>` : submissionDate}
+                </td>
+                <td>${date}</td>
+                <td>
+                  <div class="status-group">
+                    <select onchange="updateStatus('${donation.path}', this.value, this, 'money')">
+                      ${statusOptions}
+                    </select>
+                    <input type="date" class="date-picker" id="date-${donation.id}" onchange="saveReceivedDate('${donation.path}', this.value, 'money')">
+                  </div>
+                  ${receivedDate ? `<br><small>Received: ${receivedDate}</small>` : ''}
+                  ${donation.submissionDate && (donation.submissionType === 'ngo' || donation.submissionType === 'collect') ? `<br><small>Scheduled: ${submissionDate}</small>` : ''}
+                </td>
+                <td>${actions}</td>
+              </tr>
+            `;
+          });
+          moneyTableBody.innerHTML = htmlContent;
+        }
+
+        // Populate In-Kind Donations Table
+        if (inKindDonations.length === 0) {
+          inKindTableBody.innerHTML = '<tr><td colspan="12" class="loading-message">No in-kind donations found.</td></tr>';
+        } else {
+          let htmlContent = '';
+          inKindDonations.forEach((donation) => {
+            const date = donation.timestamp ? new Date(donation.timestamp).toLocaleString('en-IN', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+              hour12: true
+            }) : 'N/A';
+            const status = donation.status || 'Pending';
+            const receivedDate = donation.receivedDate ? new Date(donation.receivedDate).toLocaleDateString('en-IN', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric'
+            }) : '';
+            const submissionDate = donation.submissionDate ? new Date(donation.submissionDate).toLocaleDateString('en-IN', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric'
+            }) : 'N/A';
+            const statusOptions = status === 'Received'
+              ? `<option value="Received" selected disabled>Received</option>`
+              : `
+                <option value="Pending" ${status === 'Pending' ? 'selected' : ''}>Pending</option>
+                <option value="Received" ${status === 'Received' ? 'selected' : ''}>Received</option>
+              `;
+            const subOptionOptions = `
+              <option value="grocery" ${donation.subOption === 'grocery' ? 'selected' : ''}>Grocery</option>
+              <option value="stationary" ${donation.subOption === 'stationary' || donation.subOption === 'stationery' ? 'selected' : ''}>Stationery</option>
+              <option value="clothes" ${donation.subOption === 'clothes' ? 'selected' : ''}>Clothes</option>
+              <option value="toiletaries" ${donation.subOption === 'toiletaries' ? 'selected' : ''}>Toiletries</option>
+              <option value="blankets" ${donation.subOption === 'blankets' ? 'selected' : ''}>Blankets</option>
+              <option value="shoes" ${donation.subOption === 'shoes' ? 'selected' : ''}>Shoes</option>
+            `;
+            const submissionTypeOptions = `
+              <option value="ngo" ${donation.submissionType === 'ngo' ? 'selected' : ''}>Submit to NGO</option>
+              <option value="collect" ${donation.submissionType === 'collect' ? 'selected' : ''}>Needs to be Collected</option>
+            `;
+            const actions = status === 'Pending' ? `
+              <div class="action-buttons">
+                <button class="edit-btn" onclick="enableEdit('${donation.path}', '${donation.id}', 'inKind')">Edit</button>
+                <button class="delete-btn" onclick="deleteDonation('${donation.path}')">Delete</button>
+              </div>
+            ` : '';
+            htmlContent += `
+              <tr id="row-${donation.id}">
+                <td class="editable" data-field="fullName">${(donation.firstName || '') + ' ' + (donation.lastName || '') || 'N/A'}</td>
+                <td class="editable" data-field="email">${donation.email || 'N/A'}</td>
+                <td class="editable" data-field="address">${donation.address || 'N/A'}</td>
+                <td class="editable" data-field="panNo">${donation.panNo || 'N/A'}</td>
+                <td class="editable" data-field="subOption">
+                  ${status === 'Pending' ? `<select class="editable-field" disabled>${subOptionOptions}</select>` : (donation.subOption ? donation.subOption.charAt(0).toUpperCase() + donation.subOption.slice(1) : 'N/A')}
+                </td>
+                <td class="editable" data-field="amountOrItem">${donation.amountOrItem || 'N/A'}</td>
+                <td class="editable" data-field="itemQuantity">${donation.itemQuantity || '0'} Units</td>
+                <td class="editable" data-field="submissionType">
+                  ${status === 'Pending' ? `<select class="editable-field" disabled>${submissionTypeOptions}</select>` : (donation.submissionType === 'ngo' ? 'Submit to NGO' : donation.submissionType === 'collect' ? 'Needs to be Collected' : 'N/A')}
+                </td>
+                <td class="editable" data-field="submissionDate">
+                  ${status === 'Pending' ? `<input type="date" class="editable-field" value="${donation.submissionDate ? new Date(donation.submissionDate).toISOString().split('T')[0] : ''}" disabled>` : submissionDate}
+                </td>
+                <td>${date}</td>
+                <td>
+                  <div class="status-group">
+                    <select onchange="updateStatus('${donation.path}', this.value, this, 'inKind')">
+                      ${statusOptions}
+                    </select>
+                    <input type="date" class="date-picker" id="date-${donation.id}" onchange="saveReceivedDate('${donation.path}', this.value, 'inKind')">
+                  </div>
+                  ${receivedDate ? `<br><small>Received: ${receivedDate}</small>` : ''}
+                  ${donation.submissionDate && (donation.submissionType === 'ngo' || donation.submissionType === 'collect') ? `<br><small>Scheduled: ${submissionDate}</small>` : ''}
+                </td>
+                <td>${actions}</td>
+              </tr>
+            `;
+          });
+          inKindTableBody.innerHTML = htmlContent;
+        }
+
+        // Set initial date picker value and visibility
+        [...moneyDonations, ...inKindDonations].forEach((donation) => {
+          const datePicker = document.getElementById(`date-${donation.id}`);
+          if (datePicker) {
+            if (donation.receivedDate) {
+              const d = new Date(donation.receivedDate);
+              datePicker.value = d.toISOString().split('T')[0];
+            }
+            if (donation.status !== 'Received') {
+              datePicker.style.display = 'none';
+            }
+          }
+        });
+        console.log('Tables updated with', moneyDonations.length, 'money donations and', inKindDonations.length, 'in-kind donations at', new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }));
+      }, (error) => {
+        console.error('Event fetch error at', new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }), ':', error.message);
+        // Update totalDonations with zero spent values if events fetch fails
+        updateTotalDonations(donationData, {});
+      });
     }, (error) => {
-      console.error('Fetch error at', new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }), ':', error.message);
-      tableBody.innerHTML = '<tr><td colspan="12" class="loading-message">Error loading donations: ' + error.message + '</td></tr>';
+      console.error('Donation fetch error at', new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }), ':', error.message);
+      moneyTableBody.innerHTML = '<tr><td colspan="12" class="loading-message">Error loading money donations: ' + error.message + '</td></tr>';
+      inKindTableBody.innerHTML = '<tr><td colspan="12" class="loading-message">Error loading in-kind donations: ' + error.message + '</td></tr>';
+      // Clear totalDonations on error
+      set(ref(db, 'totalDonations'), {
+        totalMoney: { categories: { cash: 0, cheque: 0, online: 0 }, totalAmount: 0, amountSpent: 0, balanceAmt: 0 },
+        totalInKind: { categories: { grocery: 0, stationary: 0, clothes: 0, toiletaries: 0, blankets: 0, shoes: 0 }, totalCount: 0, countSpent: 0, balanceCount: 0 }
+      });
     });
   };
 
   // Update status and handle received date
-  window.updateStatus = function(path, status, selectElement) {
+  window.updateStatus = function(path, status, selectElement, tab) {
     const donationId = path.split('/').pop();
     const datePicker = document.getElementById(`date-${donationId}`);
     if (datePicker) {
@@ -717,6 +979,10 @@
       } else {
         datePicker.style.display = 'none';
         update(ref(db, path), { status: status, receivedDate: null })
+          .then(() => {
+            console.log('Status updated to', status, 'for path:', path);
+            fetchDonations(); // Refresh to update totalDonations
+          })
           .catch(error => {
             console.error('Status update error at', new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }), ':', error);
             alert('Error updating status. Please try again.');
@@ -727,7 +993,7 @@
   };
 
   // Save received date when selected
-  window.saveReceivedDate = function(path, dateValue) {
+  window.saveReceivedDate = function(path, dateValue, tab) {
     if (dateValue) {
       const date = new Date(dateValue);
       if (isNaN(date.getTime())) {
@@ -742,26 +1008,27 @@
       update(ref(db, path), updates)
         .then(() => {
           console.log('Received date updated successfully for path:', path);
+          fetchDonations(); // Refresh to update totalDonations
         })
         .catch(error => {
           console.error('Date update error at', new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }), ':', error);
           alert('Error updating received date. Please try again.');
           const donationId = path.split('/').pop();
-          const selectElement = document.querySelector(`#donationsTable select[onchange="updateStatus('${path}', this.value, this)"]`);
+          const selectElement = document.querySelector(`#${tab}DonationsTable select[onchange="updateStatus('${path}', this.value, this, '${tab}')"]`);
           selectElement.value = 'Pending'; // Revert to Pending on error
           document.getElementById(`date-${donationId}`).style.display = 'none';
         });
     } else {
       alert('Please select a date.');
       const donationId = path.split('/').pop();
-      const selectElement = document.querySelector(`#donationsTable select[onchange="updateStatus('${path}', this.value, this)"]`);
+      const selectElement = document.querySelector(`#${tab}DonationsTable select[onchange="updateStatus('${path}', this.value, this, '${tab}')"]`);
       selectElement.value = 'Pending'; // Revert to Pending if no date
       document.getElementById(`date-${donationId}`).style.display = 'none';
     }
   };
 
   // Enable edit mode for a donation
-  window.enableEdit = function(path, id) {
+  window.enableEdit = function(path, id, tab) {
     const row = document.getElementById(`row-${id}`);
     const editableFields = row.querySelectorAll('.editable');
     editableFields.forEach(field => {
@@ -774,19 +1041,23 @@
           <input type="text" class="editable-field" data-subfield="firstName" value="${firstName || ''}" placeholder="First Name">
           <input type="text" class="editable-field" data-subfield="lastName" value="${lastName || ''}" placeholder="Last Name">
         `;
+      } else if (field.dataset.field === 'amountOrItem' && tab === 'money') {
+        field.innerHTML = `<input type="number" class="editable-field" value="${field.textContent.replace('₹', '') || ''}" placeholder="Amount">`;
+      } else if (field.dataset.field === 'itemQuantity' && tab === 'inKind') {
+        field.innerHTML = `<input type="number" class="editable-field" value="${field.textContent.replace(' Units', '') || ''}" placeholder="Quantity">`;
       } else {
         field.innerHTML = `<input type="text" class="editable-field" value="${field.textContent === 'N/A' ? '' : field.textContent}" placeholder="${field.dataset.field}">`;
       }
     });
     const actionCell = row.querySelector('.action-buttons');
     actionCell.innerHTML = `
-      <button class="save-btn" onclick="saveEdit('${path}', '${id}')">Save</button>
+      <button class="save-btn" onclick="saveEdit('${path}', '${id}', '${tab}')">Save</button>
       <button class="cancel-btn" onclick="fetchDonations()">Cancel</button>
     `;
   };
 
   // Save edited donation
-  window.saveEdit = function(path, id) {
+  window.saveEdit = function(path, id, tab) {
     const row = document.getElementById(`row-${id}`);
     const updates = {};
     row.querySelectorAll('.editable').forEach(field => {
@@ -798,9 +1069,16 @@
       } else {
         const input = field.querySelector('.editable-field');
         if (input) {
-          updates[field.dataset.field] = input.value || null;
           if (field.dataset.field === 'submissionDate' && input.value) {
             updates[field.dataset.field] = new Date(input.value).getTime();
+          } else if (field.dataset.field === 'amountOrItem' && tab === 'money') {
+            updates[field.dataset.field] = parseFloat(input.value) || null;
+          } else if (field.dataset.field === 'itemQuantity' && tab === 'inKind') {
+            updates[field.dataset.field] = parseInt(input.value) || null;
+          } else if (field.dataset.field === 'subOption' && tab === 'inKind') {
+            updates[field.dataset.field] = input.value === 'stationery' ? 'stationary' : input.value || null;
+          } else {
+            updates[field.dataset.field] = input.value || null;
           }
         }
       }
@@ -808,7 +1086,7 @@
     update(ref(db, path), updates)
       .then(() => {
         console.log('Donation updated successfully for path:', path);
-        fetchDonations();
+        fetchDonations(); // Refresh to update totalDonations
       })
       .catch(error => {
         console.error('Edit update error at', new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }), ':', error);
@@ -823,7 +1101,7 @@
       remove(ref(db, path))
         .then(() => {
           console.log('Donation deleted successfully for path:', path);
-          fetchDonations();
+          fetchDonations(); // Refresh to update totalDonations
         })
         .catch(error => {
           console.error('Delete error at', new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }), ':', error);
@@ -835,3 +1113,5 @@
   // Load donations on page load
   fetchDonations();
 </script>
+</body>
+</html>
